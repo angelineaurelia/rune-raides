@@ -10,7 +10,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Potion extends cc.Component {
     @property({type: cc.Integer})
-    healAmount: number = 3;
+    healAmount: number = 10;
 
     onLoad() {
         // 開啟時 播放pot_out動畫

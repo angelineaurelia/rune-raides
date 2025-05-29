@@ -11,16 +11,16 @@ import GameManager from "./GameManeger";
 @ccclass
 export default class Player extends cc.Component {
     @property({type: cc.Integer, tooltip: "最大血量"})
-    maxHp: number = 10;
+    maxHp: number = 40;
 
     @property({type: cc.Integer, tooltip: "攻擊力"})
-    attackPower: number = 3;
+    attackPower: number = 5;
 
     @property({type: cc.Integer, tooltip: "初始血量"})
-    hp: number = 10;
+    hp: number = 40;
 
     @property(cc.Node)
-    gameMgr: cc.Node = null;
+    private lifebar: cc.Node = null;
 
     @property(cc.Node)
     controller: cc.Node = null;
@@ -39,6 +39,14 @@ export default class Player extends cc.Component {
 
     @property(cc.AudioClip)
     healsound: cc.AudioClip = null;
+
+    updatelife(num: number, hp: number){
+        console.log(num, hp);
+        this.lifebar.width = hp;
+        if(hp<=10) this.lifebar.color = cc.Color.RED;
+        else if(hp<=20) this.lifebar.color = cc.Color.ORANGE;
+        else this.lifebar.color = cc.Color.GREEN;
+    }
 
     public playattack1sound(){
         if(this.attack1sound) cc.audioEngine.playEffect(this.attack1sound,false);
@@ -71,7 +79,7 @@ export default class Player extends cc.Component {
 
     public takeDamage(amount: number) {
         this.hp -= amount; 
-        this.gameMgr.getComponent("GameManeger").updatelife(-amount, this.hp);
+        this.updatelife(-amount, this.hp);
         if(this.hp <= 0){
             this.die();
         }
@@ -81,7 +89,7 @@ export default class Player extends cc.Component {
         
         this.hp += amount;
         if (this.hp > this.maxHp) this.hp = this.maxHp;
-        this.gameMgr.getComponent("GameManeger").updatelife(amount, this.hp);
+        this.updatelife(amount, this.hp);
         this.playhealsound();
     }
 
@@ -90,7 +98,7 @@ export default class Player extends cc.Component {
     }
     public die() {
         if(this.hp <= 0){
-            this.gameMgr.getComponent("GameManeger").updatelife(-this.maxHp, 0);
+            this.updatelife(-this.maxHp, 0);
             this.controller.getComponent("ActorController").godie();
         }
     }

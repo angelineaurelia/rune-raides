@@ -213,7 +213,7 @@ export default class ActorController extends Controller {
                         this.player.getComponent("Player").playattack3sound();
                     } else if (this.inputSource.gethurt===ButtonState.Pressed) { 
                         this._playerState = PlayerState.Hurt; 
-                        this.player.getComponent("Player").takeDamage(1);
+                        this.player.getComponent("Player").takeDamage(5);
                         this.inputSource._xKey = ButtonState.Held;
                     }
                     this.incombo();
