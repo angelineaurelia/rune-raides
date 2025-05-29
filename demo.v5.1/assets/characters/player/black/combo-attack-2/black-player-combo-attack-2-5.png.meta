@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0eac427e-b68b-487c-b8f8-224e37ab72f7",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 48,
+  "height": 48,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-combo-attack-2-5": {
+      "ver": "1.0.6",
+      "uuid": "9d3b9a9f-a267-4f57-aed7-5e552fcfd319",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0eac427e-b68b-487c-b8f8-224e37ab72f7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -3,
+      "offsetY": -4.5,
+      "trimX": 11,
+      "trimY": 17,
+      "width": 20,
+      "height": 23,
+      "rawWidth": 48,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

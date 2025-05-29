@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossHurtRight",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "ce2a24d7-669b-4754-968e-537765240035"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "857248fb-32e1-4f07-b38c-39df88c09181"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "5923b28f-81ed-4b4d-be54-65a4101971fb"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "0653e975-6f8d-499f-8f3e-5f12e6aaf76e"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "75ed7fe1-45ed-4597-bea9-d8425b80fc16"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "97a3f5ba-b055-410b-b4bc-0ddc7cf88693"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

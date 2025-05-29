@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0527afc7-5728-4e18-abd6-d25ca2a70aed",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 48,
+  "height": 48,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-attack-2-2": {
+      "ver": "1.0.6",
+      "uuid": "2f2497b7-fc78-47b4-a6e2-da3b85eabab6",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0527afc7-5728-4e18-abd6-d25ca2a70aed",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 5.5,
+      "offsetY": -4,
+      "trimX": 17,
+      "trimY": 16,
+      "width": 25,
+      "height": 24,
+      "rawWidth": 48,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

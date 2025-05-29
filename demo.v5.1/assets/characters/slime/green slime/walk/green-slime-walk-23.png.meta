@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "d2550d1f-6243-4a36-97db-ce93b44b9075",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 64,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "green-slime-walk-23": {
+      "ver": "1.0.6",
+      "uuid": "7f6c7401-f2a2-480c-992b-1041cb42ffc5",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "d2550d1f-6243-4a36-97db-ce93b44b9075",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 2,
+      "offsetY": -2,
+      "trimX": 23,
+      "trimY": 26,
+      "width": 22,
+      "height": 16,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

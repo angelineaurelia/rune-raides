@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossWalkRight",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "1402af91-650f-4947-9392-41739e479abe"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "b3385c30-3d72-49ca-bc2a-4f312fbc0f2d"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "bd369fd7-ade2-4d6c-ad82-389005eea306"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "81335e2c-ddce-480b-9624-4e6e07c56c9c"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "efff7c02-ceb5-441e-bb28-fd59362ef224"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "0455bfc0-aa0e-4eed-b8c9-99b0df4be946"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

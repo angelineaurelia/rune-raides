@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "90b05139-1344-47a3-a466-cece1a17a484",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 16,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "door-wood-animation-23": {
+      "ver": "1.0.6",
+      "uuid": "bc6568b4-1574-480e-bc2e-22e4b4aa7747",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "90b05139-1344-47a3-a466-cece1a17a484",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": -7.5,
+      "trimX": 1,
+      "trimY": 15,
+      "width": 15,
+      "height": 17,
+      "rawWidth": 16,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossHurtDown",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "88378237-9d20-4800-bfce-dab6eb802685"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "fcc0b8fa-1516-4dd9-83d9-9ec832f6e82b"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "26127094-e665-4bcc-bc58-aa9ffad1f40f"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "588034d1-3dd4-4f61-bdd9-48e7a180cceb"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "3a132a25-c1a1-4070-bbba-be3cf607fd14"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "623b55f3-ce98-4804-b0fe-e8b175158888"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

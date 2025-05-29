@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossWalkDown",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "aeebd55a-33e7-4dc7-8103-908a670cf426"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "016f839e-dd04-44a4-8a1a-fb3f23fb73d7"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "04560320-6a94-4a6e-9a4b-55ee090786e1"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "141609ae-97f5-4f1f-aa8b-6c3e4bfd6928"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "c7024103-5be1-4eed-b94b-0534b0bad32d"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "88e4566a-80fa-4408-a502-16c0542964c9"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

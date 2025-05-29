@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "c23a6d11-5d24-41f9-a484-e296ef0eba14",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "vase-explode-41": {
+      "ver": "1.0.6",
+      "uuid": "933c752a-80e6-4157-8191-a326dcb4718c",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "c23a6d11-5d24-41f9-a484-e296ef0eba14",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": -6.5,
+      "trimX": 5,
+      "trimY": 20,
+      "width": 23,
+      "height": 5,
+      "rawWidth": 32,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

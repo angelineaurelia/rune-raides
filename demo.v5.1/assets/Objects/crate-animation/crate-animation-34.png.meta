@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0d574e82-225b-451f-add0-c28a448010df",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 16,
+  "height": 16,
+  "platformSettings": {},
+  "subMetas": {
+    "crate-animation-34": {
+      "ver": "1.0.6",
+      "uuid": "7eaf1ec3-a793-4488-ac1e-1a2e1d69579e",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0d574e82-225b-451f-add0-c28a448010df",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 2,
+      "width": 14,
+      "height": 13,
+      "rawWidth": 16,
+      "rawHeight": 16,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

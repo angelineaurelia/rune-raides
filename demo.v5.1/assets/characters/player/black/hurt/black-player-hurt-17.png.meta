@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "41a884ea-b89d-4fbc-a825-2f455104bd6f",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-hurt-17": {
+      "ver": "1.0.6",
+      "uuid": "3f8c0b0a-a43d-4c0d-98e5-2ffd84cf4a2a",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "41a884ea-b89d-4fbc-a825-2f455104bd6f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 9,
+      "trimY": 9,
+      "width": 14,
+      "height": 15,
+      "rawWidth": 32,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

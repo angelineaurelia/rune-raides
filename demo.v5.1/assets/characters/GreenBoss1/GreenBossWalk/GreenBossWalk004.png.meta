@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "49a7754c-2447-49bf-ad03-63921b464b00",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 64,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "GreenBossWalk004": {
+      "ver": "1.0.6",
+      "uuid": "c7024103-5be1-4eed-b94b-0534b0bad32d",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "49a7754c-2447-49bf-ad03-63921b464b00",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -3.5,
+      "offsetY": 5.5,
+      "trimX": 10,
+      "trimY": 7,
+      "width": 37,
+      "height": 39,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

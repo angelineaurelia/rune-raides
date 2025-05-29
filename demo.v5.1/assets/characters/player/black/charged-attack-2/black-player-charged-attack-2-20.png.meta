@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "724f70f7-9d49-4416-bd4a-015546d4b44c",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 48,
+  "height": 48,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-charged-attack-2-20": {
+      "ver": "1.0.6",
+      "uuid": "df834c0a-2c6b-4305-9b1b-13428da46c14",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "724f70f7-9d49-4416-bd4a-015546d4b44c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -4,
+      "offsetY": 1.5,
+      "trimX": 10,
+      "trimY": 13,
+      "width": 20,
+      "height": 19,
+      "rawWidth": 48,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

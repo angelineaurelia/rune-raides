@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "99bde5f6-de0b-4b9d-b77d-0f281cb921b4",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 64,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "green-slime-attack-24": {
+      "ver": "1.0.6",
+      "uuid": "bbc47b0b-8b28-42df-b83c-58d35411a4a3",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "99bde5f6-de0b-4b9d-b77d-0f281cb921b4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": -4,
+      "trimX": 21,
+      "trimY": 30,
+      "width": 23,
+      "height": 12,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

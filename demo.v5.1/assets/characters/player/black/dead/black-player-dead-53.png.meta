@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "2c90a7b2-56de-4487-ba7a-ad7a30e35381",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-dead-53": {
+      "ver": "1.0.6",
+      "uuid": "41a9ddcc-e68d-47d3-a19b-9774b053a4f4",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "2c90a7b2-56de-4487-ba7a-ad7a30e35381",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -0.5,
+      "trimX": 9,
+      "trimY": 9,
+      "width": 13,
+      "height": 15,
+      "rawWidth": 32,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

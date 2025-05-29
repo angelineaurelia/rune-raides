@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "19a8a69b-f7fc-4c58-82bd-db02c33e7a4d",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 16,
+  "height": 16,
+  "platformSettings": {},
+  "subMetas": {
+    "floor-carpet-red-51": {
+      "ver": "1.0.6",
+      "uuid": "44b80bf2-b0aa-4997-9a69-4a817d1a5d30",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "19a8a69b-f7fc-4c58-82bd-db02c33e7a4d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 16,
+      "height": 16,
+      "rawWidth": 16,
+      "rawHeight": 16,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

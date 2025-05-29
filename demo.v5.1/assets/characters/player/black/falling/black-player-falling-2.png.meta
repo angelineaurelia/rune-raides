@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "43d66f5e-7139-4a28-93f9-f512cc528b3e",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-falling-2": {
+      "ver": "1.0.6",
+      "uuid": "f59868e5-e164-4921-b68f-fdb8449955de",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "43d66f5e-7139-4a28-93f9-f512cc528b3e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 10,
+      "trimY": 10,
+      "width": 12,
+      "height": 12,
+      "rawWidth": 32,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "BlueSlimeHurtUp",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.35,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "474b025a-9fda-402d-821e-a0bc7d0df26a"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "ce5b1443-b5c0-44c6-9978-89563fa888d2"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "60f401a4-23ac-430c-9f21-1640ed5b1c41"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "52af47bc-f05a-43f1-b370-bae56ddcc832"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "4c7631ee-293a-4bfb-9969-35fd5fbdb646"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

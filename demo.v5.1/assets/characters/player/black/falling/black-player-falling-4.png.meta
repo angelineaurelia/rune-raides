@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "ac27ff7a-9363-40dd-a4de-819332b51586",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 32,
+  "platformSettings": {},
+  "subMetas": {
+    "black-player-falling-4": {
+      "ver": "1.0.6",
+      "uuid": "2a675325-702b-43d9-8593-959a1e63f126",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "ac27ff7a-9363-40dd-a4de-819332b51586",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 13,
+      "trimY": 13,
+      "width": 6,
+      "height": 6,
+      "rawWidth": 32,
+      "rawHeight": 32,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
