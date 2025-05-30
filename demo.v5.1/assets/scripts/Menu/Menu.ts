@@ -15,8 +15,11 @@ export default class Menu extends cc.Component {
     @property(cc.AudioClip)
     Menubgm: cc.AudioClip = null;
 
+    public VolumnValue: number = 0.5;
+
     onLoad(){
         this.playbgm();
+        cc.audioEngine.setMusicVolume(0.5);
         let exitHandler = new cc.Component.EventHandler();
         exitHandler.target = this.node;
         exitHandler.component = "Menu";
