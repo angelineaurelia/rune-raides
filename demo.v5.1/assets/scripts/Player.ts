@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const { ccclass, property } = cc._decorator;
-import GameManager from "./GameManeger";
+import GameManager from "./GameManager";
 
 @ccclass
 export default class Player extends cc.Component {
