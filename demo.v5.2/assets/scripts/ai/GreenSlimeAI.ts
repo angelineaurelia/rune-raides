@@ -36,17 +36,11 @@ export default class GreeenSlimeAI extends cc.Component {
     @property({ tooltip: "Current health of the slime" })
     health: number = 100;
 
-    @property({ tooltip: "Total width of health bar (pixels)" })
-    healthBarWidth: number = 60;
-
-    @property({ tooltip: "Height of each health segment box (pixels)" })
-    healthBarHeight: number = 10;
-
-    @property({ tooltip: "Number of segments in health bar" })
-    segmentCount: number = 10;
+    @property(cc.Node)
+    private lifebar: cc.Node = null;
 
     @property({ tooltip: "Vertical offset of health bar above slime (pixels)" })
-    healthBarOffsetY: number = 50;
+    private barOffsetY: number = 10;
 
     @property({ type: cc.Node, tooltip: "Player node to detect" })
     player: cc.Node = null;
@@ -62,12 +56,20 @@ export default class GreeenSlimeAI extends cc.Component {
     private attackNode!: cc.Node;
     private attackGfx!: cc.Graphics;
 
-    private healthBarNode!: cc.Node;
-    private healthBarGfx!: cc.Graphics;
-
     private anim!: cc.Animation;
     private currentRunClip = "";
     private currentAttackClip = "";
+    onLoad() {
+     if (!this.player) {
+            // use the exact path under the scene root:
+            this.player = cc.find("MapManager/Actors/Player");
+            if (!this.player) {
+            cc.error("Couldn’t find Player at MapManager/Actors/Player");
+            }
+        }
+    }
+
+
 
     start() {
         this.anim = this.getComponent(cc.Animation)!;
@@ -98,41 +100,60 @@ export default class GreeenSlimeAI extends cc.Component {
         this.attackGfx.lineWidth = 2;
 
         // Health bar setup
-        this.healthBarNode = new cc.Node("HealthBar");
-        this.healthBarNode.parent = this.node;
-        this.healthBarNode.setPosition(0, this.healthBarOffsetY);
-        this.healthBarGfx = this.healthBarNode.addComponent(cc.Graphics);
-        this.healthBarGfx.lineWidth = 1;
+        if (this.lifebar) {
+            this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
+            this.updateLife(0, this.health);
+        }
 
         this.setToIdle();
     }
 
     update(dt: number) {
-        this.drawHealthBar();
-
-        // Compute distance to player
-        let dist = Infinity;
+        // 1) Compute distance to player
+        let distToPlayer = Infinity;
         if (this.player) {
             const slimeW = this.node.parent!.convertToWorldSpaceAR(this.node.position);
             const playerW = this.player.parent!.convertToWorldSpaceAR(this.player.position);
-            dist = slimeW.sub(playerW).mag();
+            distToPlayer = slimeW.sub(playerW).mag();
         }
 
-        // Redraw detection
-        const inDetect = dist <= this.detectionRadius;
+        // 2) Check if player is still within patrol area
+        const localPlayerPos = this.node.parent!
+            .convertToNodeSpaceAR(
+                this.player!.parent!.convertToWorldSpaceAR(this.player!.position)
+            );
+        const distFromCenter = localPlayerPos
+            .sub(this.patrolCenter)
+            .mag();
+        const playerInPatrol = distFromCenter <= this.patrolRadius;
+
+        // 3) Clamp radii for drawing
+        const drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
+        const drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
+
+        // 4) Redraw detection circle
         this.detectionGfx.clear();
-        this.detectionGfx.strokeColor = inDetect ? cc.color(255, 165, 0) : cc.color(255, 0, 0);
-        this.detectionGfx.circle(0, 0, this.detectionRadius);
+        this.detectionGfx.lineWidth = 2;
+        this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
+            ? cc.color(255, 165, 0)
+            : cc.color(255, 0, 0);
+        this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
 
-        // Redraw attack
-        const inAttack = dist <= this.attackRadius;
+        // 5) Redraw attack circle
         this.attackGfx.clear();
-        this.attackGfx.strokeColor = inAttack ? cc.color(128, 0, 128) : cc.color(0, 0, 255);
-        this.attackGfx.circle(0, 0, this.attackRadius);
+        this.attackGfx.lineWidth = 2;
+        this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
+            ? cc.color(128, 0, 128)
+            : cc.color(0, 0, 255);
+        this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
 
-        // Attack state
+        // Determine states
+        const inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
+        const inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
+
+        // Attack priority
         if (inAttack && this.slimeState !== SlimeState.Attack) {
             this.startAttack();
             return;
@@ -143,7 +164,7 @@ export default class GreeenSlimeAI extends cc.Component {
             return;
         }
 
-        // Run if detected
+        // Running if detected
         if (inDetect) {
             if (this.slimeState !== SlimeState.Run) this.startRunning();
             this.runTowardsPlayer(dt);
@@ -152,7 +173,7 @@ export default class GreeenSlimeAI extends cc.Component {
             this.setToIdle();
         }
 
-        // Patrol
+        // Patrol logic
         this.timer += dt;
         if (this.slimeState === SlimeState.Idle && this.timer >= this.idleTime) {
             this.startWalking();
@@ -164,41 +185,42 @@ export default class GreeenSlimeAI extends cc.Component {
                 this.direction.y * this.walkSpeed * dt
             );
             const nextPos = pos.add(moveDelta);
-            // Prevent leaving patrol radius when walking
+
             if (nextPos.sub(this.patrolCenter).mag() > this.patrolRadius) {
                 this.setToIdle();
                 return;
             }
             this.node.setPosition(nextPos);
+
             if (this.timer >= this.walkTime) this.setToIdle();
         }
     }
 
-    private drawHealthBar() {
-        const total = this.segmentCount;
-        const filled = Math.ceil((this.health / this.maxHealth) * total);
-        const boxW = this.healthBarWidth / total;
-        const boxH = this.healthBarHeight;
+    // Life-bar update logic from Player
+    private updateLife(delta: number, hp: number) {
+        console.log("slime life change:", delta, "→", hp);
+        if (!this.lifebar) return;
+        this.lifebar.width = hp;
+        if (hp <= 10) this.lifebar.color = cc.Color.RED;
+        else if (hp <= 20) this.lifebar.color = cc.Color.ORANGE;
+        else this.lifebar.color = cc.Color.GREEN;
+    }
 
-        this.healthBarGfx.clear();
+    public takeDamage(amount: number) {
+        this.health -= amount;
+        if (this.health < 0) this.health = 0;
+        this.updateLife(-amount, this.health);
+        if (this.health === 0) this.die();
+    }
 
-        // Greeen default; orange ≤5; red ≤3
-        let fillColor = cc.color(0, 255, 0);
-        if (filled <= 3) fillColor = cc.color(255, 0, 0);
-        else if (filled <= 5) fillColor = cc.color(255, 165, 0);
+    public heal(amount: number) {
+        this.health += amount;
+        if (this.health > this.maxHealth) this.health = this.maxHealth;
+        this.updateLife(amount, this.health);
+    }
 
-        for (let i = 0; i < total; i++) {
-            const x = -this.healthBarWidth / 2 + i * boxW;
-            this.healthBarGfx.strokeColor = cc.color(0, 0, 0);
-            this.healthBarGfx.rect(x, -boxH / 2, boxW - 1, boxH - 1);
-            this.healthBarGfx.stroke();
-
-            if (i < filled) {
-                this.healthBarGfx.fillColor = fillColor;
-                this.healthBarGfx.rect(x, -boxH / 2, boxW - 1, boxH - 1);
-                this.healthBarGfx.fill();
-            }
-        }
+    private die() {
+        this.node.destroy();
     }
 
     private setToIdle() {
@@ -247,7 +269,6 @@ export default class GreeenSlimeAI extends cc.Component {
         }
         const moveDelta = cc.v2(dir.x * this.runSpeed * dt, dir.y * this.runSpeed * dt);
         const nextPos = this.node.getPosition().add(moveDelta);
-        // Prevent leaving patrol radius when running
         if (nextPos.sub(this.patrolCenter).mag() > this.patrolRadius) {
             this.setToIdle();
             return;
