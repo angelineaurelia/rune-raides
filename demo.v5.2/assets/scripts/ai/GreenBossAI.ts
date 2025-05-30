@@ -48,17 +48,12 @@ export default class GreenBossAI extends cc.Component {
   @property({ tooltip: "Current HP" })
   health = 200;
 
-  @property({ tooltip: "Health bar width (px)" })
-  healthBarWidth = 80;
-
-  @property({ tooltip: "Health bar height (px)" })
-  healthBarHeight = 12;
-
-  @property({ tooltip: "Health segments" })
-  segmentCount = 10;
+  // —— new lifebar property ——  
+  @property(cc.Node)
+  private lifebar: cc.Node = null;
 
   @property({ tooltip: "Health bar vertical offset (px)" })
-  healthBarOffsetY = 60;
+  private barOffsetY = 60;
 
   @property({ type: cc.Node, tooltip: "Player node" })
   player: cc.Node = null;
@@ -66,16 +61,13 @@ export default class GreenBossAI extends cc.Component {
   private state = SlimeState.Idle;
   private timer = 0;
   private direction = cc.v2(0, 0);
-  private patrolCenter = cc.v2(0, 0);
+  private patrolCenter!: cc.Vec2;
 
   private boundaryNode!: cc.Node;
   private detectionNode!: cc.Node;
   private detectionGfx!: cc.Graphics;
   private attackNode!: cc.Node;
   private attackGfx!: cc.Graphics;
-
-  private healthBarNode!: cc.Node;
-  private healthBarGfx!: cc.Graphics;
 
   private anim!: cc.Animation;
   private currentRunClip = "";
@@ -84,7 +76,7 @@ export default class GreenBossAI extends cc.Component {
     this.anim = this.getComponent(cc.Animation)!;
     this.patrolCenter = this.node.getPosition().clone();
 
-    // boundary
+    // draw patrol boundary (optional)
     this.boundaryNode = new cc.Node("Boundary");
     this.boundaryNode.parent = this.node.parent!;
     this.boundaryNode.setPosition(this.patrolCenter);
@@ -94,102 +86,103 @@ export default class GreenBossAI extends cc.Component {
     bGfx.circle(0, 0, this.patrolRadius);
     bGfx.stroke();
 
-    // detection area
+    // detection area node
     this.detectionNode = new cc.Node("Detect");
     this.detectionNode.parent = this.node;
-    this.detectionNode.setPosition(0, 0);
     this.detectionGfx = this.detectionNode.addComponent(cc.Graphics);
     this.detectionGfx.lineWidth = 2;
 
-    // attack area
+    // attack area node
     this.attackNode = new cc.Node("Attack");
     this.attackNode.parent = this.node;
-    this.attackNode.setPosition(0, 0);
     this.attackGfx = this.attackNode.addComponent(cc.Graphics);
     this.attackGfx.lineWidth = 2;
 
-    // health bar
-    this.healthBarNode = new cc.Node("HealthBar");
-    this.healthBarNode.parent = this.node;
-    this.healthBarNode.setPosition(0, this.healthBarOffsetY);
-    this.healthBarGfx = this.healthBarNode.addComponent(cc.Graphics);
-    this.healthBarGfx.lineWidth = 1;
+    // —— health bar setup ——  
+    if (this.lifebar) {
+      // position bar above boss
+      this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
+      // initialize its width/color
+      this.updateLife(0, this.health);
+    }
 
     this.setIdle();
   }
 
   update(dt: number) {
-    this.drawHealthBar();
     if (!this.player) return;
 
-    // world distance
+    // 1) world-space distance
     const bossW = this.node.parent!.convertToWorldSpaceAR(this.node.position);
     const playerW = this.player.parent!.convertToWorldSpaceAR(this.player.position);
     const dist = bossW.sub(playerW).mag();
 
-    // draw detection
+    // 2) patrol-bound check
+    const localP = this.node.parent!.convertToNodeSpaceAR(playerW);
+    const fromCenter = localP.sub(this.patrolCenter).mag();
+    const inPatrol = fromCenter <= this.patrolRadius;
+
+    // 3) choose radii & draw circles
+    const useSpec = this.health <= this.maxHealth * 0.5;
+    const rawAttackR = useSpec ? this.specAttackRadius : this.attackRadius;
+    const drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
+    const drawAttackR = Math.min(rawAttackR, this.patrolRadius);
+
     this.detectionGfx.clear();
-    const inDetect = dist <= this.detectionRadius;
+    const inDetect = dist <= this.detectionRadius && inPatrol;
     this.detectionGfx.strokeColor = inDetect ? cc.color(255, 165, 0) : cc.color(255, 0, 0);
-    this.detectionGfx.circle(0, 0, this.detectionRadius);
+    this.detectionGfx.circle(0, 0, drawDetectR);
     this.detectionGfx.stroke();
 
-    // choose proper attack range
-    const useSpec = this.health <= this.maxHealth * 0.5;
-    const range = useSpec ? this.specAttackRadius : this.attackRadius;
     this.attackGfx.clear();
-    const inRange = dist <= range;
+    const inRange = dist <= rawAttackR && inPatrol;
     this.attackGfx.strokeColor = inRange ? cc.color(128, 0, 128) : cc.color(0, 0, 255);
-    this.attackGfx.circle(0, 0, range);
+    this.attackGfx.circle(0, 0, drawAttackR);
     this.attackGfx.stroke();
 
-    // attempt attack if not currently in Attack state
+    // 4) attack state
     if (this.state !== SlimeState.Attack && inRange) {
       this.timer = 0;
       if (useSpec) this.startSpecAttack();
       else this.startAttack();
       return;
     }
-
-    // skip movement while attacking
     if (this.state === SlimeState.Attack) return;
 
-    // if player detected, run
+    // 5) run state
     if (inDetect) {
       if (this.state !== SlimeState.Run) this.startRun();
       this.runTowardsPlayer(dt);
       return;
+    } else if (this.state === SlimeState.Run) {
+      this.setIdle();
     }
 
-    // patrol
+    // 6) patrol fallback
     this.timer += dt;
-    if (this.state === SlimeState.Idle && this.timer >= this.idleTime) {
-      this.startWalk();
-    }
-    if (this.state === SlimeState.Walk) {
-      this.patrolMovement(dt);
-    }
+    if (this.state === SlimeState.Idle && this.timer >= this.idleTime) this.startWalk();
+    if (this.state === SlimeState.Walk) this.patrolMovement(dt);
   }
 
-  private drawHealthBar() {
-    const filled = Math.ceil((this.health / this.maxHealth) * this.segmentCount);
-    const boxW = this.healthBarWidth / this.segmentCount;
-    const boxH = this.healthBarHeight;
-    this.healthBarGfx.clear();
-    let color = cc.color(0, 255, 0);
-    if (filled <= 3) color = cc.color(255, 0, 0);
-    else if (filled <= 5) color = cc.color(255, 165, 0);
-    for (let i = 0; i < this.segmentCount; i++) {
-      const x = -this.healthBarWidth / 2 + i * boxW;
-      this.healthBarGfx.strokeColor = cc.color(0, 0, 0);
-      this.healthBarGfx.rect(x, -boxH / 2, boxW - 1, boxH - 1);
-      this.healthBarGfx.stroke();
-      if (i < filled) {
-        this.healthBarGfx.fillColor = color;
-        this.healthBarGfx.rect(x, -boxH / 2, boxW - 1, boxH - 1);
-        this.healthBarGfx.fill();
-      }
-    }
+  // —— life‐bar updater ——  
+  private updateLife(delta: number, hp: number) {
+    console.log("boss hp:", delta, "→", hp);
+    if (!this.lifebar) return;
+    this.lifebar.width = hp;                     // direct px = hp
+    if (hp <= 50)         this.lifebar.color = cc.Color.RED;
+    else if (hp <= 100)   this.lifebar.color = cc.Color.ORANGE;
+    else                  this.lifebar.color = cc.Color.GREEN;
+  }
+
+  public takeDamage(amount: number) {
+    this.health -= amount;
+    if (this.health < 0) this.health = 0;
+    this.updateLife(-amount, this.health);
+    if (this.health === 0) this.die();
+  }
+
+  private die() {
+    this.node.destroy();
   }
 
   private setIdle() {
@@ -201,7 +194,10 @@ export default class GreenBossAI extends cc.Component {
   private startWalk() {
     this.state = SlimeState.Walk;
     this.timer = 0;
-    this.direction = cc.v2(Math.random() < 0.5 ? -1 : 1, Math.random() < 0.5 ? -1 : 1).normalize();
+    this.direction = cc.v2(
+      Math.random() < 0.5 ? -1 : 1,
+      Math.random() < 0.5 ? -1 : 1
+    ).normalize();
     const clip = Math.abs(this.direction.x) > Math.abs(this.direction.y)
       ? (this.direction.x > 0 ? "GreenBossWalkRight" : "GreenBossWalkLeft")
       : (this.direction.y > 0 ? "GreenBossWalkUp" : "GreenBossWalkDown");
@@ -215,31 +211,37 @@ export default class GreenBossAI extends cc.Component {
 
   private startAttack() {
     this.state = SlimeState.Attack;
-    // wind-up idle
     this.anim.play("GreenBossIdle");
-    this.scheduleOnce(() => this.performAttack(this.attackDamage, this.attackRadius, "GreenBossAttack"), this.timeBeforeAttack);
+    this.scheduleOnce(
+      () => this.performAttack(this.attackDamage, this.attackRadius, "GreenBossAttack"),
+      this.timeBeforeAttack
+    );
   }
 
   private startSpecAttack() {
     this.state = SlimeState.Attack;
     this.anim.play("GreenBossIdle");
-    this.scheduleOnce(() => this.performAttack(this.specAttackDamage, this.specAttackRadius, "GreenBossSpecAttack"), this.timeBeforeAttack);
+    this.scheduleOnce(
+      () => this.performAttack(this.specAttackDamage, this.specAttackRadius, "GreenBossSpecAttack"),
+      this.timeBeforeAttack
+    );
   }
 
-  private performAttack(dmg: number, range: number, clipBase: string) {
+  private performAttack(dmg: number, range: number, baseClip: string) {
     const dir = this.getRunDirection();
     const clip = Math.abs(dir.x) > Math.abs(dir.y)
-      ? (dir.x > 0 ? `${clipBase}Right` : `${clipBase}Left`)
-      : (dir.y > 0 ? `${clipBase}Up` : `${clipBase}Down`);
+      ? (dir.x > 0 ? `${baseClip}Right` : `${baseClip}Left`)
+      : (dir.y > 0 ? `${baseClip}Up`    : `${baseClip}Down`);
     this.anim.play(clip);
-    // damage only if still in range
+
+    // deal damage if still in range
     const bossW = this.node.parent!.convertToWorldSpaceAR(this.node.position);
     const playerW = this.player.parent!.convertToWorldSpaceAR(this.player.position);
     if (bossW.sub(playerW).mag() <= range) {
       const hc: any = this.player.getComponent("Health");
       if (hc?.takeDamage) hc.takeDamage(dmg);
     }
-    // after animation back to idle
+
     this.scheduleOnce(() => this.setIdle(), 1);
   }
 
@@ -263,8 +265,7 @@ export default class GreenBossAI extends cc.Component {
       this.anim.play(clip);
       this.currentRunClip = clip;
     }
-    const delta = dir.mul(this.runSpeed * dt);
-    const next = this.node.getPosition().add(delta);
+    const next = this.node.getPosition().add(dir.mul(this.runSpeed * dt));
     if (next.sub(this.patrolCenter).mag() > this.patrolRadius) {
       this.setIdle();
       return;
@@ -273,8 +274,8 @@ export default class GreenBossAI extends cc.Component {
   }
 
   private getRunDirection(): cc.Vec2 {
-    const worldP = this.player.parent!.convertToWorldSpaceAR(this.player.position);
-    const local = this.node.parent!.convertToNodeSpaceAR(worldP);
-    return cc.v2(local.x - this.node.x, local.y - this.node.y).normalize();
+    const worldP  = this.player.parent!.convertToWorldSpaceAR(this.player.position);
+    const localP  = this.node.parent!.convertToNodeSpaceAR(worldP);
+    return cc.v2(localP.x - this.node.x, localP.y - this.node.y).normalize();
   }
 }
