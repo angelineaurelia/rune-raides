@@ -3184,7 +3184,9 @@
     "health": 100,
     "lifebar": null,
     "barOffsetY": 50,
-    "player": null,
+    "player": {
+      "__id__": 27
+    },
     "_id": "c7l0TrLp9HDpbzRX9+XfDV"
   },
   {
@@ -3841,7 +3843,9 @@
       "__id__": 79
     },
     "barOffsetY": 10,
-    "player": null,
+    "player": {
+      "__id__": 27
+    },
     "_id": "91qPnU/YlOfYqcAHSlq55m"
   },
   {
@@ -4251,7 +4255,9 @@
     "health": 200,
     "lifebar": null,
     "barOffsetY": 60,
-    "player": null,
+    "player": {
+      "__id__": 27
+    },
     "_id": "38HrR/6fZOo4SZl0yA2DT1"
   },
   {
@@ -4830,7 +4836,9 @@
     "health": 100,
     "lifebar": null,
     "barOffsetY": 10,
-    "player": null,
+    "player": {
+      "__id__": 27
+    },
     "_id": "19Y4XAb6xMlrvthepuZFPO"
   },
   {
