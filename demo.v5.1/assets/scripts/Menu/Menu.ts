@@ -18,8 +18,14 @@ export default class Menu extends cc.Component {
     public VolumnValue: number = 0.5;
 
     onLoad(){
+        let savedVolumn = cc.sys.localStorage.getItem("VolumnValue");
+        if (savedVolumn !== null) this.VolumnValue = Number(savedVolumn);
+        else this.VolumnValue = 0.5;
         this.playbgm();
-        cc.audioEngine.setMusicVolume(0.5);
+        cc.audioEngine.setMusicVolume(this.VolumnValue);
+        cc.audioEngine.setEffectsVolume(this.VolumnValue);
+        cc.sys.localStorage.setItem("VolumnValue", this.VolumnValue.toString());
+
         let exitHandler = new cc.Component.EventHandler();
         exitHandler.target = this.node;
         exitHandler.component = "Menu";

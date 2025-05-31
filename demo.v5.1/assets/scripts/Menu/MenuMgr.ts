@@ -19,6 +19,7 @@ export default class NewClass extends cc.Component {
         OptionButton.handler = "ShowSetting";
         cc.find("Canvas/background/OptionButton").getComponent(cc.Button).clickEvents.push(OptionButton);
 
+        //Load VolumnValue from localStorage
         
     }
 
@@ -61,7 +62,9 @@ export default class NewClass extends cc.Component {
         cc.find("Canvas/Setting/Login").getComponent(cc.Button).clickEvents.push(LoginButton);
         //Volumnslider?
         let Volumnslider = cc.find("Canvas/Setting/Volumn/VolumnSlider").getComponent(cc.Slider);
-        Volumnslider.progress = this.VolumnValue;
+        let savedVolumn = cc.sys.localStorage.getItem("VolumnValue");
+        if (savedVolumn !== null) Volumnslider.progress = Number(savedVolumn);
+        else Volumnslider.progress = 0.5;
         Volumnslider.node.on('slide', this.onVolumnChange, this);
     }
     ExitSetting() {
@@ -75,6 +78,7 @@ export default class NewClass extends cc.Component {
         cc.audioEngine.setMusicVolume(slider.progress); // 0~1
         cc.audioEngine.setEffectsVolume(slider.progress);
         this.VolumnValue = slider.progress;
+        cc.sys.localStorage.setItem("VolumnValue", this.VolumnValue.toString());
     }
 
     SignUp(){

@@ -1,13 +1,13 @@
 const { ccclass, property } = cc._decorator;
 
-
 @ccclass
 export default class GameManager extends cc.Component {
     @property({ type: cc.AudioClip })
     public bgm: cc.AudioClip = null;
 
     private maxhp: number = 10;
-
+    public VolumnValue : number = null;
+    public Level: number = 1;
 
     onLoad(){
         let pauseBtnNode = cc.find("Canvas/Main Camera/Pause"); 
@@ -23,6 +23,12 @@ export default class GameManager extends cc.Component {
     }
     start() {
         cc.director.getCollisionManager().enabled = true;
+        
+        let savedVolumn = cc.sys.localStorage.getItem("VolumnValue");
+        if (savedVolumn!==null) this.VolumnValue = Number(savedVolumn);
+        else this.VolumnValue = 0.5;
+        cc.audioEngine.setEffectsVolume(this.VolumnValue);
+        cc.audioEngine.setMusicVolume(this.VolumnValue);
         this.playMusic();
     }
 
@@ -63,11 +69,19 @@ export default class GameManager extends cc.Component {
 
     }
     initPause() {
+        //Resume button
         let ResumeButton = new cc.Component.EventHandler();
         ResumeButton.target = this.node;
         ResumeButton.component = "GameManager";
         ResumeButton.handler = "ResumeGame";
         cc.find("Canvas/PauseSetting/Resume").getComponent(cc.Button).clickEvents.push(ResumeButton);
+        //Volumn slider
+        let VolumnSlider = cc.find("Canvas/PauseSetting/Volumn/VolumnSlider").getComponent(cc.Slider);
+        let savedVolumn = cc.sys.localStorage.getItem("VolumnValue");
+        if (savedVolumn !== null) VolumnSlider.progress= Number(savedVolumn);
+        else VolumnSlider.progress = 0.5;
+        VolumnSlider.node.on('slide', this.onVolumnChange, this);
+
     }
     
 
@@ -81,7 +95,12 @@ export default class GameManager extends cc.Component {
         let Canvas = cc.find("Canvas");
         this.ResumeAllAnimation(Canvas); 
     }
-
+    onVolumnChange(slider: cc.Slider){
+        cc.audioEngine.setMusicVolume(slider.progress); // 0~1
+        cc.audioEngine.setEffectsVolume(slider.progress);
+        this.VolumnValue = slider.progress;
+        cc.sys.localStorage.setItem("VolumnValue", this.VolumnValue.toString());
+    }
     PauseAllAnimation(node: cc.Node) {
         let anims = node.getComponentsInChildren(cc.Animation);
         for (let anim of anims) {
