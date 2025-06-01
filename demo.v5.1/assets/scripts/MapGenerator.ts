@@ -69,7 +69,39 @@ export default class MapGenerator extends cc.Component {
             this.wallList.addChild(prefab_temp,1,'wall');
         }
     }
+    regenerateMap(level: number) {
+        this.wallList.removeAllChildren();
+        // Find Level
+        this.Map_xmax = level*4 + 6 ; // Level 1,2,3...，Map_xmax  = 10,14,18...
+        this.Map_ymax = level*2 + 3 ; // Level 1,2,3...，Map_ymax = 5,7,9...
 
+        this.myMap = new Map_Graph(this.Map_xmax, this.Map_ymax);
+
+        for(let _x:number = 0;_x<this.Map_xmax;_x++){
+            for(let _y:number = 0;_y<this.Map_ymax;_y++){
+                if(this.myMap.mapBlock[_y][_x].up){
+                    const prefab_temp = cc.instantiate(this.horizontalWallPrefab);
+                    prefab_temp.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+                    this.wallList.addChild(prefab_temp,1,'wall');
+                }
+                if(this.myMap.mapBlock[_y][_x].left){
+                    const prefab_temp = cc.instantiate(this.verticalWallPrefab);
+                    prefab_temp.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+                    this.wallList.addChild(prefab_temp,1,'wall');
+                }
+            }
+        }
+        for(let i:number = 0;i<this.Map_xmax;i++){
+            const prefab_temp = cc.instantiate(this.horizontalWallPrefab);
+            prefab_temp.setPosition(i*this.blocksize_x,this.Map_ymax*this.blocksize_y);
+            this.wallList.addChild(prefab_temp,1,'wall');
+        }
+        for(let i:number = 0;i<this.Map_ymax;i++){
+            const prefab_temp = cc.instantiate(this.verticalWallPrefab);
+            prefab_temp.setPosition(this.Map_xmax*this.blocksize_x,i*this.blocksize_y);
+            this.wallList.addChild(prefab_temp,1,'wall');
+        }
+    }
     // update (dt) {}
 }
 

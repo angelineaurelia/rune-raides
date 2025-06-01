@@ -40,6 +40,17 @@ export default class Player extends cc.Component {
     @property(cc.AudioClip)
     healsound: cc.AudioClip = null;
 
+    onLoad(){
+
+    }
+
+    public reset(){
+        //reset player position
+        //this.hp = this.maxHp;
+        //this.updatelife(0, this.hp);
+        this.node.setPosition(0,0);
+    }
+
     updatelife(num: number, hp: number){
         console.log(num, hp);
         this.lifebar.width = hp;
@@ -100,6 +111,8 @@ export default class Player extends cc.Component {
         if(this.hp <= 0){
             this.updatelife(-this.maxHp, 0);
             this.controller.getComponent("ActorController").godie();
-        }
+        } 
+        // Call GameManager to handle game over logic
     }
+
 }

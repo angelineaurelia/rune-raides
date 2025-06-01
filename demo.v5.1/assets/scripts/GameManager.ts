@@ -5,6 +5,9 @@ export default class GameManager extends cc.Component {
     @property({ type: cc.AudioClip })
     public bgm: cc.AudioClip = null;
 
+    @property(cc.Label)
+    public LevelLabel: cc.Label = null;
+
     private maxhp: number = 10;
     public VolumnValue : number = null;
     public Level: number = 1;
@@ -20,7 +23,27 @@ export default class GameManager extends cc.Component {
         } else {
             cc.error("Pause 按鈕節點找不到，請檢查 Canvas/Main Camera/Pause 是否存在！");
         }
+        // Initialize the level label
+        this.LevelLabel = cc.find("Canvas/Main Camera/Level").getComponent(cc.Label);
+        if (this.LevelLabel) this.LevelLabel.string = "Level: " + this.Level;
+        else cc.error("Level label not found");
+
+        //assign blank space for next level
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+
+
+
     }
+    onDestroy() {
+    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
+
+    onKeyDown(event: cc.Event.EventKeyboard) {
+        if (event.keyCode === cc.macro.KEY.space) {
+            this.GoNextLevel();
+        }
+    }
+
     start() {
         cc.director.getCollisionManager().enabled = true;
         
@@ -131,6 +154,27 @@ export default class GameManager extends cc.Component {
 
     resumeMusic() {
         cc.audioEngine.resumeMusic();
+    }
+
+    public GoNextLevel() {
+        this.Level++;
+        if (this.LevelLabel) this.LevelLabel.string = "Level: " + this.Level;
+        else cc.error("Level label not found");
+        // regenate the map
+        let MapGenerator = cc.find("GameManager").getComponent("MapGenerator");
+        if (MapGenerator) MapGenerator.regenerateMap(this.Level);
+        else cc.error("MapGenerator component not found");
+        //reset player position
+        let player = cc.find("Canvas/MapManager/Actor/Player").getComponent("Player");
+        if (player) player.reset();
+        else cc.error("Player component not found");
+        //reset monster
+
+        //reset UI
+
+    }
+    public GameOver() {
+        
     }
 }
 
