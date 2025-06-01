@@ -1,4 +1,5 @@
 const { ccclass, property } = cc._decorator;
+import LoadingManager from "./Menu/LoadingManager";
 
 @ccclass
 export default class GameManager extends cc.Component {
@@ -9,6 +10,7 @@ export default class GameManager extends cc.Component {
     public LevelLabel: cc.Label = null;
 
     private maxhp: number = 10;
+    private player: cc.Node = null;
     public VolumnValue : number = null;
     public Level: number = 1;
 
@@ -27,6 +29,8 @@ export default class GameManager extends cc.Component {
         this.LevelLabel = cc.find("Canvas/Main Camera/Level").getComponent(cc.Label);
         if (this.LevelLabel) this.LevelLabel.string = "Level: " + this.Level;
         else cc.error("Level label not found");
+
+        this.player = cc.find("Canvas/MapManager/Actors/Player");
 
         //assign blank space for next level
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -53,6 +57,8 @@ export default class GameManager extends cc.Component {
         cc.audioEngine.setEffectsVolume(this.VolumnValue);
         cc.audioEngine.setMusicVolume(this.VolumnValue);
         this.playMusic();
+        this.startGame();
+
     }
 
     PauseGame() {
@@ -81,7 +87,8 @@ export default class GameManager extends cc.Component {
 
             PauseNode.scaleX = 1;
             PauseNode.scaleY = 1;
-            //Pause the game
+            //Pause the game，停止鍵盤事件
+            cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
             cc.director.getScheduler().setTimeScale(0);
             cc.director.getPhysicsManager().enabled = false;
             let Canvas = cc.find("Canvas");
@@ -104,15 +111,55 @@ export default class GameManager extends cc.Component {
         if (savedVolumn !== null) VolumnSlider.progress= Number(savedVolumn);
         else VolumnSlider.progress = 0.5;
         VolumnSlider.node.on('slide', this.onVolumnChange, this);
-
+        //Restart button
+        let RestartButton = new cc.Component.EventHandler();
+        RestartButton.target = this.node;
+        RestartButton.component = "GameManager";
+        RestartButton.handler = "RestartGame";
+        cc.find("Canvas/PauseSetting/Restart").getComponent(cc.Button).clickEvents.push(RestartButton);
+        //
+        let DescButton = new cc.Component.EventHandler();
+        DescButton.target = this.node;
+        DescButton.component = "GameManager";
+        DescButton.handler = "showDesc";
+        cc.find("Canvas/PauseSetting/How").getComponent(cc.Button).clickEvents.push(DescButton);
+        let Desc = cc.find("Canvas/PauseSetting/Description");
+        Desc.active = false;
+        let ExitDescButton = new cc.Component.EventHandler();
+        ExitDescButton.target = this.node;
+        ExitDescButton.component = "GameManager";
+        ExitDescButton.handler = "HideDesc";
+        cc.find("Canvas/PauseSetting/Description/Exit").getComponent(cc.Button).clickEvents.push(ExitDescButton);
     }
-    
-
+    HideDesc() {
+        let Desc = cc.find("Canvas/PauseSetting/Description");
+        Desc.active = false;
+    }
+    showDesc() {
+        let Desc = cc.find("Canvas/PauseSetting/Description");
+        Desc.active = true;
+    }
+    RestartGame() {//Restart the game => back to menu
+        cc.director.getScheduler().setTimeScale(1);
+        cc.director.getPhysicsManager().enabled = true;
+        let Canvas = cc.find("Canvas");
+        this.ResumeAllAnimation(Canvas);    
+        cc.director.loadScene("Loading", () => {
+            let loadingManager = cc.find("Canvas/LoadingManager").getComponent("LoadingManager");
+            loadingManager.startLoading("menu");
+        });
+        //Destroy Pausetting node if it exists
+        let PauseSettingNode = cc.find("Canvas/Pausetting");
+        if (PauseSettingNode) PauseSettingNode.destroy();
+        else cc.error("PauseSetting node not found");
+         
+    }
     ResumeGame() {
         let PauseSettingNode = cc.find("Canvas/PauseSetting");
         if (PauseSettingNode) PauseSettingNode.destroy();
         else cc.error("PauseSetting node not found");
         //Resume the game
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.director.getScheduler().setTimeScale(1);
         cc.director.getPhysicsManager().enabled = true;
         let Canvas = cc.find("Canvas");
@@ -155,6 +202,21 @@ export default class GameManager extends cc.Component {
     resumeMusic() {
         cc.audioEngine.resumeMusic();
     }
+    public startGame(){
+        //Initialize the game state
+        this.Level = 1;
+        if (this.LevelLabel) this.LevelLabel.string = "Level: "+ this.Level;
+        else cc.error("Level Label not found");
+        //set player position
+        this.player.getComponent("Player").SetPlayer(this.Level);
+        //set Map
+        let GenMap = cc.find("GameManager").getComponent("MapGenerator");
+        GenMap.GeneratorMap();
+        //set monster
+        let MonsterMgr = cc.find("Canvas/MapManager/MonsterManager").getComponent("MonsterManager");
+        MonsterMgr.SetMonster(this.Level);
+
+    }
 
     public GoNextLevel() {
         this.Level++;
@@ -165,16 +227,16 @@ export default class GameManager extends cc.Component {
         if (MapGenerator) MapGenerator.regenerateMap(this.Level);
         else cc.error("MapGenerator component not found");
         //reset player position
-        let player = cc.find("Canvas/MapManager/Actor/Player").getComponent("Player");
-        if (player) player.reset();
+        if (this.player) this.player.getComponent("Player").SetPlayer(this.Level);
         else cc.error("Player component not found");
         //reset monster
-
+        let MonsterMgr = cc.find("Canvas/MapManager/MonsterManager").getComponent("MonsterManager");
+        MonsterMgr.SetMonster(this.Level);
         //reset UI
 
     }
     public GameOver() {
-        
+
     }
 }
 

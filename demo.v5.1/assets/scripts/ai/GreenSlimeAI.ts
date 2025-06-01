@@ -42,9 +42,10 @@ export default class GreeenSlimeAI extends cc.Component {
     @property({ tooltip: "Vertical offset of health bar above slime (pixels)" })
     private barOffsetY: number = 10;
 
-    @property({ type: cc.Node, tooltip: "Player node to detect" })
-    player: cc.Node = null;
+    //@property({ type: cc.Node, tooltip: "Player node to detect" })
+    //player: cc.Node = null;
 
+    public player: cc.Node = null;
     private slimeState = SlimeState.Idle;
     private timer = 0;
     private direction = cc.v2(0, 0);
@@ -62,7 +63,7 @@ export default class GreeenSlimeAI extends cc.Component {
     onLoad() {
      if (!this.player) {
             // use the exact path under the scene root:
-            this.player = cc.find("MapManager/Actors/Player");
+            this.player = cc.find("Canvas/MapManager/Actors/Player");
             if (!this.player) {
             cc.error("Couldn’t find Player at MapManager/Actors/Player");
             }
@@ -72,6 +73,9 @@ export default class GreeenSlimeAI extends cc.Component {
 
 
     start() {
+        this.player = cc.find("Canvas/MapManager/Actors/Player") as cc.Node;
+        if (!this.player) cc.error("Player node not found");
+
         this.anim = this.getComponent(cc.Animation)!;
         this.patrolCenter = this.node.getPosition().clone();
 

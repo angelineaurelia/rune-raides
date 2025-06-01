@@ -55,9 +55,10 @@ export default class GreenBossAI extends cc.Component {
   @property({ tooltip: "Health bar vertical offset (px)" })
   private barOffsetY = 60;
 
-  @property({ type: cc.Node, tooltip: "Player node" })
-  player: cc.Node = null;
-
+  //@property({ type: cc.Node, tooltip: "Player node" })
+  //player: cc.Node = null;
+  
+  public player: cc.Node = null;
   private state = SlimeState.Idle;
   private timer = 0;
   private direction = cc.v2(0, 0);
@@ -73,6 +74,9 @@ export default class GreenBossAI extends cc.Component {
   private currentRunClip = "";
 
   start() {
+    this.player = cc.find("Canvas/MapManager/Actors/Player") as cc.Node;
+    if (!this.player) cc.error("Player node not found");
+
     this.anim = this.getComponent(cc.Animation)!;
     this.patrolCenter = this.node.getPosition().clone();
 

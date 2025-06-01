@@ -34,13 +34,19 @@ export default class MapGenerator extends cc.Component {
     private Map_ymax : number = 5;
     private blocksize_x : number = 100;
     private blocksize_y : number = 100;
+    public get MapXmax(): number {
+        return this.Map_xmax* this.blocksize_x;
+    }
+    public get MapYmax(): number {
+        return this.Map_ymax * this.blocksize_y;
+    }
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         ;
     }
 
-    start () {
+    GeneratorMap () {
         
         this.myMap = new Map_Graph(this.Map_xmax,this.Map_ymax);// generate map
         //Please set the Anchor of Prefab into (0,0) first

@@ -44,11 +44,12 @@ export default class Player extends cc.Component {
 
     }
 
-    public reset(){
+    public SetPlayer(level: number){
         //reset player position
-        //this.hp = this.maxHp;
-        //this.updatelife(0, this.hp);
-        this.node.setPosition(0,0);
+        this.hp = this.maxHp;
+        this.updatelife(0, this.hp);
+        this.node.setPosition(20,20);
+
     }
 
     updatelife(num: number, hp: number){
