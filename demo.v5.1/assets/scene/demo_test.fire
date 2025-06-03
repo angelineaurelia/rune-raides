@@ -1214,8 +1214,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -189.897,
-        71.612,
+        -185,
+        80,
         0,
         0,
         0,
@@ -1614,7 +1614,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "0c480545-c9a6-4435-886a-c75ff3902b52"
+      "__uuid__": "0475d4ad-29f1-4d03-b169-0105adf2ee42"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1716,9 +1716,7 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "0c480545-c9a6-4435-886a-c75ff3902b52"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -1764,7 +1762,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 109.1,
+      "width": 67.5,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1776,8 +1774,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -200,
-        120,
+        -190,
+        110,
         0,
         0,
         0,
@@ -1818,11 +1816,11 @@
     "_dstBlendFactor": 771,
     "_string": "Label",
     "_N$string": "Label",
-    "_fontSize": 40,
+    "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "7bed7da0-8e40-488d-8b8e-ea47333ab75c"
+      "__uuid__": "86a57ffa-f9cb-428a-96aa-6abe77f6da30"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
