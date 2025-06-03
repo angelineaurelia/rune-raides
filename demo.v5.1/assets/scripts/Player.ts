@@ -40,6 +40,11 @@ export default class Player extends cc.Component {
     @property(cc.AudioClip)
     healsound: cc.AudioClip = null;
 
+    @property(GameManager)
+    gameManager: GameManager = null;
+
+    public holdingKey : boolean = false;
+
     onLoad(){
 
     }
@@ -49,6 +54,7 @@ export default class Player extends cc.Component {
         this.hp = this.maxHp;
         this.updatelife(0, this.hp);
         this.node.setPosition(20,20);
+        this.holdingKey = false;
 
     }
 
@@ -114,6 +120,23 @@ export default class Player extends cc.Component {
             this.controller.getComponent("ActorController").godie();
         } 
         // Call GameManager to handle game over logic
+    }
+
+    onBeginContact(contact, selfCollider, otherCollider){
+        if(otherCollider.node.name == 'key'){
+            this.holdingKey = true;
+            otherCollider.node.active = false;
+        }
+        if(otherCollider.node.name == 'lock'){
+            const temp = otherCollider.getComponent("NewClass");
+            if(temp){
+                temp.playAnim();
+            }
+            this.scheduleOnce(()=>{
+                otherCollider.node.destroy();
+                this.gameManager.GoNextLevel();
+            },1.2);
+        }
     }
 
 }

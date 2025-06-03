@@ -29,6 +29,12 @@ export default class MapGenerator extends cc.Component {
     @property(cc.Prefab)
     horizontalWallPrefab: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    keyToNextLevel: cc.Prefab = null;
+
+    @property(cc.Prefab)
+    lockToNextLevel: cc.Prefab = null;
+
     private myMap : Map_Graph = null;
     private Map_xmax : number = 10;
     private Map_ymax : number = 5;
@@ -74,6 +80,7 @@ export default class MapGenerator extends cc.Component {
             prefab_temp.setPosition(this.Map_xmax*this.blocksize_x,i*this.blocksize_y);
             this.wallList.addChild(prefab_temp,1,'wall');
         }
+        this.generateKey_Lock();
     }
     regenerateMap(level: number) {
         this.wallList.removeAllChildren();
@@ -107,6 +114,23 @@ export default class MapGenerator extends cc.Component {
             prefab_temp.setPosition(this.Map_xmax*this.blocksize_x,i*this.blocksize_y);
             this.wallList.addChild(prefab_temp,1,'wall');
         }
+        this.generateKey_Lock();
+    }
+    generateKey_Lock(){
+        let _x:number = 0;
+        let _y:number = 0;
+
+        _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+        _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        const prefab_temp_0 = cc.instantiate(this.keyToNextLevel);
+        prefab_temp_0.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+        this.wallList.addChild(prefab_temp_0,1,'key');
+
+        _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+        _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        const prefab_temp_1 = cc.instantiate(this.lockToNextLevel);
+        prefab_temp_1.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+        this.wallList.addChild(prefab_temp_1,1,'lock');
     }
     // update (dt) {}
 }
