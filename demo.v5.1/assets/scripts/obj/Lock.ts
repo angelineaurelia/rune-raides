@@ -18,7 +18,6 @@ export default class NewClass extends cc.Component {
 
     private anim: cc.Animation = null;
 
-
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -27,9 +26,11 @@ export default class NewClass extends cc.Component {
         this.anim = this.getComponent(cc.Animation);
     }
 
-    update (dt) {
-        if(!this.anim.getAnimationState('key-gold').isPlaying){
-            this.anim.play('key-gold');
+    public playAnim(){
+        if(!this.anim.getAnimationState('Lock-pink').isPlaying){
+            this.anim.play('Lock-pink');
         }
     }
+
+    // update (dt) {}
 }
