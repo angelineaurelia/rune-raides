@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "518715ef-a5ce-4e6b-9d54-6a1a0a46859b",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1024,
+  "height": 1024,
+  "platformSettings": {},
+  "subMetas": {
+    "Remove background project": {
+      "ver": "1.0.6",
+      "uuid": "0f82b607-0ead-4e4c-8c56-b86062e0be0f",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "518715ef-a5ce-4e6b-9d54-6a1a0a46859b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": -4,
+      "trimX": 65,
+      "trimY": 143,
+      "width": 895,
+      "height": 746,
+      "rawWidth": 1024,
+      "rawHeight": 1024,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
