@@ -97,7 +97,7 @@ export default class Player extends cc.Component {
     // Called when any key is pressed
     private onKeyDown(event: cc.Event.EventKeyboard) {
         // Use Space as the attack key (change if you prefer another key)
-        if (event.keyCode === cc.macro.KEY.c) {
+        if (event.keyCode === cc.macro.KEY.c || event.keyCode === cc.macro.KEY.z || event.keyCode === cc.macro.KEY.v) {
             this.tryAttack();
         }
     }
