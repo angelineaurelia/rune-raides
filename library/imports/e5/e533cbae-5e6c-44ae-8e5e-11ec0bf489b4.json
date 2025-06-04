@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "vase-shine-3",
+    "texture": "5d308570-15eb-4f99-9132-44edbcae1448",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      14,
+      15
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

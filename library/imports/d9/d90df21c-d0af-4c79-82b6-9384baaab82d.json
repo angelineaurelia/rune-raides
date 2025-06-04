@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "grate-3-hit-4",
+    "texture": "7fa50188-b590-4e2d-89b9-881a699f2750",
+    "atlas": "",
+    "rect": [
+      9,
+      10,
+      14,
+      13
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

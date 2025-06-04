@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "floor-arrow-11",
+    "texture": "59abe484-75f6-4664-a96c-f5dd92a4d5f9",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      14,
+      15
+    ],
+    "offset": [
+      -1,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

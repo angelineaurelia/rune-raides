@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "chest-green-1",
+    "texture": "48eace6d-8819-48e9-9ef2-efc0c110edcc",
+    "atlas": "",
+    "rect": [
+      0,
+      1,
+      16,
+      15
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-walk-right-11",
+    "texture": "bdb986e5-4cfc-4f9b-8d2f-c412a90a428c",
+    "atlas": "",
+    "rect": [
+      9,
+      8,
+      13,
+      16
+    ],
+    "offset": [
+      -0.5,
+      0
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-wall-red-11",
+    "texture": "c2840685-8f25-4d38-ae7f-1211971b549d",
+    "atlas": "",
+    "rect": [
+      3,
+      6,
+      10,
+      8
+    ],
+    "offset": [
+      0,
+      -2
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

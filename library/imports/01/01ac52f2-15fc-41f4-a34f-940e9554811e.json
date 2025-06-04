@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "grate-3-shine-0",
+    "texture": "911f8fd1-12ca-447a-a745-aaac4cac6b77",
+    "atlas": "",
+    "rect": [
+      9,
+      10,
+      14,
+      13
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

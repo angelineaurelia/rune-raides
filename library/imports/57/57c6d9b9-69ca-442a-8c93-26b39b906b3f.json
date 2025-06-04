@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "basic-slime-13",
+    "texture": "c166d5b4-04b0-47b2-8390-9f9ae0c9ddbd",
+    "atlas": "",
+    "rect": [
+      16,
+      3,
+      16,
+      11
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      48,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

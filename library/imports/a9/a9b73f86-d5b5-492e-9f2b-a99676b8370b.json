@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "silver-key-25",
+    "texture": "8727a15d-0a05-4d15-9abf-ef705bfb344a",
+    "atlas": "",
+    "rect": [
+      0,
+      1,
+      16,
+      13
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

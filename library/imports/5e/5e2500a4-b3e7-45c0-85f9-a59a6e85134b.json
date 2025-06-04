@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "barrel-light-brown-1",
+    "texture": "bd84a384-bffb-47cb-8d1d-9316d0c3d2c2",
+    "atlas": "",
+    "rect": [
+      1,
+      0,
+      14,
+      26
+    ],
+    "offset": [
+      0,
+      3
+    ],
+    "originalSize": [
+      16,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

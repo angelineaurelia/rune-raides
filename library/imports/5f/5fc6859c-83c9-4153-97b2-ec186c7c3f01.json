@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-slime-walk-8",
+    "texture": "6287d78f-6339-43f2-9980-e627f374da69",
+    "atlas": "",
+    "rect": [
+      20,
+      12,
+      28,
+      30
+    ],
+    "offset": [
+      2,
+      5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

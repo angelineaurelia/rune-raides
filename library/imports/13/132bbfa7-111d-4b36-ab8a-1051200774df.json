@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "crate-animation-25",
+    "texture": "499ff265-b4f8-46c4-92b1-0342c4fb7aac",
+    "atlas": "",
+    "rect": [
+      1,
+      2,
+      14,
+      13
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

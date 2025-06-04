@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "waterfall-end-20",
+    "texture": "54a07314-48d6-49d6-bae8-82f55399a5c8",
+    "atlas": "",
+    "rect": [
+      0,
+      5,
+      16,
+      24
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      35
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

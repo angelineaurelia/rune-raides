@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-run-5",
+    "texture": "93aa139e-862f-429a-894b-a0169054d4ca",
+    "atlas": "",
+    "rect": [
+      9,
+      7,
+      14,
+      17
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

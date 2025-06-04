@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-slime-run-9",
+    "texture": "a2ca2556-c8b9-4685-80ee-53aca5339b7d",
+    "atlas": "",
+    "rect": [
+      20,
+      17,
+      24,
+      25
+    ],
+    "offset": [
+      0,
+      2.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

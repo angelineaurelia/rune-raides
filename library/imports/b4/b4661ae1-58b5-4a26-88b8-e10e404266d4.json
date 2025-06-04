@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-wall-yellow-7",
+    "texture": "c2f043a6-6b9f-497e-9e6c-ab1ee11840ab",
+    "atlas": "",
+    "rect": [
+      3,
+      6,
+      10,
+      8
+    ],
+    "offset": [
+      0,
+      -2
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

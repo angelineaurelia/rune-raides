@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-slime-hurt-6",
+    "texture": "00d9341e-7be8-4875-a278-4a2f4ca8081b",
+    "atlas": "",
+    "rect": [
+      4,
+      0,
+      27,
+      26
+    ],
+    "offset": [
+      1.5,
+      3
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

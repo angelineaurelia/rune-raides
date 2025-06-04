@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "stars-silver-2",
+    "texture": "439ece32-b9e7-4e22-8c57-9abe7a5af6b0",
+    "atlas": "",
+    "rect": [
+      3,
+      2,
+      10,
+      12
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-wall-blue-2",
+    "texture": "b7e722ac-7168-4874-8965-b3fbbd2e5f6f",
+    "atlas": "",
+    "rect": [
+      3,
+      4,
+      10,
+      10
+    ],
+    "offset": [
+      0,
+      -1
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

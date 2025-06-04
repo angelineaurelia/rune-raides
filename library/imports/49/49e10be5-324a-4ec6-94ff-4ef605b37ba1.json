@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-key-3",
+    "texture": "d75be508-64d2-445b-b8a4-47957757549e",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      14,
+      13
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

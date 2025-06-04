@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-walk-front-3",
+    "texture": "b475d773-96f5-4b9d-8338-2e8b8e9375f1",
+    "atlas": "",
+    "rect": [
+      9,
+      8,
+      14,
+      16
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

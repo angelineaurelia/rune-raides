@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-walk-left-27",
+    "texture": "9593b693-c398-46e3-ae67-d0c5f5c530ca",
+    "atlas": "",
+    "rect": [
+      10,
+      8,
+      13,
+      16
+    ],
+    "offset": [
+      0.5,
+      0
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-side-40",
+    "texture": "2f092542-ef9b-45ec-b997-9b34cfc6b0cc",
+    "atlas": "",
+    "rect": [
+      10,
+      4,
+      6,
+      11
+    ],
+    "offset": [
+      5,
+      -1.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

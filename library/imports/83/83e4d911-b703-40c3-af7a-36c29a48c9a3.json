@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "gate-parts-5",
+    "texture": "6a38e9ab-1d82-4952-9f98-de639b4eb641",
+    "atlas": "",
+    "rect": [
+      2,
+      3,
+      5,
+      12
+    ],
+    "offset": [
+      -3.5,
+      -1
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

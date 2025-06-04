@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "barrel-blue-5",
+    "texture": "7b8dc410-7b7c-457c-a28e-f8667067d885",
+    "atlas": "",
+    "rect": [
+      1,
+      0,
+      14,
+      26
+    ],
+    "offset": [
+      0,
+      3
+    ],
+    "originalSize": [
+      16,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

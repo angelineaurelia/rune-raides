@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "coin-green-12",
+    "texture": "a4d4c13b-48c8-4e71-b980-0f2809576c02",
+    "atlas": "",
+    "rect": [
+      5,
+      0,
+      6,
+      15
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

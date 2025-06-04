@@ -1,0 +1,59 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "hurt_up",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.75,
+  "sample": 68,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "Sprite": {
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "813dd6f1-9d16-424f-a899-87a6f8418eb3"
+                }
+              },
+              {
+                "frame": 0.14705882352941177,
+                "value": {
+                  "__uuid__": "ed3689b2-bf93-471d-9f5e-ed272398a0ea"
+                }
+              },
+              {
+                "frame": 0.29411764705882354,
+                "value": {
+                  "__uuid__": "339a8737-1e75-4152-a64f-bdd386a6af5c"
+                }
+              },
+              {
+                "frame": 0.4411764705882353,
+                "value": {
+                  "__uuid__": "a1e443ab-0696-45b7-b5f9-b227d7080664"
+                }
+              },
+              {
+                "frame": 0.5882352941176471,
+                "value": {
+                  "__uuid__": "e1d2fe69-ee7a-4991-ba70-f6b97b1a58e1"
+                }
+              },
+              {
+                "frame": 0.7352941176470589,
+                "value": {
+                  "__uuid__": "3f8c0b0a-a43d-4c0d-98e5-2ffd84cf4a2a"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

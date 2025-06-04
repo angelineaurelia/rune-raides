@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossWalkLeft",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "ceafefaf-84d6-40b0-8e72-eeff50054497"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "aaeae215-6af7-4043-9152-f6dae8acc235"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "5cbd6561-da5f-4292-b18c-917e2da76021"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "a2448560-ef3a-418c-8dc8-dccff6d3be6c"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "fc12f7ce-3fe9-4f15-9cc5-9c35db2ddc0d"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "6713fca7-7c5c-423b-aa51-99209af682c3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

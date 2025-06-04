@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-slime-hurt-1",
+    "texture": "f452d115-98aa-410b-be69-d44d47ac7cd6",
+    "atlas": "",
+    "rect": [
+      22,
+      25,
+      20,
+      17
+    ],
+    "offset": [
+      0,
+      -1.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

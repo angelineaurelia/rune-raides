@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-front-63",
+    "texture": "d1db1575-9520-4bed-9a6f-64acd0b130f6",
+    "atlas": "",
+    "rect": [
+      4,
+      4,
+      8,
+      11
+    ],
+    "offset": [
+      0,
+      -1.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

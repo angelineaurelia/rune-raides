@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "coin-gold-12",
+    "texture": "7aafb907-82cc-4b6e-a336-f0d0a8dfa772",
+    "atlas": "",
+    "rect": [
+      5,
+      0,
+      6,
+      15
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

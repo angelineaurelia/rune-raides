@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "floor-carpet-red-16",
+    "texture": "309bea9e-616c-407e-8d40-2be9d23d4af8",
+    "atlas": "",
+    "rect": [
+      0,
+      15,
+      16,
+      1
+    ],
+    "offset": [
+      0,
+      -7.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

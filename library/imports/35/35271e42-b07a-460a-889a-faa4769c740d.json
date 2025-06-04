@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-slime-run-31",
+    "texture": "dffbe179-a82d-4a21-88a2-2df34a2c94ea",
+    "atlas": "",
+    "rect": [
+      20,
+      27,
+      24,
+      15
+    ],
+    "offset": [
+      0,
+      -2.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

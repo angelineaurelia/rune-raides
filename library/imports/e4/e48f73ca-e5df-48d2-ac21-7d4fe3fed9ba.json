@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-key-0",
+    "texture": "8014a50c-3b2b-4c82-932f-3aa5cf9f3715",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      14,
+      13
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

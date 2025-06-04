@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-hurt-19",
+    "texture": "4cf438e6-af65-418a-a19d-ac478b90053b",
+    "atlas": "",
+    "rect": [
+      10,
+      8,
+      13,
+      16
+    ],
+    "offset": [
+      0.5,
+      0
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

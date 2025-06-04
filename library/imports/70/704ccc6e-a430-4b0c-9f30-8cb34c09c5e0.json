@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "waterfall-35",
+    "texture": "266079ea-7047-4d3b-91bb-a82b6a1f30e3",
+    "atlas": "",
+    "rect": [
+      1,
+      8,
+      14,
+      9
+    ],
+    "offset": [
+      0,
+      5
+    ],
+    "originalSize": [
+      16,
+      35
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

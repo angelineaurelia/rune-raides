@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lava-slime-idle-18",
+    "texture": "d184c524-070c-41a4-94f1-d3609e38808c",
+    "atlas": "",
+    "rect": [
+      21,
+      15,
+      20,
+      27
+    ],
+    "offset": [
+      -1,
+      3.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

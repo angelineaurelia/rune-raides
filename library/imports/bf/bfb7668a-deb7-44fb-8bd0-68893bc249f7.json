@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "grate-1-break-no-particles-2-3",
+    "texture": "4b94f643-58dc-4da7-841e-70aca47a542e",
+    "atlas": "",
+    "rect": [
+      9,
+      11,
+      19,
+      11
+    ],
+    "offset": [
+      2.5,
+      -0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

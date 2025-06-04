@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "coin-blue-12",
+    "texture": "0795f2cc-fc87-423b-8c98-859ce90bfddc",
+    "atlas": "",
+    "rect": [
+      5,
+      0,
+      6,
+      15
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

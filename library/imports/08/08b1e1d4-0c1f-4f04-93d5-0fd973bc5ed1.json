@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "spike-22",
+    "texture": "8524a167-ffaf-4f1a-8204-6034cd45dddf",
+    "atlas": "",
+    "rect": [
+      1,
+      5,
+      14,
+      9
+    ],
+    "offset": [
+      0,
+      -1.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

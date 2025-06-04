@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-floor-10",
+    "texture": "3afa229c-5f2c-430a-963b-a8e53331f237",
+    "atlas": "",
+    "rect": [
+      0,
+      11,
+      48,
+      48
+    ],
+    "offset": [
+      0,
+      -3
+    ],
+    "originalSize": [
+      48,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

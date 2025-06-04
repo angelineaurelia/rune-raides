@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lava-slime-attack-3",
+    "texture": "57a40ef2-da4e-4c36-9c41-263ffbccfdf7",
+    "atlas": "",
+    "rect": [
+      9,
+      13,
+      46,
+      41
+    ],
+    "offset": [
+      0,
+      -1.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lava-slime-run-14",
+    "texture": "75da92b6-3e27-401b-9f1a-7b344a4bac87",
+    "atlas": "",
+    "rect": [
+      20,
+      4,
+      25,
+      38
+    ],
+    "offset": [
+      0.5,
+      9
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

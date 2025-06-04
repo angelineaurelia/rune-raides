@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lava-slime-hurt-11",
+    "texture": "d1673ed3-15dc-4a64-aa08-343f7e467670",
+    "atlas": "",
+    "rect": [
+      21,
+      20,
+      23,
+      22
+    ],
+    "offset": [
+      0.5,
+      1
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

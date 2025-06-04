@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lava-slime-death-22",
+    "texture": "5a58e5e4-8d29-4f3a-b018-20e20a41594a",
+    "atlas": "",
+    "rect": [
+      25,
+      15,
+      15,
+      27
+    ],
+    "offset": [
+      0.5,
+      3.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

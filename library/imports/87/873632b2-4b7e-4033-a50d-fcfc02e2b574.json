@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "arc-1",
+    "texture": "73e9d89a-1b7d-49cc-a6c4-fa3de0e9c4cc",
+    "atlas": "",
+    "rect": [
+      0,
+      10,
+      16,
+      14
+    ],
+    "offset": [
+      0,
+      -1
+    ],
+    "originalSize": [
+      16,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

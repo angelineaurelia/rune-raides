@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "rock-5",
+    "texture": "50c33f5f-791e-4343-acc9-86bc8544c2c6",
+    "atlas": "",
+    "rect": [
+      2,
+      4,
+      12,
+      10
+    ],
+    "offset": [
+      0,
+      -1
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

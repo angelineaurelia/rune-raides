@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "stars-green-2",
+    "texture": "f85fb92e-143b-4d20-995f-414f9041815c",
+    "atlas": "",
+    "rect": [
+      3,
+      2,
+      10,
+      12
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

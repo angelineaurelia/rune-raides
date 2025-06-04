@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "waterfall-big-5",
+    "texture": "a9ac1e00-e480-4863-b030-d1db1ec62080",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      22,
+      38
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      22,
+      38
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

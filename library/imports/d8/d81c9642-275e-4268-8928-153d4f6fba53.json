@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "vase-explode-16",
+    "texture": "7ea6dc69-bd2d-4eeb-97bc-38a8cfb0c944",
+    "atlas": "",
+    "rect": [
+      9,
+      8,
+      14,
+      15
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

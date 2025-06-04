@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blade-6",
+    "texture": "b92511ff-f7da-4942-99df-38b69d45cf78",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      26,
+      12
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      26,
+      12
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

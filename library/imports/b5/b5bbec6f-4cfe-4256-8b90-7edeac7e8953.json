@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-falling-3",
+    "texture": "02e4b11a-b977-4329-a65e-5157eb3d2305",
+    "atlas": "",
+    "rect": [
+      11,
+      11,
+      9,
+      9
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

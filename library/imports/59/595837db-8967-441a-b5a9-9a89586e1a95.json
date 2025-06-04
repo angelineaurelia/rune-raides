@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-floor-flame-1",
+    "texture": "5670a0de-bc80-467b-aa19-c637b4b39a2f",
+    "atlas": "",
+    "rect": [
+      4,
+      1,
+      8,
+      16
+    ],
+    "offset": [
+      0,
+      1.5
+    ],
+    "originalSize": [
+      16,
+      21
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
