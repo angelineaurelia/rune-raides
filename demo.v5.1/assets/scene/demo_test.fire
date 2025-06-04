@@ -194,6 +194,12 @@
     "horizontalWallPrefab": {
       "__uuid__": "8c0662b4-9958-4508-8b46-3aa628f6fc58"
     },
+    "keyToNextLevel": {
+      "__uuid__": "4bd6049f-da2e-4b74-b24f-9f181e6c1b9b"
+    },
+    "lockToNextLevel": {
+      "__uuid__": "6c74b5de-b864-44af-99eb-4ec33968e873"
+    },
     "_id": "1f5QR58aZEQ6k8kS3+zLvM"
   },
   {
@@ -2660,6 +2666,7 @@
     "healsound": {
       "__uuid__": "f0ea5fbc-b3e5-4415-bf4e-47ad732646ff"
     },
+    "gameManager": null,
     "_id": "cdLsua1jtBQ48YKq0fqsbY"
   },
   {

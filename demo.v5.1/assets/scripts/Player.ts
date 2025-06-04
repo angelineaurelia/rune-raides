@@ -127,13 +127,14 @@ export default class Player extends cc.Component {
             this.holdingKey = true;
             otherCollider.node.active = false;
         }
-        if(otherCollider.node.name == 'lock'){
-            const temp = otherCollider.getComponent("NewClass");
+        if(otherCollider.node.name == 'lock' && this.holdingKey){
+            const temp = otherCollider.getComponent("Lock");
             if(temp){
                 temp.playAnim();
             }
             this.scheduleOnce(()=>{
                 otherCollider.node.destroy();
+                this.gameManager = cc.find("GameManager").getComponent("GameManager");
                 this.gameManager.GoNextLevel();
             },1.2);
         }
