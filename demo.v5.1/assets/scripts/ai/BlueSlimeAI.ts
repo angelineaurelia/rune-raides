@@ -51,6 +51,9 @@ export default class BlueSlimeAI extends cc.Component {
     @property({ tooltip: "Vertical offset of health bar above slime (pixels)" })
     private barOffsetY: number = 10;
 
+    private isDead: boolean = false;
+    private isDeathAnimPlaying: boolean = false; // NEW: Tracks death animation
+
     public player: cc.Node = null;
     private slimeState: SlimeState = SlimeState.Idle;
     private timer: number = 0;
@@ -68,22 +71,16 @@ export default class BlueSlimeAI extends cc.Component {
     private currentAttackClip: string = "";
 
     onLoad() {
-        // Enable the collision manager (if using physics/colliders later)
         cc.director.getCollisionManager().enabled = true;
     }
 
     start() {
-        // 1) Find the player node in the scene
         this.player = cc.find("Canvas/MapManager/Actors/Player") as cc.Node;
         if (!this.player) cc.error("Player node not found");
 
-        // 2) Cache the Animation component
         this.anim = this.getComponent(cc.Animation)!;
-
-        // 3) Save the patrol center
         this.patrolCenter = this.node.getPosition().clone();
 
-        // 4) Draw patrol boundary (unchanged)
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent!;
         this.boundaryNode.setPosition(this.patrolCenter);
@@ -93,31 +90,33 @@ export default class BlueSlimeAI extends cc.Component {
         patrolGfx.circle(0, 0, this.patrolRadius);
         patrolGfx.stroke();
 
-        // 5) Detection area (unchanged)
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
         this.detectionNode.setPosition(0, 0);
         this.detectionGfx = this.detectionNode.addComponent(cc.Graphics);
         this.detectionGfx.lineWidth = 2;
 
-        // 6) Attack area (unchanged)
         this.attackNode = new cc.Node("AttackArea");
         this.attackNode.parent = this.node;
         this.attackNode.setPosition(0, 0);
         this.attackGfx = this.attackNode.addComponent(cc.Graphics);
         this.attackGfx.lineWidth = 2;
 
-        // 7) Health bar setup (unchanged)
         if (this.lifebar) {
             this.updateLife(0, 40);
         }
 
-        // 8) Start in Idle state
         this.setToIdle();
     }
 
     update(dt: number) {
-        // 1) Compute distance to player (world space)
+        if (this.isDead) return; // Actually dead, nothing happens
+
+        if (this.isDeathAnimPlaying) {
+            // Let the death animation play, but skip AI
+            return;
+        }
+
         let distToPlayer = Infinity;
         if (this.player) {
             const slimeW = this.node.parent!.convertToWorldSpaceAR(this.node.position);
@@ -125,7 +124,6 @@ export default class BlueSlimeAI extends cc.Component {
             distToPlayer = slimeW.sub(playerW).mag();
         }
 
-        // 2) Check if player is within the patrol area
         const localPlayerPos = this.node.parent!
             .convertToNodeSpaceAR(
                 this.player!.parent!.convertToWorldSpaceAR(this.player!.position)
@@ -133,7 +131,6 @@ export default class BlueSlimeAI extends cc.Component {
         const distFromCenter = localPlayerPos.sub(this.patrolCenter).mag();
         const playerInPatrol = distFromCenter <= this.patrolRadius;
 
-        // 3) Redraw detection & attack circles (unchanged)
         const drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
         const drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
 
@@ -153,37 +150,30 @@ export default class BlueSlimeAI extends cc.Component {
         this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
 
-        // 4) Determine states
         const inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
         const inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
 
-        // 5) If in attack range and not already attacking, start attack
         if (inAttack && this.slimeState !== SlimeState.Attack) {
             this.startAttack();
             return;
         }
 
-        // 6) If currently in Attack state, wait out the attack timer before returning to Idle
         if (this.slimeState === SlimeState.Attack) {
             this.timer += dt;
             if (this.timer >= this.attackAnimDuration) {
-                // After the full anim duration, go back to Idle
                 this.setToIdle();
             }
             return;
         }
 
-        // 7) If detected but not in attack range, run toward player
         if (inDetect) {
             if (this.slimeState !== SlimeState.Run) this.startRunning();
             this.runTowardsPlayer(dt);
             return;
         } else if (this.slimeState === SlimeState.Run) {
-            // If we were running but now out of detection, return to Idle
             this.setToIdle();
         }
 
-        // 8) Patrol logic (unchanged)
         this.timer += dt;
         if (this.slimeState === SlimeState.Idle && this.timer >= this.idleTime) {
             this.startWalking();
@@ -206,9 +196,7 @@ export default class BlueSlimeAI extends cc.Component {
         }
     }
 
-    // Life-bar update
     private updateLife(delta: number, hp: number) {
-        console.log("slime life change:", delta, "→", hp);
         if (!this.lifebar) return;
         this.lifebar.width = hp;
         if (hp <= 10) this.lifebar.color = cc.Color.RED;
@@ -217,23 +205,28 @@ export default class BlueSlimeAI extends cc.Component {
     }
 
     public takeDamage(amount: number) {
+        if (this.isDead || this.isDeathAnimPlaying) return; // Already dead or anim playing
+
+        const playerPos = this.player.getPosition();
+        const slimePos = this.node.getPosition();
+        const direction = playerPos.sub(slimePos).normalize();
+
+        const hurtAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "BlueSlimeHurtRight" : "BlueSlimeHurtLeft")
+            : (direction.y > 0 ? "BlueSlimeHurtUp" : "BlueSlimeHurtDown");
+
+        this.anim.play(hurtAnim);
+
         this.health -= amount;
-        if (this.health < 0) this.health = 0;
-
-        if (this.health > 0) {
-            // STILL ALIVE → play hurt animation
-            this.anim.play("BlueSlimeHurt");   // ensure you have this clip
+        if (this.health <= 0) {
+            this.health = 0;
+            if (!this.isDeathAnimPlaying) {
+                this.isDeathAnimPlaying = true;
+                this.playDeathAnimation(direction);
+            }
         }
+
         this.updateLife(-amount, this.health);
-
-        if (this.health === 0) {
-            // ZERO HP → play death animation first
-            this.anim.play("BlueSlimeDeath");  // ensure you have this clip
-            // Delay actual destroy until the death anim finishes (adjust 0.8 to match your clip length)
-            this.scheduleOnce(() => {
-                this.die();
-            }, 0.8);
-        }
     }
 
     public heal(amount: number) {
@@ -243,7 +236,7 @@ export default class BlueSlimeAI extends cc.Component {
     }
 
     private die() {
-        this.node.destroy();
+        this.unscheduleAllCallbacks();
     }
 
     private setToIdle() {
@@ -275,23 +268,18 @@ export default class BlueSlimeAI extends cc.Component {
         this.timer = 0;
         this.currentAttackClip = "";
 
-        // 1) Play the correct attack clip based on direction
         const dir = this.getRunDirection();
         const clip = Math.abs(dir.x) > Math.abs(dir.y)
             ? (dir.x > 0 ? "BlueSlimeAttackRight" : "BlueSlimeAttackLeft")
             : (dir.y > 0 ? "BlueSlimeAttackUp" : "BlueSlimeAttackDown");
         this.anim.play(clip);
 
-        // 2) Schedule the “hit” a little into the animation
         this.scheduleOnce(this.applyAttackHit, this.attackHitDelay);
     }
 
-    // Called attackHitDelay seconds into the attack animation
     private applyAttackHit() {
-        // Only deal damage once if still in Attack state
         if (this.slimeState !== SlimeState.Attack) return;
 
-        // Convert both slime and player to world-space Vec2
         const slimeWorld3 = this.node.parent!.convertToWorldSpaceAR(this.node.position);
         const slimeWorld2 = cc.v2(slimeWorld3.x, slimeWorld3.y);
 
@@ -300,7 +288,6 @@ export default class BlueSlimeAI extends cc.Component {
 
         const dist = slimeWorld2.sub(playerWorld2).mag();
         if (dist <= this.attackRadius) {
-            // Player is in attack range → deal damage
             const playerComp = this.player.getComponent(Player);
             if (playerComp) {
                 playerComp.takeDamage(this.attackDamage);
@@ -333,7 +320,22 @@ export default class BlueSlimeAI extends cc.Component {
     }
 
     onDisable() {
-        // Cancel any pending callbacks when this node is destroyed
         this.unscheduleAllCallbacks();
+    }
+
+    private playDeathAnimation(direction: cc.Vec2) {
+        const deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "BlueSlimeDeathRight" : "BlueSlimeDeathLeft")
+            : (direction.y > 0 ? "BlueSlimeDeathUp" : "BlueSlimeDeathDown");
+
+        this.anim.play(deathAnim);
+
+        this.unscheduleAllCallbacks();
+        this.slimeState = SlimeState.Idle;
+
+        this.scheduleOnce(() => {
+            this.isDead = true;
+            this.isDeathAnimPlaying = false;
+        }, 1.0); // match to your animation's duration
     }
 }
