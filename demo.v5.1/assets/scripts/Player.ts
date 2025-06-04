@@ -46,7 +46,7 @@ export default class Player extends cc.Component {
     public holdingKey : boolean = false;
 
     onLoad(){
-
+        ;
     }
 
     public SetPlayer(level: number){
@@ -56,6 +56,10 @@ export default class Player extends cc.Component {
         this.node.setPosition(20,20);
         this.holdingKey = false;
 
+    }
+
+    update(dt){
+        cc.find("Canvas/Main Camera/UI/Key").active = this.holdingKey;
     }
 
     updatelife(num: number, hp: number){
@@ -133,7 +137,11 @@ export default class Player extends cc.Component {
                 temp.playAnim();
             }
             this.scheduleOnce(()=>{
-                otherCollider.node.destroy();
+                if(otherCollider.node){
+                    otherCollider.node.destroy();
+                }else{
+                    cc.log("can't deal with otherCollider.node.destroy(); properly");
+                }
                 this.gameManager = cc.find("GameManager").getComponent("GameManager");
                 this.gameManager.GoNextLevel();
             },1.2);
