@@ -15,7 +15,7 @@ export default class GameManager extends cc.Component {
     public Level: number = 1;
 
     onLoad(){
-        let pauseBtnNode = cc.find("Canvas/Main Camera/Pause"); 
+        let pauseBtnNode = cc.find("Canvas/Main Camera/UI/Pause"); 
         if (pauseBtnNode) {
             let PauseButton = new cc.Component.EventHandler();
             PauseButton.target = this.node;
@@ -23,10 +23,10 @@ export default class GameManager extends cc.Component {
             PauseButton.handler = "PauseGame";
             pauseBtnNode.getComponent(cc.Button).clickEvents.push(PauseButton);
         } else {
-            cc.error("Pause 按鈕節點找不到，請檢查 Canvas/Main Camera/Pause 是否存在！");
+            cc.error("Pause 按鈕節點找不到，請檢查 Canvas/Main Camera/UI/Pause 是否存在！");
         }
         // Initialize the level label
-        this.LevelLabel = cc.find("Canvas/Main Camera/Level").getComponent(cc.Label);
+        this.LevelLabel = cc.find("Canvas/Main Camera/UI/Level").getComponent(cc.Label);
         if (this.LevelLabel) this.LevelLabel.string = "Level: " + this.Level;
         else cc.error("Level label not found");
 
@@ -233,6 +233,17 @@ export default class GameManager extends cc.Component {
         let MonsterMgr = cc.find("Canvas/MapManager/MonsterManager").getComponent("MonsterManager");
         MonsterMgr.SetMonster(this.Level);
         //reset UI
+        
+        //隨著level 提升 改變視窗大小
+        let camera = cc.find("Canvas/Main Camera").getComponent(cc.Camera);
+        camera.zoomRatio = camera.zoomRatio * 0.9;
+        //視窗改變 UI 也要改變
+        let UI = cc.find("Canvas/Main Camera/UI");
+        if (UI) {
+            UI.setPosition(0,0);
+            UI.scaleX = 1/ camera.zoomRatio;
+            UI.scaleY = 1/ camera.zoomRatio;
+        } else console.log("UI not found");
 
     }
     public GameOver() {
