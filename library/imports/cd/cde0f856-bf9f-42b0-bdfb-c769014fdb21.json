@@ -1,7 +1,7 @@
 {
   "__type__": "cc.SpriteFrame",
   "content": {
-    "name": "Save",
+    "name": "save",
     "texture": "e5e24592-251c-428d-b4bb-f7dfa995bdae",
     "atlas": "",
     "rect": [

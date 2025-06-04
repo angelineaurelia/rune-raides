@@ -73,7 +73,7 @@ var Player = /** @class */ (function (_super) {
     // Called when any key is pressed
     Player.prototype.onKeyDown = function (event) {
         // Use Space as the attack key (change if you prefer another key)
-        if (event.keyCode === cc.macro.KEY.c) {
+        if (event.keyCode === cc.macro.KEY.c || event.keyCode === cc.macro.KEY.z || event.keyCode === cc.macro.KEY.v) {
             this.tryAttack();
         }
     };
