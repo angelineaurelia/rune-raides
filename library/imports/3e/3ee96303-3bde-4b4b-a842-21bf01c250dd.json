@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-slime-idle-23",
+    "texture": "be196d05-af7e-4536-9bda-46c8cc7fac8c",
+    "atlas": "",
+    "rect": [
+      7,
+      5,
+      18,
+      21
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

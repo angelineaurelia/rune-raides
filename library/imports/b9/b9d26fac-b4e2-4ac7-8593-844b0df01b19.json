@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "pebble-4",
+    "texture": "02956d68-94d4-4d43-a92a-e531c144ae91",
+    "atlas": "",
+    "rect": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "offset": [
+      4,
+      -4
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

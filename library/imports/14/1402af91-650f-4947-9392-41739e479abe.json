@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "GreenBossWalk018",
+    "texture": "499e1236-5c99-426c-bfe0-b37e598665e6",
+    "atlas": "",
+    "rect": [
+      16,
+      6,
+      27,
+      40
+    ],
+    "offset": [
+      -2.5,
+      6
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

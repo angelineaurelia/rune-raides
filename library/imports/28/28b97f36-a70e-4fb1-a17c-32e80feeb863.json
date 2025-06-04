@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-attack-3-30",
+    "texture": "beab45b0-a566-4a20-be66-985360f62f6a",
+    "atlas": "",
+    "rect": [
+      17,
+      3,
+      14,
+      29
+    ],
+    "offset": [
+      0,
+      6.5
+    ],
+    "originalSize": [
+      48,
+      48
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

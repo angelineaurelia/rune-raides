@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "pillar-4",
+    "texture": "b9c2f0df-30e9-4697-aa10-dd6165c5eebb",
+    "atlas": "",
+    "rect": [
+      1,
+      8,
+      13,
+      19
+    ],
+    "offset": [
+      -0.5,
+      -1.5
+    ],
+    "originalSize": [
+      16,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "floor-carpet-blue-9",
+    "texture": "eb45ba34-1fc8-4d07-900e-0d227aacbb36",
+    "atlas": "",
+    "rect": [
+      15,
+      0,
+      1,
+      16
+    ],
+    "offset": [
+      7.5,
+      0
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

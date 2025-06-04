@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-slime-walk-22",
+    "texture": "2b72f653-75d6-4e65-8ff3-85538f958a80",
+    "atlas": "",
+    "rect": [
+      21,
+      28,
+      23,
+      14
+    ],
+    "offset": [
+      0.5,
+      -3
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

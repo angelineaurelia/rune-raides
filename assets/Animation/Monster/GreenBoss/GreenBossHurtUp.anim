@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossHurtUp",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "a61c9aa5-9da6-4f21-8a12-fd5d6234ee86"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "c030becb-14dd-4f96-b356-bbefd212c579"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "33eedb6c-e1ca-4271-b65f-a264789692c9"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "e66abb9f-9ff3-49e3-b733-9ed4ebfbbb70"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "a9ba35e0-f878-4833-b11a-2f4a54c1c764"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "080daf5d-00fb-4307-82b7-7d6656a2dee9"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

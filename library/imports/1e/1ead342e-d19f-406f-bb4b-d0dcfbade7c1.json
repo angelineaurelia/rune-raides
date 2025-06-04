@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-charged-attack-3-55",
+    "texture": "35e8ae82-1913-4c92-b8cc-05b841e976dc",
+    "atlas": "",
+    "rect": [
+      16,
+      10,
+      15,
+      22
+    ],
+    "offset": [
+      -0.5,
+      3
+    ],
+    "originalSize": [
+      48,
+      48
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

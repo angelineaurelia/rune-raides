@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "door-stone-1-6",
+    "texture": "6bf1c279-ed89-473b-8708-736afa61ad66",
+    "atlas": "",
+    "rect": [
+      0,
+      10,
+      32,
+      6
+    ],
+    "offset": [
+      0,
+      -5
+    ],
+    "originalSize": [
+      32,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

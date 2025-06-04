@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "pool-50",
+    "texture": "915349d1-d8ab-4845-ae4d-bc6aedf7f434",
+    "atlas": "",
+    "rect": [
+      2,
+      0,
+      14,
+      7
+    ],
+    "offset": [
+      1,
+      4.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

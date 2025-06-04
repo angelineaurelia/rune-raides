@@ -1,0 +1,61 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossDeadRight",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.0166666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "6678710c-8e2e-4940-af64-d426063f00c5"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "6904471e-2498-43a8-b52d-f9d49d1f21ea"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "ee6ab535-03c7-4ba6-922d-b782c9dd9038"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "ea5289a4-3792-435f-bbde-8e552e2c605b"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "727d017e-0f43-46c0-81e9-887a0dfab7ff"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "dd2ada47-a158-46e1-9797-a4ef89c55ef0"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "1e6632b8-dbed-4083-beff-152b846aa510"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

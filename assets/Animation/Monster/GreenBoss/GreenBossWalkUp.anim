@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreenBossWalkUp",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.85,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "9d7910f5-2d30-4151-8c2b-13f5da8e3af2"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "b5b91bd7-56e1-4d27-8c82-5016a2994cf2"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "fe9dfec7-4332-493a-9562-c937001f86f5"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "526e7be9-960d-48c6-b4b4-021c10b4c19b"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "9a49ee76-c8fe-46b9-98f4-03dc843e8d90"
+            }
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": {
+              "__uuid__": "927ff742-ae6a-4790-8e49-2c3b91143b99"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

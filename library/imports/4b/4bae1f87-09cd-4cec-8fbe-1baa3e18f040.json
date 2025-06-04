@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-combo-attack-1-43",
+    "texture": "a031d10f-f651-4c4c-8971-5721412f55ec",
+    "atlas": "",
+    "rect": [
+      6,
+      16,
+      25,
+      20
+    ],
+    "offset": [
+      -5.5,
+      -2
+    ],
+    "originalSize": [
+      48,
+      48
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

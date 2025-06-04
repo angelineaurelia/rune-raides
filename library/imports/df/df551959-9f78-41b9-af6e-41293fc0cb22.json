@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "torch-wall-green-10",
+    "texture": "f395b5f9-ffcb-4438-9742-613dc7ee2207",
+    "atlas": "",
+    "rect": [
+      3,
+      4,
+      10,
+      10
+    ],
+    "offset": [
+      0,
+      -1
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

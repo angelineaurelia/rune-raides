@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-slime-attack-7",
+    "texture": "19287350-7654-430e-bd02-0c56d337a609",
+    "atlas": "",
+    "rect": [
+      4,
+      10,
+      58,
+      32
+    ],
+    "offset": [
+      1,
+      6
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

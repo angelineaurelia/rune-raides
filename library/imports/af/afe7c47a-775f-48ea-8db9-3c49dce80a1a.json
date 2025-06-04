@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lava-slime-walk-16",
+    "texture": "e9cc377d-fad9-4460-8fb3-7598eec21858",
+    "atlas": "",
+    "rect": [
+      24,
+      17,
+      20,
+      25
+    ],
+    "offset": [
+      2,
+      2.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

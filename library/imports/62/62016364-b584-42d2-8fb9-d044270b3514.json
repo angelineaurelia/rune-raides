@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "door-wood-animation-26",
+    "texture": "eae9581f-d85a-47e4-a2f8-62ccdfa9d65b",
+    "atlas": "",
+    "rect": [
+      0,
+      14,
+      14,
+      18
+    ],
+    "offset": [
+      -1,
+      -7
+    ],
+    "originalSize": [
+      16,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

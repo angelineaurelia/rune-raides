@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "GreeenSlimeWalkLeft",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.43333333333333335,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "cab5f387-cd4e-4d1a-b0a3-3bf8314b6a99"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "251aa35f-c6ae-48e0-9ae1-b4a5c4da3869"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "6120933e-b9e3-428e-bb54-2552b74d9587"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "3d4ea96d-e453-4218-9a87-2f251e3cf35c"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "83edbe1c-92d0-4465-8949-9c65aec81092"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "814d98a4-c92c-4f83-a762-2df6f672ccdf"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

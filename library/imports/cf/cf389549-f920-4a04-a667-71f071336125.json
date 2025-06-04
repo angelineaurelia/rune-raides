@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "waterfall-green-short-2",
+    "texture": "01956087-79b5-4ba8-af3a-dcf3dd1123ec",
+    "atlas": "",
+    "rect": [
+      2,
+      10,
+      12,
+      21
+    ],
+    "offset": [
+      0,
+      -4.5
+    ],
+    "originalSize": [
+      16,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

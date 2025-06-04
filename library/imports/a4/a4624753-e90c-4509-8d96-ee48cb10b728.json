@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-slime-idle-2",
+    "texture": "9e009a0f-f6cc-40b3-bcc3-2747fbb46cf1",
+    "atlas": "",
+    "rect": [
+      22,
+      16,
+      23,
+      26
+    ],
+    "offset": [
+      1.5,
+      3
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

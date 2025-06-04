@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "How",
+    "texture": "048402e3-640b-418b-ab62-6bb5186be0b2",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      1421,
+      618
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      1421,
+      618
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

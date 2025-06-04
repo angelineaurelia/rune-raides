@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-slime-attack-33",
+    "texture": "aa0e44e1-75ab-4724-a1e7-91e5c626f51a",
+    "atlas": "",
+    "rect": [
+      24,
+      25,
+      17,
+      17
+    ],
+    "offset": [
+      0.5,
+      -1.5
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

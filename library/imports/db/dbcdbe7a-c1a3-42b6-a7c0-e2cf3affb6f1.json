@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "stars-gold-1",
+    "texture": "aec1a565-bcfe-478a-ba67-8a9cc4f4aee2",
+    "atlas": "",
+    "rect": [
+      2,
+      2,
+      12,
+      12
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

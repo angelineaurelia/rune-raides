@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-standby-11",
+    "texture": "6d8d10fd-fd22-4728-afa5-f602f531e999",
+    "atlas": "",
+    "rect": [
+      9,
+      9,
+      22,
+      15
+    ],
+    "offset": [
+      4,
+      -0.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

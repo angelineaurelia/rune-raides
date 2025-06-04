@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "green-slime-death-5",
+    "texture": "74e7e303-c43c-49d2-a84b-6e85d52daeca",
+    "atlas": "",
+    "rect": [
+      14,
+      26,
+      36,
+      16
+    ],
+    "offset": [
+      0,
+      -2
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

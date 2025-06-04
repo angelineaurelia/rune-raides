@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blue-slime-death-27",
+    "texture": "9d509cb6-6416-47af-a89b-07a280eedf7e",
+    "atlas": "",
+    "rect": [
+      13,
+      9,
+      38,
+      32
+    ],
+    "offset": [
+      0,
+      7
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

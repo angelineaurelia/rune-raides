@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "floor-stairs-small-23",
+    "texture": "0a6685ab-6099-4f0b-b071-0e6838eb4ac0",
+    "atlas": "",
+    "rect": [
+      1,
+      0,
+      15,
+      16
+    ],
+    "offset": [
+      0.5,
+      0
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

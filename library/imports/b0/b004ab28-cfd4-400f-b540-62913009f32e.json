@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "black-player-dead-56",
+    "texture": "d7bae6cf-6ca0-438c-a847-0455fbbc0794",
+    "atlas": "",
+    "rect": [
+      3,
+      11,
+      18,
+      15
+    ],
+    "offset": [
+      -4,
+      -2.5
+    ],
+    "originalSize": [
+      32,
+      32
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

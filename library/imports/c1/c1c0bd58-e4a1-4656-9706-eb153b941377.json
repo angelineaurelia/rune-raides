@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "gold-key-6",
+    "texture": "d89bc5ae-7c1f-420d-beae-7f328145c590",
+    "atlas": "",
+    "rect": [
+      1,
+      5,
+      14,
+      11
+    ],
+    "offset": [
+      0,
+      -2.5
+    ],
+    "originalSize": [
+      16,
+      16
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
