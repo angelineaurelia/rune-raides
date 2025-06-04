@@ -7,6 +7,9 @@
 
 const { ccclass, property } = cc._decorator;
 import GameManager from "./GameManager";
+import BlueSlimeAI from "./ai/BlueSlimeAI";
+
+type FacingDirection = "up" | "down" | "left" | "right";
 
 @ccclass
 export default class Player extends cc.Component {
@@ -45,10 +48,99 @@ export default class Player extends cc.Component {
 
     public holdingKey : boolean = false;
 
+    private isAttacking: boolean = false; // Prevent overlapping swings
+    private anim: cc.Animation;
+    @property({ type: cc.Integer, tooltip: "Player attack range in pixels" })
+    attackRange: number = 50;
+
+    // Delay (seconds) into the attack animation when damage is actually applied
+    @property({ type: cc.Float, tooltip: "When (sec) to check hit in attack anim" })
+    attackHitDelay: number = 0.2;
+
+    // Total length (seconds) of the attack animation
+    @property({ type: cc.Float, tooltip: "Length of PlayerAttack animation" })
+    attackAnimDuration: number = 0.5;
+
     onLoad(){
+        this.anim = this.getComponent(cc.Animation);
+        cc.systemEvent.on(
+            cc.SystemEvent.EventType.KEY_DOWN,
+            this.onKeyDown,
+            this
+        );
 
     }
+    onDestroy() {
+        // Clean up listener
+        cc.systemEvent.off(
+            cc.SystemEvent.EventType.KEY_DOWN,
+            this.onKeyDown,
+            this
+        );
+    }
+    private onKeyDown(event: cc.Event.EventKeyboard) {
+        // Use Space as the attack key (change if you prefer another key)
+        if (event.keyCode === cc.macro.KEY.z || event.keyCode === cc.macro.KEY.c || event.keyCode === cc.macro.KEY.v) {
+            this.tryAttack();
+        }
+    }
+    private tryAttack() {
+        if (this.isAttacking) return;
+        this.isAttacking = true;
 
+        // 1) Play attack animation & sound
+        if (this.anim) {
+            this.anim.play("PlayerAttack"); // ensure you have a clip named “PlayerAttack”
+        }
+        if (this.attack1sound) {
+            cc.audioEngine.playEffect(this.attack1sound, false);
+        }
+
+        // 2) Schedule the actual “hit” moment
+        this.scheduleOnce(this.applyAttackHit, this.attackHitDelay);
+
+        // 3) Once the full animation is done, allow attacking again
+        this.scheduleOnce(() => {
+            this.isAttacking = false;
+        }, this.attackAnimDuration);
+    }
+
+    // Runs attackHitDelay seconds into the swing to check for any slimes in range
+    private applyAttackHit() {
+        // 1) Convert the player's position to world space (Vec3) and then to Vec2
+        const playerWorld3 = this.node.convertToWorldSpaceAR(cc.v3(0, 0, 0));
+        const playerWorld2 = cc.v2(playerWorld3.x, playerWorld3.y);
+
+        // 2) Find all slimes under “Canvas/MapManager/Actors”
+        const actorsRoot = cc.find("Canvas/MapManager/MonsterManager");
+        if (!actorsRoot) return;
+
+        actorsRoot.children.forEach((childNode) => {
+            const slimeComp = childNode.getComponent("BlueSlimeAI");
+            if (!slimeComp) console.log("no-Monster"); // skip non‐slime nodes
+            else console.log("Monster :", childNode.name);
+            // 3) Convert that slime’s position to world-space Vec2
+            const slimeWorld3 = childNode.convertToWorldSpaceAR(cc.v3(0, 0, 0));
+            const slimeWorld2 = cc.v2(slimeWorld3.x, slimeWorld3.y);
+
+            // 4) Distance check
+            const dist = playerWorld2.sub(slimeWorld2).mag();
+            if (dist <= this.attackRange) {
+                // 5) Slash hits this slime → deal damage
+                if (slimeComp) slimeComp.takeDamage(this.attackPower);
+                // (Optional) If you only want one slime per swing, uncomment:
+                // return;
+            }
+        });
+    }
+
+     public get worldPosition(): cc.Vec3 {
+        return this.node.convertToWorldSpaceAR(cc.v3(0, 0, 0));
+    }
+
+    public get localPosition(): cc.Vec3 {
+        return this.node.position;
+    }
     public SetPlayer(level: number){
         //reset player position
         this.hp = this.maxHp;
@@ -87,14 +179,6 @@ export default class Player extends cc.Component {
         if(this.attack3sound) cc.audioEngine.playEffect(this.attack3sound,false);
     }
 
-    public get worldPosition(): cc.Vec3 {
-        return this.node.convertToWorldSpaceAR(cc.v3(0, 0, 0));
-    }
-
-    public get localPosition(): cc.Vec3 {
-        return this.node.position;
-    }
-
     public takeDamage(amount: number) {
         this.hp -= amount; 
         this.updatelife(-amount, this.hp);
@@ -127,13 +211,14 @@ export default class Player extends cc.Component {
             this.holdingKey = true;
             otherCollider.node.active = false;
         }
-        if(otherCollider.node.name == 'lock'){
-            const temp = otherCollider.getComponent("NewClass");
+        if(otherCollider.node.name == 'lock' && this.holdingKey){
+            const temp = otherCollider.getComponent("Lock");
             if(temp){
                 temp.playAnim();
             }
             this.scheduleOnce(()=>{
                 otherCollider.node.destroy();
+                this.gameManager = cc.find("GameManager").getComponent("GameManager");
                 this.gameManager.GoNextLevel();
             },1.2);
         }

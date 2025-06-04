@@ -125,12 +125,14 @@ export default class MapGenerator extends cc.Component {
         const prefab_temp_0 = cc.instantiate(this.keyToNextLevel);
         prefab_temp_0.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
         this.wallList.addChild(prefab_temp_0,1,'key');
+        console.log("Key at:",_x, _y);
 
         _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
         _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         const prefab_temp_1 = cc.instantiate(this.lockToNextLevel);
         prefab_temp_1.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
         this.wallList.addChild(prefab_temp_1,1,'lock');
+        console.log("Lock at:",_x, _y);
     }
     // update (dt) {}
 }

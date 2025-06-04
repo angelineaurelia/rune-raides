@@ -449,9 +449,14 @@
     "patrolRadius": 80,
     "detectionRadius": 50,
     "attackRadius": 20,
-    "maxHealth": 100,
-    "health": 100,
-    "lifebar": null,
+    "attackDamage": 5,
+    "attackHitDelay": 0.3,
+    "attackAnimDuration": 1,
+    "maxHealth": 40,
+    "health": 40,
+    "lifebar": {
+      "__id__": 6
+    },
     "barOffsetY": 10,
     "_id": ""
   },
@@ -542,7 +547,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 0,
+    "_type": 1,
     "_allowSleep": true,
     "_gravityScale": 1,
     "_linearDamping": 0,
