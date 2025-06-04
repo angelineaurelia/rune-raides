@@ -558,7 +558,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 0,
+    "_type": 1,
     "_allowSleep": true,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -594,7 +594,7 @@
       "x": 4.6,
       "y": -2.3
     },
-    "_radius": 7.7,
+    "_radius": 10.5,
     "_id": ""
   },
   {

@@ -24,6 +24,7 @@ export default class NewClass extends cc.Component {
 
     onLoad () {
         cc.director.getCollisionManager().enabled = true;
+        cc.director.getPhysicsManager().enabled = true;
         this.level = cc.find("GameManager").getComponent("GameManager").Level;
         //Initialize the monster manager
         this.monsterManager = cc.find("Canvas/MapManager/MonsterManager");
