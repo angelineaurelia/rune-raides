@@ -29,13 +29,13 @@ export default class LavaSlimeAI extends cc.Component {
     detectionRadius: number = 170;
 
     @property({ tooltip: "Attack circle radius (pixels)" })
-    attackRadius: number = 70;
+    attackRadius: number = 80;
 
     @property({ tooltip: "Time to wait before performing attack (seconds)" })
     timeBeforeAttack: number = 1;
 
     @property({ tooltip: "Damage dealt by the attack" })
-    attackDamage: number = 20;
+    attackDamage: number = 13;
 
     @property({ tooltip: "Maximum health of the slime" })
     maxHealth: number = 40;

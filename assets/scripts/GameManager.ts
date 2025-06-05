@@ -1,6 +1,12 @@
 const { ccclass, property } = cc._decorator;
 import LoadingManager from "./Menu/LoadingManager";
 declare const firebase: any;
+//for Firebase initialization
+declare global {
+    interface Window {
+        _firebaseInited?: boolean;
+    }
+}
 
 @ccclass
 export default class GameManager extends cc.Component {
@@ -35,12 +41,30 @@ export default class GameManager extends cc.Component {
 
         //assign blank space for next level
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.log("Is Firebase initialized?", window._firebaseInited);
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyDFW4-emWdI1ghgZWWGp1wqoWvAvTwAqrQ",
+            authDomain: "rune-raids.firebaseapp.com",
+            projectId: "rune-raids",
+            storageBucket: "rune-raids.firebasestorage.app",
+            messagingSenderId: "530514360843",
+            appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
+            measurementId: "G-B1C5FG1YSN"
+        };
 
-
+        if (!window._firebaseInited) {
+            firebase.initializeApp(firebaseConfig);
+            window._firebaseInited = true;
+            cc.log("✅ Firebase initialized in GameManager.ts");
+        } else {
+            cc.log("ℹ️ Firebase already initialized");
+        }
+        
     }
+
     onDestroy() {
-    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
     onKeyDown(event: cc.Event.EventKeyboard) {
@@ -269,6 +293,7 @@ export default class GameManager extends cc.Component {
 
     private saveProgress(level: number) {
         cc.log("Saving progress for level:", level);
+
         if (!window._firebaseInited) {
             cc.warn("Firebase not initialized.");
             return;
@@ -280,42 +305,50 @@ export default class GameManager extends cc.Component {
             return;
         }
 
-        const db = firebase.firestore();
-        const userRef = db.collection("leaderboard").doc(user.uid);
+        const userRef = firebase.database().ref("leaderboard/" + user.uid);
 
-        userRef.get().then(doc => {
-            const prev = doc.exists ? doc.data().highestLevel : 0;
-            if (level > prev) {
-                userRef.set({
-                    username: user.displayName || "Unknown",
-                    highestLevel: level
-                });
-                cc.log(`Updated leaderboard for ${user.displayName || "Unknown"}: Level ${level}`);
+        userRef.once("value").then((snapshot: any) => {
+            const existing = snapshot.val();
+            const previousLevel = existing?.highestLevel || 0;
+
+            if (level > previousLevel) {
+            userRef.set({
+                username: user.displayName || "Unknown",
+                highestLevel: level,
+                lastUpdate: firebase.database.ServerValue.TIMESTAMP
+            }).then(() => {
+                cc.log(`✅ Updated Realtime DB for ${user.displayName || "Unknown"}: Level ${level}`);
+            }).catch((err: any) => {
+                cc.error("❌ Failed to write to Realtime DB:", err);
+            });
+            } else {
+            cc.log("No update needed — previous level is higher or equal.");
             }
-        }).catch(err => {
-            cc.error("Failed to save progress:", err);
+        }).catch((err: any) => {
+            cc.error("❌ Failed to read from Realtime DB:", err);
         });
     }
 
     public loadLeaderboard() {
-        if (!window._firebaseInited) {
-            cc.warn("Firebase not initialized.");
-            return;
-        }
+        const dbRef = firebase.database().ref("leaderboard");
+        dbRef.once("value")
+            .then((snapshot: any) => {
+            const data = snapshot.val();
+            if (!data) {
+                cc.log("Leaderboard is empty.");
+                return;
+            }
 
-        const db = firebase.firestore();
-        db.collection("leaderboard")
-            .orderBy("highestLevel", "desc")
-            .limit(10)
-            .get()
-            .then(snapshot => {
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    cc.log(`${data.username}: Level ${data.highestLevel}`);
-                    // You can update UI here
-                });
-            }).catch(err => {
-                cc.error("Failed to load leaderboard:", err);
+            const sorted = Object.values(data)
+                .sort((a: any, b: any) => b.highestLevel - a.highestLevel)
+                .slice(0, 10);
+
+            sorted.forEach((entry: any, index: number) => {
+                cc.log(`#${index + 1} ${entry.username}: Level ${entry.highestLevel}`);
+            });
+            })
+            .catch((err: any) => {
+            cc.error("❌ Failed to load leaderboard from Realtime DB:", err);
             });
     }
 }

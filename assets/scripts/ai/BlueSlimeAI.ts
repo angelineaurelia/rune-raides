@@ -25,10 +25,10 @@ export default class BlueSlimeAI extends cc.Component {
     patrolRadius: number = 200;
 
     @property({ tooltip: "Detection circle radius (pixels)" })
-    detectionRadius: number = 170;
+    detectionRadius: number = 180;
 
     @property({ tooltip: "Attack circle radius (pixels)" })
-    attackRadius: number = 70;
+    attackRadius: number = 80;
 
     @property({ tooltip: "How much damage the slime does per attack" })
     attackDamage: number = 10;

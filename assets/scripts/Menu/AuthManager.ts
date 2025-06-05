@@ -1,7 +1,12 @@
 // assets/scripts/AuthManager.ts
 declare const firebase: any;
 const { ccclass, property } = cc._decorator;
-
+// Ensure Firebase is initialized before using it
+declare global {
+  interface Window {
+    _firebaseInited?: boolean;
+  }
+}
 @ccclass('AuthManager')
 export default class AuthManager extends cc.Component {
   // These get wired automatically by find() in onLoad()

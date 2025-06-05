@@ -57,6 +57,24 @@ var GameManager = /** @class */ (function (_super) {
         this.player = cc.find("Canvas/MapManager/Actors/Player");
         //assign blank space for next level
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.log("Is Firebase initialized?", window._firebaseInited);
+        var firebaseConfig = {
+            apiKey: "AIzaSyDFW4-emWdI1ghgZWWGp1wqoWvAvTwAqrQ",
+            authDomain: "rune-raids.firebaseapp.com",
+            projectId: "rune-raids",
+            storageBucket: "rune-raids.firebasestorage.app",
+            messagingSenderId: "530514360843",
+            appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
+            measurementId: "G-B1C5FG1YSN"
+        };
+        if (!window._firebaseInited) {
+            firebase.initializeApp(firebaseConfig);
+            window._firebaseInited = true;
+            cc.log("✅ Firebase initialized in GameManager.ts");
+        }
+        else {
+            cc.log("ℹ️ Firebase already initialized");
+        }
     };
     GameManager.prototype.onDestroy = function () {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -306,39 +324,46 @@ var GameManager = /** @class */ (function (_super) {
             cc.warn("User not logged in.");
             return;
         }
-        var db = firebase.firestore();
-        var userRef = db.collection("leaderboard").doc(user.uid);
-        userRef.get().then(function (doc) {
-            var prev = doc.exists ? doc.data().highestLevel : 0;
-            if (level > prev) {
+        var userRef = firebase.database().ref("leaderboard/" + user.uid);
+        userRef.once("value").then(function (snapshot) {
+            var existing = snapshot.val();
+            var previousLevel = (existing === null || existing === void 0 ? void 0 : existing.highestLevel) || 0;
+            if (level > previousLevel) {
                 userRef.set({
                     username: user.displayName || "Unknown",
-                    highestLevel: level
+                    highestLevel: level,
+                    lastUpdate: firebase.database.ServerValue.TIMESTAMP
+                }).then(function () {
+                    cc.log("\u2705 Updated Realtime DB for " + (user.displayName || "Unknown") + ": Level " + level);
+                }).catch(function (err) {
+                    cc.error("❌ Failed to write to Realtime DB:", err);
                 });
-                cc.log("Updated leaderboard for " + (user.displayName || "Unknown") + ": Level " + level);
+            }
+            else {
+                cc.log("No update needed — previous level is higher or equal.");
             }
         }).catch(function (err) {
-            cc.error("Failed to save progress:", err);
+            cc.error("❌ Failed to read from Realtime DB:", err);
         });
     };
     GameManager.prototype.loadLeaderboard = function () {
-        if (!window._firebaseInited) {
-            cc.warn("Firebase not initialized.");
-            return;
-        }
-        var db = firebase.firestore();
-        db.collection("leaderboard")
-            .orderBy("highestLevel", "desc")
-            .limit(10)
-            .get()
+        var dbRef = firebase.database().ref("leaderboard");
+        dbRef.once("value")
             .then(function (snapshot) {
-            snapshot.forEach(function (doc) {
-                var data = doc.data();
-                cc.log(data.username + ": Level " + data.highestLevel);
-                // You can update UI here
+            var data = snapshot.val();
+            if (!data) {
+                cc.log("Leaderboard is empty.");
+                return;
+            }
+            var sorted = Object.values(data)
+                .sort(function (a, b) { return b.highestLevel - a.highestLevel; })
+                .slice(0, 10);
+            sorted.forEach(function (entry, index) {
+                cc.log("#" + (index + 1) + " " + entry.username + ": Level " + entry.highestLevel);
             });
-        }).catch(function (err) {
-            cc.error("Failed to load leaderboard:", err);
+        })
+            .catch(function (err) {
+            cc.error("❌ Failed to load leaderboard from Realtime DB:", err);
         });
     };
     __decorate([

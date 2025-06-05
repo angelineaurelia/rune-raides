@@ -36,14 +36,14 @@ var GreenSlimeAI = /** @class */ (function (_super) {
     __extends(GreenSlimeAI, _super);
     function GreenSlimeAI() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.walkSpeed = 100;
-        _this.runSpeed = 200;
+        _this.walkSpeed = 120;
+        _this.runSpeed = 240;
         _this.idleTime = 5;
         _this.walkTime = 5;
         _this.patrolRadius = 200;
         _this.detectionRadius = 150;
-        _this.attackRadius = 50;
-        _this.attackDamage = 10;
+        _this.attackRadius = 80;
+        _this.attackDamage = 12;
         _this.attackHitDelay = 0.3;
         _this.attackAnimDuration = 1.0;
         _this.maxHealth = 40;

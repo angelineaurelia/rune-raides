@@ -10,10 +10,10 @@ enum SlimeState {
 @ccclass
 export default class GreenSlimeAI extends cc.Component {
     @property({ tooltip: "Slime walk speed in pixels per second" })
-    walkSpeed: number = 100;
+    walkSpeed: number = 120;
 
     @property({ tooltip: "Slime run speed in pixels per second" })
-    runSpeed: number = 200;
+    runSpeed: number = 240;
 
     @property({ tooltip: "How long the slime stays idle before walking (seconds)" })
     idleTime: number = 5;
@@ -28,10 +28,10 @@ export default class GreenSlimeAI extends cc.Component {
     detectionRadius: number = 150;
 
     @property({ tooltip: "Attack circle radius (pixels)" })
-    attackRadius: number = 50;
+    attackRadius: number = 80;
 
     @property({ tooltip: "How much damage the slime does per attack" })
-    attackDamage: number = 10;
+    attackDamage: number = 12;
 
     @property({ type: cc.Float, tooltip: "Seconds into attack anim to apply damage" })
     attackHitDelay: number = 0.3;

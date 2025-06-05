@@ -1,5 +1,5 @@
 "use strict";
-cc._RF.push(module, '906b6ZwtNJApoIUce17Hcz9', 'FirebaseInit');
+cc._RF.push(module, 'f1a17JHHO1CcJy04wT2g108', 'FirebaseInit');
 // scripts/Menu/FirebaseInit.ts
 
 "use strict";
@@ -46,6 +46,7 @@ var FirebaseInit = /** @class */ (function (_super) {
             window._firebaseInited = true;
             cc.log("Firebase initialized");
         }
+        cc.game.addPersistRootNode(this.node);
     };
     FirebaseInit = __decorate([
         ccclass('FirebaseInit')

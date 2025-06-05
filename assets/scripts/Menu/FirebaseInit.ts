@@ -27,5 +27,6 @@ export default class FirebaseInit extends cc.Component {
       window._firebaseInited = true;
       cc.log("Firebase initialized");
     }
+    cc.game.addPersistRootNode(this.node);
   }
 }

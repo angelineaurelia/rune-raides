@@ -29,8 +29,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var AuthManager_1 = require("../AuthManager");
+var AuthManager_1 = require("./AuthManager");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var firebaseConfig = {
+    apiKey: "AIzaSyDFW4-emWdI1ghgZWWGp1wqoWvAvTwAqrQ",
+    authDomain: "rune-raids.firebaseapp.com",
+    projectId: "rune-raids",
+    storageBucket: "rune-raids.firebasestorage.app",
+    messagingSenderId: "530514360843",
+    appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
+    measurementId: "G-B1C5FG1YSN"
+};
 var MenuMgr = /** @class */ (function (_super) {
     __extends(MenuMgr, _super);
     function MenuMgr() {
@@ -48,6 +57,15 @@ var MenuMgr = /** @class */ (function (_super) {
         OptionButton.component = "MenuMgr";
         OptionButton.handler = "ShowSetting";
         cc.find("Canvas/background/OptionButton").getComponent(cc.Button).clickEvents.push(OptionButton);
+        cc.log("Is Firebase initialized?", window._firebaseInited);
+        if (!window._firebaseInited) {
+            firebase.initializeApp(firebaseConfig);
+            window._firebaseInited = true;
+            cc.log("✅ Firebase initialized in MenuMgr");
+        }
+        else {
+            cc.log("ℹ️ Firebase already initialized");
+        }
         //Load VolumnValue from localStorage
     };
     MenuMgr.prototype.ShowSetting = function () {
