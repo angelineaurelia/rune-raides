@@ -1,5 +1,5 @@
 const { ccclass, property } = cc._decorator;
-
+import Player from "../Player";
 enum SlimeState {
     Idle,
     Walk,
@@ -8,7 +8,7 @@ enum SlimeState {
 }
 
 @ccclass
-export default class GreeenSlimeAI extends cc.Component {
+export default class GreenSlimeAI extends cc.Component {
     @property({ tooltip: "Slime walk speed in pixels per second" })
     walkSpeed: number = 100;
 
@@ -30,11 +30,20 @@ export default class GreeenSlimeAI extends cc.Component {
     @property({ tooltip: "Attack circle radius (pixels)" })
     attackRadius: number = 50;
 
+    @property({ tooltip: "How much damage the slime does per attack" })
+    attackDamage: number = 10;
+
+    @property({ type: cc.Float, tooltip: "Seconds into attack anim to apply damage" })
+    attackHitDelay: number = 0.3;
+
+    @property({ type: cc.Float, tooltip: "Total length of attack anim (seconds)" })
+    attackAnimDuration: number = 1.0;
+
     @property({ tooltip: "Maximum health of the slime" })
-    maxHealth: number = 100;
+    maxHealth: number = 40;
 
     @property({ tooltip: "Current health of the slime" })
-    health: number = 100;
+    health: number = 40;
 
     @property(cc.Node)
     private lifebar: cc.Node = null;
@@ -42,14 +51,14 @@ export default class GreeenSlimeAI extends cc.Component {
     @property({ tooltip: "Vertical offset of health bar above slime (pixels)" })
     private barOffsetY: number = 10;
 
-    //@property({ type: cc.Node, tooltip: "Player node to detect" })
-    //player: cc.Node = null;
+    private isDead: boolean = false;
+    private isDeathAnimPlaying: boolean = false; // NEW: Tracks death animation
 
     public player: cc.Node = null;
-    private slimeState = SlimeState.Idle;
-    private timer = 0;
-    private direction = cc.v2(0, 0);
-    private patrolCenter = cc.v2(0, 0);
+    private slimeState: SlimeState = SlimeState.Idle;
+    private timer: number = 0;
+    private direction: cc.Vec2 = cc.v2(0, 0);
+    private patrolCenter: cc.Vec2 = cc.v2(0, 0);
 
     private boundaryNode!: cc.Node;
     private detectionNode!: cc.Node;
@@ -58,19 +67,12 @@ export default class GreeenSlimeAI extends cc.Component {
     private attackGfx!: cc.Graphics;
 
     private anim!: cc.Animation;
-    private currentRunClip = "";
-    private currentAttackClip = "";
+    private currentRunClip: string = "";
+    private currentAttackClip: string = "";
+
     onLoad() {
-     if (!this.player) {
-            // use the exact path under the scene root:
-            this.player = cc.find("Canvas/MapManager/Actors/Player");
-            if (!this.player) {
-            cc.error("Couldn’t find Player at MapManager/Actors/Player");
-            }
-        }
+        cc.director.getCollisionManager().enabled = true;
     }
-
-
 
     start() {
         this.player = cc.find("Canvas/MapManager/Actors/Player") as cc.Node;
@@ -79,7 +81,6 @@ export default class GreeenSlimeAI extends cc.Component {
         this.anim = this.getComponent(cc.Animation)!;
         this.patrolCenter = this.node.getPosition().clone();
 
-        // Draw patrol boundary
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent!;
         this.boundaryNode.setPosition(this.patrolCenter);
@@ -89,31 +90,33 @@ export default class GreeenSlimeAI extends cc.Component {
         patrolGfx.circle(0, 0, this.patrolRadius);
         patrolGfx.stroke();
 
-        // Detection area
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
         this.detectionNode.setPosition(0, 0);
         this.detectionGfx = this.detectionNode.addComponent(cc.Graphics);
         this.detectionGfx.lineWidth = 2;
 
-        // Attack area
         this.attackNode = new cc.Node("AttackArea");
         this.attackNode.parent = this.node;
         this.attackNode.setPosition(0, 0);
         this.attackGfx = this.attackNode.addComponent(cc.Graphics);
         this.attackGfx.lineWidth = 2;
 
-        // Health bar setup
         if (this.lifebar) {
-            this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
-            this.updateLife(0, this.health);
+            this.updateLife(0, 40);
         }
 
         this.setToIdle();
     }
 
     update(dt: number) {
-        // 1) Compute distance to player
+        if (this.isDead) return; // Actually dead, nothing happens
+
+        if (this.isDeathAnimPlaying) {
+            // Let the death animation play, but skip AI
+            return;
+        }
+
         let distToPlayer = Infinity;
         if (this.player) {
             const slimeW = this.node.parent!.convertToWorldSpaceAR(this.node.position);
@@ -121,21 +124,16 @@ export default class GreeenSlimeAI extends cc.Component {
             distToPlayer = slimeW.sub(playerW).mag();
         }
 
-        // 2) Check if player is still within patrol area
         const localPlayerPos = this.node.parent!
             .convertToNodeSpaceAR(
                 this.player!.parent!.convertToWorldSpaceAR(this.player!.position)
             );
-        const distFromCenter = localPlayerPos
-            .sub(this.patrolCenter)
-            .mag();
+        const distFromCenter = localPlayerPos.sub(this.patrolCenter).mag();
         const playerInPatrol = distFromCenter <= this.patrolRadius;
 
-        // 3) Clamp radii for drawing
         const drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
         const drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
 
-        // 4) Redraw detection circle
         this.detectionGfx.clear();
         this.detectionGfx.lineWidth = 2;
         this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
@@ -144,7 +142,6 @@ export default class GreeenSlimeAI extends cc.Component {
         this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
 
-        // 5) Redraw attack circle
         this.attackGfx.clear();
         this.attackGfx.lineWidth = 2;
         this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
@@ -153,22 +150,22 @@ export default class GreeenSlimeAI extends cc.Component {
         this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
 
-        // Determine states
         const inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
         const inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
 
-        // Attack priority
         if (inAttack && this.slimeState !== SlimeState.Attack) {
             this.startAttack();
             return;
         }
+
         if (this.slimeState === SlimeState.Attack) {
             this.timer += dt;
-            if (this.timer >= 1) this.setToIdle();
+            if (this.timer >= this.attackAnimDuration) {
+                this.setToIdle();
+            }
             return;
         }
 
-        // Running if detected
         if (inDetect) {
             if (this.slimeState !== SlimeState.Run) this.startRunning();
             this.runTowardsPlayer(dt);
@@ -177,7 +174,6 @@ export default class GreeenSlimeAI extends cc.Component {
             this.setToIdle();
         }
 
-        // Patrol logic
         this.timer += dt;
         if (this.slimeState === SlimeState.Idle && this.timer >= this.idleTime) {
             this.startWalking();
@@ -200,9 +196,7 @@ export default class GreeenSlimeAI extends cc.Component {
         }
     }
 
-    // Life-bar update logic from Player
     private updateLife(delta: number, hp: number) {
-        console.log("slime life change:", delta, "→", hp);
         if (!this.lifebar) return;
         this.lifebar.width = hp;
         if (hp <= 10) this.lifebar.color = cc.Color.RED;
@@ -211,10 +205,28 @@ export default class GreeenSlimeAI extends cc.Component {
     }
 
     public takeDamage(amount: number) {
+        if (this.isDead || this.isDeathAnimPlaying) return; // Already dead or anim playing
+
+        const playerPos = this.player.getPosition();
+        const slimePos = this.node.getPosition();
+        const direction = playerPos.sub(slimePos).normalize();
+
+        const hurtAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "GreeenSlimeHurtRight" : "GreeenSlimeHurtLeft")
+            : (direction.y > 0 ? "GreeenSlimeHurtUp" : "GreeenSlimeHurtDown");
+
+        this.anim.play(hurtAnim);
+
         this.health -= amount;
-        if (this.health < 0) this.health = 0;
+        if (this.health <= 0) {
+            this.health = 0;
+            if (!this.isDeathAnimPlaying) {
+                this.isDeathAnimPlaying = true;
+                this.playDeathAnimation(direction);
+            }
+        }
+
         this.updateLife(-amount, this.health);
-        if (this.health === 0) this.die();
     }
 
     public heal(amount: number) {
@@ -224,7 +236,7 @@ export default class GreeenSlimeAI extends cc.Component {
     }
 
     private die() {
-        this.node.destroy();
+        this.unscheduleAllCallbacks();
     }
 
     private setToIdle() {
@@ -255,11 +267,33 @@ export default class GreeenSlimeAI extends cc.Component {
         this.slimeState = SlimeState.Attack;
         this.timer = 0;
         this.currentAttackClip = "";
+
         const dir = this.getRunDirection();
         const clip = Math.abs(dir.x) > Math.abs(dir.y)
             ? (dir.x > 0 ? "GreeenSlimeAttackRight" : "GreeenSlimeAttackLeft")
             : (dir.y > 0 ? "GreeenSlimeAttackUp" : "GreeenSlimeAttackDown");
         this.anim.play(clip);
+
+        this.scheduleOnce(this.applyAttackHit, this.attackHitDelay);
+    }
+
+    
+    private applyAttackHit() {
+        if (this.slimeState !== SlimeState.Attack) return;
+
+        const slimeWorld3 = this.node.parent!.convertToWorldSpaceAR(this.node.position);
+        const slimeWorld2 = cc.v2(slimeWorld3.x, slimeWorld3.y);
+
+        const playerWorld3 = this.player!.parent!.convertToWorldSpaceAR(this.player!.position);
+        const playerWorld2 = cc.v2(playerWorld3.x, playerWorld3.y);
+
+        const dist = slimeWorld2.sub(playerWorld2).mag();
+        if (dist <= this.attackRadius) {
+            const playerComp = this.player.getComponent(Player);
+            if (playerComp) {
+                playerComp.takeDamage(this.attackDamage);
+            }
+        }
     }
 
     private runTowardsPlayer(dt: number) {
@@ -281,8 +315,28 @@ export default class GreeenSlimeAI extends cc.Component {
     }
 
     private getRunDirection() {
-        const worldP = this.player.parent!.convertToWorldSpaceAR(this.player.position);
+        const worldP = this.player!.parent!.convertToWorldSpaceAR(this.player!.position);
         const localP = this.node.parent!.convertToNodeSpaceAR(worldP);
         return cc.v2(localP.x - this.node.x, localP.y - this.node.y).normalize();
+    }
+
+    onDisable() {
+        this.unscheduleAllCallbacks();
+    }
+
+    private playDeathAnimation(direction: cc.Vec2) {
+        const deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "GreeenSlimeDeathRight" : "GreeenSlimeDeathLeft")
+            : (direction.y > 0 ? "GreeenSlimeDeathUp" : "GreeenSlimeDeathDown");
+
+        this.anim.play(deathAnim);
+
+        this.unscheduleAllCallbacks();
+        this.slimeState = SlimeState.Idle;
+
+        this.scheduleOnce(() => {
+            this.isDead = true;
+            this.isDeathAnimPlaying = false;
+        }, 1.0); // match to your animation's duration
     }
 }
