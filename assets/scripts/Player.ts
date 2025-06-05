@@ -74,6 +74,7 @@ export default class Player extends cc.Component {
     private isDead: boolean = false;//new
 
     onLoad() {
+        this.gameManager = cc.find("GameManager").getComponent("GameManager");
         // Capture the Animation component once
         this.anim = this.getComponent(cc.Animation)!;
 
@@ -292,7 +293,7 @@ export default class Player extends cc.Component {
             this.holdingKey = true;
             otherCollider.node.active = false;
         }
-        if (otherCollider.node.name == "lock") {
+        if (otherCollider.node.name == "lock" && this.holdingKey) {
             const temp = otherCollider.getComponent("NewClass");
             if (temp) {
                 temp.playAnim();

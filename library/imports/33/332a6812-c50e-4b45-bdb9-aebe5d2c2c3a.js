@@ -61,6 +61,7 @@ var Player = /** @class */ (function (_super) {
         return _this;
     }
     Player.prototype.onLoad = function () {
+        this.gameManager = cc.find("GameManager").getComponent("GameManager");
         // Capture the Animation component once
         this.anim = this.getComponent(cc.Animation);
         // Listen for keyboard input to trigger attack
@@ -268,7 +269,7 @@ var Player = /** @class */ (function (_super) {
             this.holdingKey = true;
             otherCollider.node.active = false;
         }
-        if (otherCollider.node.name == "lock") {
+        if (otherCollider.node.name == "lock" && this.holdingKey) {
             var temp = otherCollider.getComponent("NewClass");
             if (temp) {
                 temp.playAnim();
