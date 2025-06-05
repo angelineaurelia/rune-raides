@@ -5,38 +5,21 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-<<<<<<< Updated upstream
-      "x": 378,
-      "y": 204,
+      "x": 260,
+      "y": 225,
       "width": 1280,
       "height": 742,
-=======
-      "x": 0,
-      "y": 0,
-      "width": 1536,
-      "height": 824,
->>>>>>> Stashed changes
       "layout": {
         "type": "dock-h",
         "children": [
           {
-<<<<<<< Updated upstream
-            "width": 299.6145935058594,
-            "height": 633.8333740234375,
+            "width": 304,
+            "height": 655,
             "type": "dock-v",
             "children": [
               {
-                "width": 299.6145935058594,
-                "height": 272.44793701171875,
-=======
-            "width": 361.8374938964844,
-            "height": 708.2000122070312,
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 361.8374938964844,
-                "height": 305.01251220703125,
->>>>>>> Stashed changes
+                "width": 304,
+                "height": 226,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -44,13 +27,8 @@
                 ]
               },
               {
-<<<<<<< Updated upstream
-                "width": 299.6145935058594,
-                "height": 358.38543701171875,
-=======
-                "width": 361.8374938964844,
-                "height": 400.1875,
->>>>>>> Stashed changes
+                "width": 304,
+                "height": 426,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -60,33 +38,18 @@
             ]
           },
           {
-<<<<<<< Updated upstream
-            "width": 656.3854370117188,
-            "height": 633.8333740234375,
+            "width": 666,
+            "height": 655,
             "type": "dock-v",
             "children": [
               {
-                "width": 656.3854370117188,
-                "height": 331.04168701171875,
+                "width": 666,
+                "height": 342,
                 "type": "dock-h",
                 "children": [
                   {
-                    "width": 389.38543701171875,
-                    "height": 331.04168701171875,
-=======
-            "width": 660.6000366210938,
-            "height": 708.2000122070312,
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 660.6000366210938,
-                "height": 369.8999938964844,
-                "type": "dock-h",
-                "children": [
-                  {
-                    "width": 343.1000061035156,
-                    "height": 369.8999938964844,
->>>>>>> Stashed changes
+                    "width": 399,
+                    "height": 342,
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -94,13 +57,8 @@
                     ]
                   },
                   {
-<<<<<<< Updated upstream
                     "width": 264,
-                    "height": 331.04168701171875,
-=======
-                    "width": 314.5,
-                    "height": 369.8999938964844,
->>>>>>> Stashed changes
+                    "height": 342,
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -110,13 +68,8 @@
                 ]
               },
               {
-<<<<<<< Updated upstream
-                "width": 656.3854370117188,
-                "height": 299.79168701171875,
-=======
-                "width": 660.6000366210938,
-                "height": 335.3000183105469,
->>>>>>> Stashed changes
+                "width": 666,
+                "height": 310,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -128,13 +81,8 @@
             ]
           },
           {
-<<<<<<< Updated upstream
             "width": 304,
-            "height": 633.8333740234375,
-=======
-            "width": 493.9624938964844,
-            "height": 708.2000122070312,
->>>>>>> Stashed changes
+            "height": 655,
             "type": "panel",
             "active": 0,
             "children": [
@@ -155,27 +103,9 @@
         "inspector",
         "cocos-services"
       ]
-<<<<<<< Updated upstream
     },
-    " common-asset-worker-worker": {},
-    "window-1749055182785": {}
-=======
-    }
->>>>>>> Stashed changes
+    " common-asset-worker-worker": {}
   },
-  "panels": {
-    "builder": {
-      "x": 1143,
-      "y": 177,
-      "width": 500,
-      "height": 728
-    },
-    "sprite-editor": {
-      "x": 650,
-      "y": 298,
-      "width": 500,
-      "height": 528
-    }
-  },
+  "panels": {},
   "panelLabelWidth": {}
 }
