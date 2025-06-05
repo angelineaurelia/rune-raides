@@ -5799,11 +5799,6 @@
     "meta": 1748932535049,
     "relativePath": "scripts/ai/GreenBossAI.ts"
   },
-  "83760605-2174-4fc8-bf98-85e8e136abaa": {
-    "asset": 1748932413652,
-    "meta": 1748932535090,
-    "relativePath": "scripts/ai/GreenSlimeAI.ts"
-  },
   "8da0837e-175e-40c8-abe0-bfcf5a3619b7": {
     "asset": 1748932413653,
     "meta": 1748932535129,
@@ -9511,117 +9506,117 @@
   },
   "43488202-2ffe-487a-8ec0-be99df18a243": {
     "asset": 1748932413838,
-    "meta": 1748932536360,
+    "meta": 1749110542799,
     "relativePath": "tilemaps/pillar/pillar-0.png"
   },
   "fd48b242-b0e0-4951-884f-c3ca00e876f8": {
     "asset": 1748932413838,
-    "meta": 1748932536361,
+    "meta": 1749110542813,
     "relativePath": "tilemaps/pillar/pillar-1.png"
   },
   "87988326-feda-4617-9e47-4ddbfe1e53aa": {
     "asset": 1748932413838,
-    "meta": 1748932536363,
+    "meta": 1749110542924,
     "relativePath": "tilemaps/pillar/pillar-11.png"
   },
   "f1fcd243-2213-4c91-81c0-4a613ec6685c": {
     "asset": 1748932413838,
-    "meta": 1748932536363,
+    "meta": 1749110542913,
     "relativePath": "tilemaps/pillar/pillar-10.png"
   },
   "9dbda492-c681-4e53-a13a-636aea421e0d": {
     "asset": 1748932413839,
-    "meta": 1748932536364,
+    "meta": 1749110542952,
     "relativePath": "tilemaps/pillar/pillar-13.png"
   },
   "fc6cde91-ee48-44ae-893c-69c5c0156170": {
     "asset": 1748932413839,
-    "meta": 1748932536364,
+    "meta": 1749110542934,
     "relativePath": "tilemaps/pillar/pillar-12.png"
   },
   "02f227eb-6bc6-470b-8826-dffad7059ef4": {
     "asset": 1748932413839,
-    "meta": 1748932536365,
+    "meta": 1749110542967,
     "relativePath": "tilemaps/pillar/pillar-14.png"
   },
   "99a42602-edf2-4864-a39f-f176f36e6f4c": {
     "asset": 1748932413839,
-    "meta": 1748932536371,
+    "meta": 1749110542985,
     "relativePath": "tilemaps/pillar/pillar-15.png"
   },
   "932d1a6e-cdd0-4502-93ea-29aa7ab2d5a5": {
     "asset": 1748932413840,
-    "meta": 1748932536372,
+    "meta": 1749110543007,
     "relativePath": "tilemaps/pillar/pillar-17.png"
   },
   "cf6a82e0-bef2-4c41-8edc-45683938c62e": {
     "asset": 1748932413840,
-    "meta": 1748932536373,
+    "meta": 1749110543016,
     "relativePath": "tilemaps/pillar/pillar-18.png"
   },
   "229f52ca-47e3-48bf-b539-536b9627f364": {
     "asset": 1748932413839,
-    "meta": 1748932536374,
+    "meta": 1749110542995,
     "relativePath": "tilemaps/pillar/pillar-16.png"
   },
   "47310255-225e-4193-8397-a378518b84b0": {
     "asset": 1748932413840,
-    "meta": 1748932536375,
+    "meta": 1749110543034,
     "relativePath": "tilemaps/pillar/pillar-19.png"
   },
   "16927b95-f71c-4e36-9b18-fdfbd69f0abd": {
     "asset": 1748932413840,
-    "meta": 1748932536376,
+    "meta": 1749110542825,
     "relativePath": "tilemaps/pillar/pillar-2.png"
   },
   "a35880aa-069f-48dc-b6a6-2e1f7817d049": {
     "asset": 1748932413840,
-    "meta": 1748932536376,
+    "meta": 1749110543044,
     "relativePath": "tilemaps/pillar/pillar-20.png"
   },
   "c56298a9-323e-4341-bbcf-0361ea31087b": {
     "asset": 1748932413841,
-    "meta": 1748932536377,
+    "meta": 1749110543063,
     "relativePath": "tilemaps/pillar/pillar-21.png"
   },
   "c0635abe-ce78-424c-a7f2-43fdf54697dd": {
     "asset": 1748932413841,
-    "meta": 1748932536383,
+    "meta": 1749110543074,
     "relativePath": "tilemaps/pillar/pillar-22.png"
   },
   "04f2a61d-7bc9-4feb-b6f4-3bc1472da45a": {
     "asset": 1748932413841,
-    "meta": 1748932536384,
+    "meta": 1749110542835,
     "relativePath": "tilemaps/pillar/pillar-3.png"
   },
   "b9c2f0df-30e9-4697-aa10-dd6165c5eebb": {
     "asset": 1748932413841,
-    "meta": 1748932536385,
+    "meta": 1749110542845,
     "relativePath": "tilemaps/pillar/pillar-4.png"
   },
   "607382d4-c954-476f-8d4a-7a57d65ef2d1": {
     "asset": 1748932413841,
-    "meta": 1748932536385,
+    "meta": 1749110542858,
     "relativePath": "tilemaps/pillar/pillar-5.png"
   },
   "1b4efb30-8f93-4149-876d-e04977dd6490": {
     "asset": 1748932413842,
-    "meta": 1748932536387,
+    "meta": 1749110542870,
     "relativePath": "tilemaps/pillar/pillar-6.png"
   },
   "ef4c4deb-0196-409f-b345-5c4c77f49318": {
     "asset": 1748932413842,
-    "meta": 1748932536388,
+    "meta": 1749110542880,
     "relativePath": "tilemaps/pillar/pillar-7.png"
   },
   "91dd53e6-2920-4573-afbf-5a219fed86c2": {
     "asset": 1748932413842,
-    "meta": 1748932536389,
+    "meta": 1749110542892,
     "relativePath": "tilemaps/pillar/pillar-8.png"
   },
   "e56c76ee-9454-4fcf-b158-83cad271f53f": {
     "asset": 1748932413842,
-    "meta": 1748932536390,
+    "meta": 1749110542903,
     "relativePath": "tilemaps/pillar/pillar-9.png"
   },
   "b61a15b2-b4d4-49c8-8fc1-2c2fd2f915b8": {
@@ -20790,8 +20785,8 @@
     "relativePath": "resources/prefabs/Green Boss.prefab"
   },
   "d731b1b4-525f-4dbd-8a30-1a2f5c05eaf4": {
-    "asset": 1749046165030,
-    "meta": 1749046194867,
+    "asset": 1749109543593,
+    "meta": 1749109543597,
     "relativePath": "resources/prefabs/Green Slime.prefab"
   },
   "5a45b349-5490-48eb-bbb0-81994a458f5e": {
@@ -20800,14 +20795,9 @@
     "relativePath": "resources/prefabs/Blue Slime.prefab"
   },
   "8c0662b4-9958-4508-8b46-3aa628f6fc58": {
-    "asset": 1749046165030,
-    "meta": 1749046194870,
+    "asset": 1749110813017,
+    "meta": 1749110813022,
     "relativePath": "resources/prefabs/HorizontalWall.prefab"
-  },
-  "93c172ec-5963-4d30-8865-3e0860176be8": {
-    "asset": 1749046165038,
-    "meta": 1749046194953,
-    "relativePath": "scripts/ai/BlueSlimeAI.ts"
   },
   "4bd6049f-da2e-4b74-b24f-9f181e6c1b9b": {
     "asset": 1749046165031,
@@ -20850,8 +20840,8 @@
     "relativePath": "resources/prefabs/Lock.prefab"
   },
   "1dc9d90e-0033-48a1-a5b2-ee3c2d7ce6db": {
-    "asset": 1749046165034,
-    "meta": 1749046195136,
+    "asset": 1749111457776,
+    "meta": 1749111457779,
     "relativePath": "resources/prefabs/VerticalWall.prefab"
   },
   "1b0dcfcd-e79a-4b95-bf59-ceab89b68cce": {
@@ -20860,8 +20850,8 @@
     "relativePath": "resources/prefabs/Player.prefab"
   },
   "74c2097b-232c-4398-8b2f-714eb8e4d09b": {
-    "asset": 1749107360911,
-    "meta": 1749107360923,
+    "asset": 1749109031727,
+    "meta": 1749109031733,
     "relativePath": "resources/prefabs/PauseSetting.prefab"
   },
   "93072ac7-e1b9-4c07-8745-e78a8fc9e8f7": {
@@ -20873,11 +20863,6 @@
     "asset": 1748951945521,
     "meta": 1749046195166,
     "relativePath": "tilemaps/UI/signup.png"
-  },
-  "332a6812-c50e-4b45-bdb9-aebe5d2c2c3a": {
-    "asset": 1749052129919,
-    "meta": 1749052323971,
-    "relativePath": "scripts/Player.ts"
   },
   "06b92a82-6e6c-4d62-941b-9b8b3c56a514": {
     "asset": 1748949363722,
@@ -21328,5 +21313,20 @@
     "asset": 1749106429550,
     "meta": 1749106429602,
     "relativePath": "tilemaps/UI/resume.png"
+  },
+  "93c172ec-5963-4d30-8865-3e0860176be8": {
+    "asset": 1749108467386,
+    "meta": 1749108690336,
+    "relativePath": "scripts/ai/BlueSlimeAI.ts"
+  },
+  "83760605-2174-4fc8-bf98-85e8e136abaa": {
+    "asset": 1749108488689,
+    "meta": 1749108690391,
+    "relativePath": "scripts/ai/GreenSlimeAI.ts"
+  },
+  "332a6812-c50e-4b45-bdb9-aebe5d2c2c3a": {
+    "asset": 1749108438766,
+    "meta": 1749108690424,
+    "relativePath": "scripts/Player.ts"
   }
 }

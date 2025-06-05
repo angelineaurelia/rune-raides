@@ -24,6 +24,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var Player_1 = require("../Player");
 var SlimeState;
 (function (SlimeState) {
     SlimeState[SlimeState["Idle"] = 0] = "Idle";
@@ -31,9 +32,9 @@ var SlimeState;
     SlimeState[SlimeState["Run"] = 2] = "Run";
     SlimeState[SlimeState["Attack"] = 3] = "Attack";
 })(SlimeState || (SlimeState = {}));
-var GreeenSlimeAI = /** @class */ (function (_super) {
-    __extends(GreeenSlimeAI, _super);
-    function GreeenSlimeAI() {
+var GreenSlimeAI = /** @class */ (function (_super) {
+    __extends(GreenSlimeAI, _super);
+    function GreenSlimeAI() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.walkSpeed = 100;
         _this.runSpeed = 200;
@@ -42,12 +43,15 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
         _this.patrolRadius = 200;
         _this.detectionRadius = 150;
         _this.attackRadius = 50;
-        _this.maxHealth = 100;
-        _this.health = 100;
+        _this.attackDamage = 10;
+        _this.attackHitDelay = 0.3;
+        _this.attackAnimDuration = 1.0;
+        _this.maxHealth = 40;
+        _this.health = 40;
         _this.lifebar = null;
         _this.barOffsetY = 10;
-        //@property({ type: cc.Node, tooltip: "Player node to detect" })
-        //player: cc.Node = null;
+        _this.isDead = false;
+        _this.isDeathAnimPlaying = false; // NEW: Tracks death animation
         _this.player = null;
         _this.slimeState = SlimeState.Idle;
         _this.timer = 0;
@@ -57,22 +61,15 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
         _this.currentAttackClip = "";
         return _this;
     }
-    GreeenSlimeAI.prototype.onLoad = function () {
-        if (!this.player) {
-            // use the exact path under the scene root:
-            this.player = cc.find("Canvas/MapManager/Actors/Player");
-            if (!this.player) {
-                cc.error("Couldn’t find Player at MapManager/Actors/Player");
-            }
-        }
+    GreenSlimeAI.prototype.onLoad = function () {
+        cc.director.getCollisionManager().enabled = true;
     };
-    GreeenSlimeAI.prototype.start = function () {
+    GreenSlimeAI.prototype.start = function () {
         this.player = cc.find("Canvas/MapManager/Actors/Player");
         if (!this.player)
             cc.error("Player node not found");
         this.anim = this.getComponent(cc.Animation);
         this.patrolCenter = this.node.getPosition().clone();
-        // Draw patrol boundary
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent;
         this.boundaryNode.setPosition(this.patrolCenter);
@@ -81,44 +78,40 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
         patrolGfx.strokeColor = cc.color(0, 255, 0);
         patrolGfx.circle(0, 0, this.patrolRadius);
         patrolGfx.stroke();
-        // Detection area
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
         this.detectionNode.setPosition(0, 0);
         this.detectionGfx = this.detectionNode.addComponent(cc.Graphics);
         this.detectionGfx.lineWidth = 2;
-        // Attack area
         this.attackNode = new cc.Node("AttackArea");
         this.attackNode.parent = this.node;
         this.attackNode.setPosition(0, 0);
         this.attackGfx = this.attackNode.addComponent(cc.Graphics);
         this.attackGfx.lineWidth = 2;
-        // Health bar setup
         if (this.lifebar) {
-            this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
-            this.updateLife(0, this.health);
+            this.updateLife(0, 40);
         }
         this.setToIdle();
     };
-    GreeenSlimeAI.prototype.update = function (dt) {
-        // 1) Compute distance to player
+    GreenSlimeAI.prototype.update = function (dt) {
+        if (this.isDead)
+            return; // Actually dead, nothing happens
+        if (this.isDeathAnimPlaying) {
+            // Let the death animation play, but skip AI
+            return;
+        }
         var distToPlayer = Infinity;
         if (this.player) {
             var slimeW = this.node.parent.convertToWorldSpaceAR(this.node.position);
             var playerW = this.player.parent.convertToWorldSpaceAR(this.player.position);
             distToPlayer = slimeW.sub(playerW).mag();
         }
-        // 2) Check if player is still within patrol area
         var localPlayerPos = this.node.parent
             .convertToNodeSpaceAR(this.player.parent.convertToWorldSpaceAR(this.player.position));
-        var distFromCenter = localPlayerPos
-            .sub(this.patrolCenter)
-            .mag();
+        var distFromCenter = localPlayerPos.sub(this.patrolCenter).mag();
         var playerInPatrol = distFromCenter <= this.patrolRadius;
-        // 3) Clamp radii for drawing
         var drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
         var drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
-        // 4) Redraw detection circle
         this.detectionGfx.clear();
         this.detectionGfx.lineWidth = 2;
         this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
@@ -126,7 +119,6 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
             : cc.color(255, 0, 0);
         this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
-        // 5) Redraw attack circle
         this.attackGfx.clear();
         this.attackGfx.lineWidth = 2;
         this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
@@ -134,21 +126,19 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
             : cc.color(0, 0, 255);
         this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
-        // Determine states
         var inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
         var inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
-        // Attack priority
         if (inAttack && this.slimeState !== SlimeState.Attack) {
             this.startAttack();
             return;
         }
         if (this.slimeState === SlimeState.Attack) {
             this.timer += dt;
-            if (this.timer >= 1)
+            if (this.timer >= this.attackAnimDuration) {
                 this.setToIdle();
+            }
             return;
         }
-        // Running if detected
         if (inDetect) {
             if (this.slimeState !== SlimeState.Run)
                 this.startRunning();
@@ -158,7 +148,6 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
         else if (this.slimeState === SlimeState.Run) {
             this.setToIdle();
         }
-        // Patrol logic
         this.timer += dt;
         if (this.slimeState === SlimeState.Idle && this.timer >= this.idleTime) {
             this.startWalking();
@@ -176,9 +165,7 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
                 this.setToIdle();
         }
     };
-    // Life-bar update logic from Player
-    GreeenSlimeAI.prototype.updateLife = function (delta, hp) {
-        console.log("slime life change:", delta, "→", hp);
+    GreenSlimeAI.prototype.updateLife = function (delta, hp) {
         if (!this.lifebar)
             return;
         this.lifebar.width = hp;
@@ -189,29 +176,41 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
         else
             this.lifebar.color = cc.Color.GREEN;
     };
-    GreeenSlimeAI.prototype.takeDamage = function (amount) {
+    GreenSlimeAI.prototype.takeDamage = function (amount) {
+        if (this.isDead || this.isDeathAnimPlaying)
+            return; // Already dead or anim playing
+        var playerPos = this.player.getPosition();
+        var slimePos = this.node.getPosition();
+        var direction = playerPos.sub(slimePos).normalize();
+        var hurtAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "GreeenSlimeHurtRight" : "GreeenSlimeHurtLeft")
+            : (direction.y > 0 ? "GreeenSlimeHurtUp" : "GreeenSlimeHurtDown");
+        this.anim.play(hurtAnim);
         this.health -= amount;
-        if (this.health < 0)
+        if (this.health <= 0) {
             this.health = 0;
+            if (!this.isDeathAnimPlaying) {
+                this.isDeathAnimPlaying = true;
+                this.playDeathAnimation(direction);
+            }
+        }
         this.updateLife(-amount, this.health);
-        if (this.health === 0)
-            this.die();
     };
-    GreeenSlimeAI.prototype.heal = function (amount) {
+    GreenSlimeAI.prototype.heal = function (amount) {
         this.health += amount;
         if (this.health > this.maxHealth)
             this.health = this.maxHealth;
         this.updateLife(amount, this.health);
     };
-    GreeenSlimeAI.prototype.die = function () {
-        this.node.destroy();
+    GreenSlimeAI.prototype.die = function () {
+        this.unscheduleAllCallbacks();
     };
-    GreeenSlimeAI.prototype.setToIdle = function () {
+    GreenSlimeAI.prototype.setToIdle = function () {
         this.slimeState = SlimeState.Idle;
         this.timer = 0;
         this.anim.play("GreeenSlimeIdle");
     };
-    GreeenSlimeAI.prototype.startWalking = function () {
+    GreenSlimeAI.prototype.startWalking = function () {
         this.slimeState = SlimeState.Walk;
         this.timer = 0;
         this.direction = cc.v2(Math.random() >= 0.5 ? 1 : -1, Math.random() >= 0.5 ? 1 : -1).normalize();
@@ -220,11 +219,11 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
             : (this.direction.y > 0 ? "GreeenSlimeWalkUp" : "GreeenSlimeWalkDown");
         this.anim.play(clip);
     };
-    GreeenSlimeAI.prototype.startRunning = function () {
+    GreenSlimeAI.prototype.startRunning = function () {
         this.slimeState = SlimeState.Run;
         this.currentRunClip = "";
     };
-    GreeenSlimeAI.prototype.startAttack = function () {
+    GreenSlimeAI.prototype.startAttack = function () {
         this.slimeState = SlimeState.Attack;
         this.timer = 0;
         this.currentAttackClip = "";
@@ -233,8 +232,24 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
             ? (dir.x > 0 ? "GreeenSlimeAttackRight" : "GreeenSlimeAttackLeft")
             : (dir.y > 0 ? "GreeenSlimeAttackUp" : "GreeenSlimeAttackDown");
         this.anim.play(clip);
+        this.scheduleOnce(this.applyAttackHit, this.attackHitDelay);
     };
-    GreeenSlimeAI.prototype.runTowardsPlayer = function (dt) {
+    GreenSlimeAI.prototype.applyAttackHit = function () {
+        if (this.slimeState !== SlimeState.Attack)
+            return;
+        var slimeWorld3 = this.node.parent.convertToWorldSpaceAR(this.node.position);
+        var slimeWorld2 = cc.v2(slimeWorld3.x, slimeWorld3.y);
+        var playerWorld3 = this.player.parent.convertToWorldSpaceAR(this.player.position);
+        var playerWorld2 = cc.v2(playerWorld3.x, playerWorld3.y);
+        var dist = slimeWorld2.sub(playerWorld2).mag();
+        if (dist <= this.attackRadius) {
+            var playerComp = this.player.getComponent(Player_1.default);
+            if (playerComp) {
+                playerComp.takeDamage(this.attackDamage);
+            }
+        }
+    };
+    GreenSlimeAI.prototype.runTowardsPlayer = function (dt) {
         var dir = this.getRunDirection();
         var clip = Math.abs(dir.x) > Math.abs(dir.y)
             ? (dir.x > 0 ? "GreeenSlimeRunRight" : "GreeenSlimeRunLeft")
@@ -251,49 +266,74 @@ var GreeenSlimeAI = /** @class */ (function (_super) {
         }
         this.node.setPosition(nextPos);
     };
-    GreeenSlimeAI.prototype.getRunDirection = function () {
+    GreenSlimeAI.prototype.getRunDirection = function () {
         var worldP = this.player.parent.convertToWorldSpaceAR(this.player.position);
         var localP = this.node.parent.convertToNodeSpaceAR(worldP);
         return cc.v2(localP.x - this.node.x, localP.y - this.node.y).normalize();
     };
+    GreenSlimeAI.prototype.onDisable = function () {
+        this.unscheduleAllCallbacks();
+    };
+    GreenSlimeAI.prototype.playDeathAnimation = function (direction) {
+        var _this = this;
+        var deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "GreeenSlimeDeathRight" : "GreeenSlimeDeathLeft")
+            : (direction.y > 0 ? "GreeenSlimeDeathUp" : "GreeenSlimeDeathDown");
+        this.anim.play(deathAnim);
+        this.unscheduleAllCallbacks();
+        this.slimeState = SlimeState.Idle;
+        this.scheduleOnce(function () {
+            _this.isDead = true;
+            _this.isDeathAnimPlaying = false;
+        }, 1.0); // match to your animation's duration
+    };
     __decorate([
         property({ tooltip: "Slime walk speed in pixels per second" })
-    ], GreeenSlimeAI.prototype, "walkSpeed", void 0);
+    ], GreenSlimeAI.prototype, "walkSpeed", void 0);
     __decorate([
         property({ tooltip: "Slime run speed in pixels per second" })
-    ], GreeenSlimeAI.prototype, "runSpeed", void 0);
+    ], GreenSlimeAI.prototype, "runSpeed", void 0);
     __decorate([
         property({ tooltip: "How long the slime stays idle before walking (seconds)" })
-    ], GreeenSlimeAI.prototype, "idleTime", void 0);
+    ], GreenSlimeAI.prototype, "idleTime", void 0);
     __decorate([
         property({ tooltip: "How long the slime walks in one direction (seconds)" })
-    ], GreeenSlimeAI.prototype, "walkTime", void 0);
+    ], GreenSlimeAI.prototype, "walkTime", void 0);
     __decorate([
         property({ tooltip: "Patrol radius from start point (pixels)" })
-    ], GreeenSlimeAI.prototype, "patrolRadius", void 0);
+    ], GreenSlimeAI.prototype, "patrolRadius", void 0);
     __decorate([
         property({ tooltip: "Detection circle radius (pixels)" })
-    ], GreeenSlimeAI.prototype, "detectionRadius", void 0);
+    ], GreenSlimeAI.prototype, "detectionRadius", void 0);
     __decorate([
         property({ tooltip: "Attack circle radius (pixels)" })
-    ], GreeenSlimeAI.prototype, "attackRadius", void 0);
+    ], GreenSlimeAI.prototype, "attackRadius", void 0);
+    __decorate([
+        property({ tooltip: "How much damage the slime does per attack" })
+    ], GreenSlimeAI.prototype, "attackDamage", void 0);
+    __decorate([
+        property({ type: cc.Float, tooltip: "Seconds into attack anim to apply damage" })
+    ], GreenSlimeAI.prototype, "attackHitDelay", void 0);
+    __decorate([
+        property({ type: cc.Float, tooltip: "Total length of attack anim (seconds)" })
+    ], GreenSlimeAI.prototype, "attackAnimDuration", void 0);
     __decorate([
         property({ tooltip: "Maximum health of the slime" })
-    ], GreeenSlimeAI.prototype, "maxHealth", void 0);
+    ], GreenSlimeAI.prototype, "maxHealth", void 0);
     __decorate([
         property({ tooltip: "Current health of the slime" })
-    ], GreeenSlimeAI.prototype, "health", void 0);
+    ], GreenSlimeAI.prototype, "health", void 0);
     __decorate([
         property(cc.Node)
-    ], GreeenSlimeAI.prototype, "lifebar", void 0);
+    ], GreenSlimeAI.prototype, "lifebar", void 0);
     __decorate([
         property({ tooltip: "Vertical offset of health bar above slime (pixels)" })
-    ], GreeenSlimeAI.prototype, "barOffsetY", void 0);
-    GreeenSlimeAI = __decorate([
+    ], GreenSlimeAI.prototype, "barOffsetY", void 0);
+    GreenSlimeAI = __decorate([
         ccclass
-    ], GreeenSlimeAI);
-    return GreeenSlimeAI;
+    ], GreenSlimeAI);
+    return GreenSlimeAI;
 }(cc.Component));
-exports.default = GreeenSlimeAI;
+exports.default = GreenSlimeAI;
 
 cc._RF.pop();

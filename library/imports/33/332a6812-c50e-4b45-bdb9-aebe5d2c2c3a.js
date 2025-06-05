@@ -3,7 +3,6 @@ cc._RF.push(module, '332a6gSxQ5LRb25rr5dLCw6', 'Player');
 // scripts/Player.ts
 
 "use strict";
-// Player.ts
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -27,6 +26,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var GameManager_1 = require("./GameManager");
 var BlueSlimeAI_1 = require("./ai/BlueSlimeAI");
+// ↓ Fix the typo here: it should be "GreenSlimeAI" (two “e”s), not "GreenSlimeAI"
+var GreenSlimeAI_1 = require("./ai/GreenSlimeAI");
 var Player = /** @class */ (function (_super) {
     __extends(Player, _super);
     function Player() {
@@ -54,10 +55,8 @@ var Player = /** @class */ (function (_super) {
         _this.attackAnimDuration = 0.5;
         _this.isAttacking = false; // Prevent overlapping swings
         // Tracks which direction the player is facing.
-        // You should update this value whenever your movement code changes direction.
-        // Default is "down" if you don’t explicitly set it.
         _this.facing = "down";
-        _this.isDead = false; //new
+        _this.isDead = false; // new
         return _this;
     }
     Player.prototype.onLoad = function () {
@@ -72,8 +71,10 @@ var Player = /** @class */ (function (_super) {
     };
     // Called when any key is pressed
     Player.prototype.onKeyDown = function (event) {
-        // Use Space as the attack key (change if you prefer another key)
-        if (event.keyCode === cc.macro.KEY.c || event.keyCode === cc.macro.KEY.z || event.keyCode === cc.macro.KEY.v) {
+        // Use C, Z, or V as the attack key (you can adjust as needed)
+        if (event.keyCode === cc.macro.KEY.c ||
+            event.keyCode === cc.macro.KEY.z ||
+            event.keyCode === cc.macro.KEY.v) {
             this.tryAttack();
         }
     };
@@ -97,29 +98,39 @@ var Player = /** @class */ (function (_super) {
             _this.isAttacking = false;
         }, this.attackAnimDuration);
     };
-    // Runs attackHitDelay seconds into the swing to check for any slimes in range
+    // ────────────────────────────────────────────────────────────────────────────
+    // This method checks every child under “Canvas/MapManager/MonsterManager” for
+    // either a BlueSlimeAI or a GreenSlimeAI, then applies damage if within range.
+    // ────────────────────────────────────────────────────────────────────────────
     Player.prototype.applyAttackHit = function () {
         var _this = this;
         // 1) Convert the player's position to world space (Vec3) and then to Vec2
         var playerWorld3 = this.node.convertToWorldSpaceAR(cc.v3(0, 0, 0));
         var playerWorld2 = cc.v2(playerWorld3.x, playerWorld3.y);
-        // 2) Find all slimes under “Canvas/MapManager/Actors”
+        // 2) Find all slimes under “Canvas/MapManager/MonsterManager”
         var actorsRoot = cc.find("Canvas/MapManager/MonsterManager");
         if (!actorsRoot)
             return;
         actorsRoot.children.forEach(function (childNode) {
-            var slimeComp = childNode.getComponent(BlueSlimeAI_1.default);
-            if (!slimeComp)
-                return; // skip non‐slime nodes
-            // 3) Convert that slime’s position to world-space Vec2
+            // 3a) Try to grab a BlueSlimeAI component
+            var slimeComp = childNode.getComponent(BlueSlimeAI_1.default) || null;
+            // 3b) If there was no BlueSlimeAI, try to grab a GreenSlimeAI instead
+            if (!slimeComp) {
+                slimeComp = childNode.getComponent(GreenSlimeAI_1.default);
+            }
+            // 4) If this node has neither component, skip it
+            if (!slimeComp) {
+                return;
+            }
+            // 5) Convert that slime’s position (node’s anchor point) to world-space Vec3 → Vec2
             var slimeWorld3 = childNode.convertToWorldSpaceAR(cc.v3(0, 0, 0));
             var slimeWorld2 = cc.v2(slimeWorld3.x, slimeWorld3.y);
-            // 4) Distance check
+            // 6) Check distance from player
             var dist = playerWorld2.sub(slimeWorld2).mag();
             if (dist <= _this.attackRange) {
-                // 5) Slash hits this slime → deal damage
+                // 7) We’re in range → deal damage
                 slimeComp.takeDamage(_this.attackPower);
-                // (Optional) If you only want one slime per swing, uncomment:
+                // (Optional) If you want to hit only one slime per swing, uncomment:
                 // return;
             }
         });
@@ -192,14 +203,12 @@ var Player = /** @class */ (function (_super) {
                 break;
         }
         this.updatelife(-amount, this.hp);
-        // (Optional) play a death sound here if you want
-        // if (this.deathsound) cc.audioEngine.playEffect(this.deathsound, false);
         this.isDead = true;
         // 3) Delay the actual “freeze/game-over” until after the death animation finishes.
-        //    Suppose each death clip is about 1.0 second long; adjust as needed.
         this.scheduleOnce(function () {
             _this.die();
-        }, 1.0);
+        }, 1.0 // adjust this delay to match your death‐animation length
+        );
     };
     Player.prototype.heal = function (amount) {
         this.hp += amount;
