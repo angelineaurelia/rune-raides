@@ -15729,11 +15729,6 @@
     "meta": 1749097709576,
     "relativePath": "Objects\\stars\\stars-silver\\stars-silver-1.png"
   },
-  "74c2097b-232c-4398-8b2f-714eb8e4d09b": {
-    "asset": 1749096988508,
-    "meta": 1749097710582,
-    "relativePath": "resources\\prefabs\\PauseSetting.prefab"
-  },
   "0ed3db88-9906-4f6d-809c-7ee86f5f66cc": {
     "asset": 1749096988677,
     "meta": 1749097710584,
@@ -15809,11 +15804,6 @@
     "meta": 1749097711050,
     "relativePath": "scripts\\camera\\CameraTransposer.ts"
   },
-  "73ee723e-d220-4425-a7bf-501cd479bd40": {
-    "asset": 1749096988549,
-    "meta": 1749097711054,
-    "relativePath": "resources\\prefabs\\SignupLogin.prefab"
-  },
   "1dc9d90e-0033-48a1-a5b2-ee3c2d7ce6db": {
     "asset": 1749096988557,
     "meta": 1749097711058,
@@ -15834,11 +15824,6 @@
     "meta": 1749097711165,
     "relativePath": "scripts\\input\\KeyboardControls.ts"
   },
-  "8f6bc8a3-e035-40a9-8ac1-5ac3c4c5e65e": {
-    "asset": 1749096988594,
-    "meta": 1749097711176,
-    "relativePath": "scripts\\Menu\\AuthManager.ts"
-  },
   "3e0bedbc-115f-436f-8910-0298c939f2c2": {
     "asset": 1749096988549,
     "meta": 1749097711182,
@@ -15853,11 +15838,6 @@
     "asset": 1749096988596,
     "meta": 1749097711260,
     "relativePath": "scripts\\Menu\\Menu.ts"
-  },
-  "cfc9aa43-27ed-4fb1-a636-6613efef1871": {
-    "asset": 1749096988596,
-    "meta": 1749097711348,
-    "relativePath": "scripts\\Menu\\MenuMgr.ts"
   },
   "cb56de86-6ff7-4d2e-aaaa-0bf800a67d03": {
     "asset": 1749096988674,
@@ -15973,11 +15953,6 @@
     "asset": 1749096988880,
     "meta": 1749097711639,
     "relativePath": "tilemaps\\door-wood-animation"
-  },
-  "9afa1c3b-416f-42b2-9afe-235d30d0a6e9": {
-    "asset": 1749096988572,
-    "meta": 1749097711647,
-    "relativePath": "scene\\menu.fire"
   },
   "1f74fc2a-a17b-4a32-a289-371a602fa117": {
     "asset": 1749096988859,
@@ -21279,14 +21254,99 @@
     "meta": 1749097725501,
     "relativePath": "tilemaps\\waterfall-short\\waterfall-short-5.png"
   },
+  "cfc9aa43-27ed-4fb1-a636-6613efef1871": {
+    "asset": 1749107623002,
+    "meta": 1749108297499,
+    "relativePath": "scripts\\Menu\\MenuMgr.ts"
+  },
+  "be1c68be-e74a-47b2-a3a4-739f54308b8b": {
+    "asset": 1749107622975,
+    "meta": 1749108297500,
+    "relativePath": "libs"
+  },
+  "0117d86e-e772-4a92-b5c6-48b5c791fd4f": {
+    "asset": 1749107622988,
+    "meta": 1749108297501,
+    "relativePath": "libs\\firebase"
+  },
+  "e0315333-7e5b-4a5d-9d79-2b840d21b1b7": {
+    "asset": 1749107622987,
+    "meta": 1749108297502,
+    "relativePath": "libs\\firebase\\firebase-compat.min.js"
+  },
+  "df5990cb-184a-443e-ba1b-817a617f0b78": {
+    "asset": 1749107622997,
+    "meta": 1749108297528,
+    "relativePath": "scripts\\AuthManager.ts"
+  },
+  "906b6670-b4d2-40a6-8214-71ed7b1dccfd": {
+    "asset": 1749107622998,
+    "meta": 1749108297538,
+    "relativePath": "scripts\\FirebaseInit.ts"
+  },
+  "f37640c3-a7b2-4587-8b10-a184ebae1d79": {
+    "asset": 1749107623002,
+    "meta": 1749108297548,
+    "relativePath": "scripts\\SuccessPopup.ts"
+  },
+  "9afa1c3b-416f-42b2-9afe-235d30d0a6e9": {
+    "asset": 1749107622996,
+    "meta": 1749108297560,
+    "relativePath": "scene\\menu.fire"
+  },
+  "74c2097b-232c-4398-8b2f-714eb8e4d09b": {
+    "asset": 1749107622990,
+    "meta": 1749108297562,
+    "relativePath": "resources\\prefabs\\PauseSetting.prefab"
+  },
+  "73ee723e-d220-4425-a7bf-501cd479bd40": {
+    "asset": 1749109386249,
+    "meta": 1749109386267,
+    "relativePath": "resources\\prefabs\\SignupLogin.prefab"
+  },
+  "bd2be53c-9aa6-40fd-abdc-3872819e7f0a": {
+    "asset": 1749107622993,
+    "meta": 1749108297565,
+    "relativePath": "resources\\prefabs\\SuccessPopup.prefab"
+  },
+  "deb2879b-1e9e-4203-8935-901909fb0648": {
+    "asset": 1749107622978,
+    "meta": 1749108297569,
+    "relativePath": "libs\\firebase\\firebase-compat.d.ts"
+  },
+  "70f1284b-ad46-45d6-9aaf-2ce72ac912c7": {
+    "asset": 1749107623033,
+    "meta": 1749108297617,
+    "relativePath": "tilemaps\\UI\\resume.png"
+  },
+  "53075930-66c3-4b69-8756-655db2278b4e": {
+    "asset": 1749096988753,
+    "meta": 1749108297629,
+    "relativePath": "tilemaps\\UI\\Save.png"
+  },
+  "b48240ea-1106-4626-9231-f7875753aa2f": {
+    "asset": 1749107623026,
+    "meta": 1749108297630,
+    "relativePath": "tilemaps\\UI\\restart.png"
+  },
   "332a6812-c50e-4b45-bdb9-aebe5d2c2c3a": {
-    "asset": 1749106187397,
-    "meta": 1749106209955,
+    "asset": 1749108513600,
+    "meta": 1749108516111,
     "relativePath": "scripts\\Player.ts"
   },
   "9ee73bb5-046e-4a78-ac74-88b74c3ea026": {
-    "asset": 1749106619395,
-    "meta": 1749106657410,
+    "asset": 1749109156456,
+    "meta": 1749109224950,
     "relativePath": "scripts\\firebase.js"
+  },
+  "a2c1a810-3639-4354-a02c-ff06e088ba54": {
+    "asset": 1749111422699,
+    "meta": 1749111465654,
+    "relativePath": "scripts\\Menu\\FirebaseManager.ts"
+  },
+  "c55e50be-7948-4e79-9ddf-63c4345051df": {
+    "asset": 1749111419789,
+    "meta": 1749111465691,
+    "relativePath": "scripts\\Menu\\LoginSignUp.ts"
   }
 }

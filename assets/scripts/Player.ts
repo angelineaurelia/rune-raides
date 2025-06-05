@@ -299,7 +299,7 @@ export default class Player extends cc.Component {
                 temp.playAnim();
             }
             this.scheduleOnce(() => {
-                otherCollider.node.destroy();
+                if (otherCollider.node) otherCollider.node.destroy();
                 this.gameManager.GoNextLevel();
             }, 1.2);
         }

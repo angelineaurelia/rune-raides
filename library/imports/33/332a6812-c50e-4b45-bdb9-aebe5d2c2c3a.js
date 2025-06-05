@@ -275,7 +275,8 @@ var Player = /** @class */ (function (_super) {
                 temp.playAnim();
             }
             this.scheduleOnce(function () {
-                otherCollider.node.destroy();
+                if (otherCollider.node)
+                    otherCollider.node.destroy();
                 _this.gameManager.GoNextLevel();
             }, 1.2);
         }
