@@ -10,7 +10,7 @@ export default class SuccessPopup extends cc.Component {
   public onOk: (() => void) | null = null;
 
   onLoad() {
-    const okBtn = cc.find("DialogBox/OKButton", this.node).getComponent(cc.Button);
+    const okBtn = cc.find("OKButton", this.node).getComponent(cc.Button);
     okBtn.node.on('click', () => {
       if (this.onOk) this.onOk();
       this.node.destroy();

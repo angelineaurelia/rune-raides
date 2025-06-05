@@ -54,6 +54,11 @@ var AuthManager = /** @class */ (function (_super) {
     };
     AuthManager.prototype.onSaveClicked = function () {
         var _this = this;
+        var isSigningUp = cc.find("Canvas/MenuMgr").getComponent("MenuMgr").isSigningUp;
+        if (isSigningUp)
+            this.signup();
+        else
+            this.login();
         var username = this.usernameEB.string.trim();
         var email = this.emailEB.string.trim();
         var password = this.pwdEB.string;
@@ -68,11 +73,51 @@ var AuthManager = /** @class */ (function (_super) {
             return userCred.user.updateProfile({ displayName: username });
         })
             .then(function () {
-            cc.log("Signup succeeded:", username);
-            _this.showPopup("Signup Successful");
+            cc.log(text + " succeeded:", username);
+            _this.showPopup(text + " Successful");
         })
             .catch(function (err) {
-            cc.error("Signup error:", err.code, err.message);
+            cc.error(text + " error:", err.code, err.message);
+        });
+    };
+    AuthManager.prototype.signup = function () {
+        var _this = this;
+        var username = this.usernameEB.string.trim();
+        var email = this.emailEB.string.trim();
+        var password = this.pwdEB.string;
+        if (!email || !password || !username) {
+            cc.warn("All fields must be filled.");
+            return;
+        }
+        // 4) Create user and set displayName
+        this.auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(function (userCred) {
+            return userCred.user.updateProfile({ displayName: username });
+        })
+            .then(function () {
+            cc.log(text + " succeeded:", username);
+            _this.showPopup(text + " Successful");
+        })
+            .catch(function (err) {
+            cc.error(text + " error:", err.code, err.message);
+        });
+    };
+    AuthManager.prototype.login = function () {
+        var _this = this;
+        var username = this.usernameEB.string.trim();
+        var email = this.emailEB.string.trim();
+        var password = this.pwdEB.string;
+        if (!email || !password || !username) {
+            cc.warn("All fields must be filled.");
+            return;
+        }
+        this.auth.signInWithEmailAndPassword(email, password).then(function (userCred) {
+            cc.log("Login succeeded:", username);
+            _this.showPopup("Login Successful");
+        })
+            .catch(function (err) {
+            cc.error("Login error:", err.code, err.message);
         });
     };
     AuthManager.prototype.showPopup = function (msg) {

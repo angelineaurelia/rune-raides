@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, 'f3764DDp7JFh4sQoYTrrh15', 'SuccessPopup');
-// scripts/SuccessPopup.ts
+// scripts/Menu/SuccessPopup.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -35,7 +35,7 @@ var SuccessPopup = /** @class */ (function (_super) {
     }
     SuccessPopup.prototype.onLoad = function () {
         var _this = this;
-        var okBtn = cc.find("DialogBox/OKButton", this.node).getComponent(cc.Button);
+        var okBtn = cc.find("OKButton", this.node).getComponent(cc.Button);
         okBtn.node.on('click', function () {
             if (_this.onOk)
                 _this.onOk();

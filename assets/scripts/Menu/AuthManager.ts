@@ -14,13 +14,13 @@ export default class AuthManager extends cc.Component {
   private auth: any = null;
 
   onLoad() {
+
     this.usernameEB = cc.find("UserName", this.node).getComponent(cc.EditBox);
     this.emailEB    = cc.find("Email", this.node).getComponent(cc.EditBox);
     this.pwdEB      = cc.find("Password", this.node).getComponent(cc.EditBox);
 
     this.saveBtn = cc.find("Save", this.node).getComponent(cc.Button);
     this.exitBtn = cc.find("Exit", this.node).getComponent(cc.Button);
-    
     this.saveBtn.node.on('click', this.onSaveClicked, this);
     this.exitBtn.node.on('click', () => this.node.destroy(), this);
 
@@ -32,6 +32,9 @@ export default class AuthManager extends cc.Component {
   }
 
   private onSaveClicked() {
+    let isSigningUp = cc.find("Canvas/MenuMgr").getComponent("MenuMgr").isSigningUp;
+    if (isSigningUp) this.signup();
+    else this.login();
     const username = this.usernameEB.string.trim();
     const email    = this.emailEB.string.trim();
     const password = this.pwdEB.string;
@@ -42,20 +45,64 @@ export default class AuthManager extends cc.Component {
     }
 
     // 4) Create user and set displayName
+   
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCred: any) => {
         return userCred.user.updateProfile({ displayName: username });
       })
       .then(() => {
-        cc.log("Signup succeeded:", username);
-        this.showPopup("Signup Successful");
+        cc.log(text + " succeeded:", username);
+        this.showPopup(text + " Successful");
       })
       .catch((err: any) => {
-        cc.error("Signup error:", err.code, err.message);
+        cc.error(text + " error:", err.code, err.message);
       });
   }
 
+  private signup(){
+    const username = this.usernameEB.string.trim();
+    const email    = this.emailEB.string.trim();
+    const password = this.pwdEB.string;
+
+    if (!email || !password || !username) {
+      cc.warn("All fields must be filled.");
+      return;
+    }
+
+    // 4) Create user and set displayName
+   
+    this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCred: any) => {
+        return userCred.user.updateProfile({ displayName: username });
+      })
+      .then(() => {
+        cc.log(text + " succeeded:", username);
+        this.showPopup(text + " Successful");
+      })
+      .catch((err: any) => {
+        cc.error(text + " error:", err.code, err.message);
+      });
+  }
+  private login(){
+    const username = this.usernameEB.string.trim();
+    const email    = this.emailEB.string.trim();
+    const password = this.pwdEB.string;
+
+    if (!email || !password || !username) {
+      cc.warn("All fields must be filled.");
+      return;
+    }
+    this.auth.signInWithEmailAndPassword(email, password).then((userCred: any) => {
+      cc.log("Login succeeded:", username);
+      this.showPopup("Login Successful");
+    })
+    .catch((err: any) => {
+      cc.error("Login error:", err.code, err.message);
+    });
+  }
+  
   private showPopup(msg: string) {
     // Load and instantiate SuccessPopup
     cc.resources.load("prefabs/SuccessPopup", cc.Prefab, (err, prefab: cc.Prefab) => {
