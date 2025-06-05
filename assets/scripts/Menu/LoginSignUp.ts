@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 // assets/scripts/LoginManager.ts
-import { auth } from "./FirebaseManager";
+/*import { auth } from "./FirebaseManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -58,5 +58,5 @@ export default class LoginManager extends cc.Component {
             this.infoLabel.string = "Google 登入失敗：" + error.message;
         });
     }
-}
+}*/
 

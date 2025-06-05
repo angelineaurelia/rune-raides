@@ -26,15 +26,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var GameManager_1 = require("./GameManager");
 var BlueSlimeAI_1 = require("./ai/BlueSlimeAI");
-<<<<<<< Updated upstream
-// ↓ Fix the typo here: it should be "GreenSlimeAI" (two “e”s), not "GreenSlimeAI"
-var GreenSlimeAI_1 = require("./ai/GreenSlimeAI");
-=======
 var LavaSlimeAI_1 = require("./ai/LavaSlimeAI");
 // ↓ Fix the typo here: it should be "GreenSlimeAI" (two “e”s), not "GreenSlimeAI"
 var GreenSlimeAI_1 = require("./ai/GreenSlimeAI");
 var GreenBossAI_1 = require("./ai/GreenBossAI");
->>>>>>> Stashed changes
 var Player = /** @class */ (function (_super) {
     __extends(Player, _super);
     function Player() {
@@ -126,15 +121,12 @@ var Player = /** @class */ (function (_super) {
             if (!slimeComp) {
                 slimeComp = childNode.getComponent(GreenSlimeAI_1.default);
             }
-<<<<<<< Updated upstream
-=======
             if (!slimeComp) {
                 slimeComp = childNode.getComponent(LavaSlimeAI_1.default);
             }
             if (!slimeComp) {
                 slimeComp = childNode.getComponent(GreenBossAI_1.default);
             }
->>>>>>> Stashed changes
             // 4) If this node has neither component, skip it
             if (!slimeComp) {
                 return;
