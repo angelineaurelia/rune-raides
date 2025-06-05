@@ -20300,8 +20300,8 @@
     "relativePath": "resources/prefabs"
   },
   "7d710f7e-921a-4707-bb6c-ceff85bdd9dc": {
-    "asset": 1748952525620,
-    "meta": 1748952525677,
+    "asset": 1749111770231,
+    "meta": 1749111770234,
     "relativePath": "resources/prefabs/Setting.prefab"
   },
   "3e0bedbc-115f-436f-8910-0298c939f2c2": {
@@ -20320,8 +20320,8 @@
     "relativePath": "resources/prefabs/blue_pot.prefab"
   },
   "73ee723e-d220-4425-a7bf-501cd479bd40": {
-    "asset": 1749105054814,
-    "meta": 1749105054823,
+    "asset": 1749111626107,
+    "meta": 1749111626111,
     "relativePath": "resources/prefabs/SignupLogin.prefab"
   },
   "737d70fd-1d9a-433e-bb69-50239d68bed2": {
@@ -20850,8 +20850,8 @@
     "relativePath": "resources/prefabs/Player.prefab"
   },
   "74c2097b-232c-4398-8b2f-714eb8e4d09b": {
-    "asset": 1749109031727,
-    "meta": 1749109031733,
+    "asset": 1749111776218,
+    "meta": 1749111776220,
     "relativePath": "resources/prefabs/PauseSetting.prefab"
   },
   "93072ac7-e1b9-4c07-8745-e78a8fc9e8f7": {
