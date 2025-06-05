@@ -36,13 +36,13 @@ var LavaSlimeAI = /** @class */ (function (_super) {
     __extends(LavaSlimeAI, _super);
     function LavaSlimeAI() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.walkSpeed = 100;
-        _this.runSpeed = 200;
+        _this.walkSpeed = 120;
+        _this.runSpeed = 240;
         _this.idleTime = 5;
         _this.walkTime = 5;
         _this.patrolRadius = 200;
-        _this.detectionRadius = 150;
-        _this.attackRadius = 50;
+        _this.detectionRadius = 170;
+        _this.attackRadius = 70;
         _this.timeBeforeAttack = 1;
         _this.attackDamage = 20;
         _this.maxHealth = 40;

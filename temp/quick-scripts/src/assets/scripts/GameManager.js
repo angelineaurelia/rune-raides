@@ -98,7 +98,7 @@ var GameManager = /** @class */ (function (_super) {
                 PauseNode.setPosition(localPos);
             }
             else {
-                cc.warn("找不到 Main Camera，使用預設位置 (0, 0)");
+                cc.warn("找不到 Main Camera, 使用預設位置 (0, 0)");
                 PauseNode.setPosition(0, 0);
             }
             PauseNode.scaleX = 1;
@@ -250,40 +250,96 @@ var GameManager = /** @class */ (function (_super) {
         MonsterMgr.SetMonster(this.Level);
     };
     GameManager.prototype.GoNextLevel = function () {
+        var _a, _b, _c, _d;
         this.Level++;
-        if (this.LevelLabel)
+        this.saveProgress(this.Level);
+        if (this.LevelLabel) {
             this.LevelLabel.string = "Level: " + this.Level;
-        else
-            cc.error("Level label not found");
-        // regenate the map
-        var MapGenerator = cc.find("GameManager").getComponent("MapGenerator");
-        if (MapGenerator)
-            MapGenerator.regenerateMap(this.Level);
-        else
-            cc.error("MapGenerator component not found");
-        //reset player position
-        if (this.player)
-            this.player.getComponent("Player").SetPlayer(this.Level);
-        else
-            cc.error("Player component not found");
-        //reset monster
-        var MonsterMgr = cc.find("Canvas/MapManager/MonsterManager").getComponent("MonsterManager");
-        MonsterMgr.SetMonster(this.Level);
-        //reset UI
-        //隨著level 提升 改變視窗大小
-        var camera = cc.find("Canvas/Main Camera").getComponent(cc.Camera);
-        camera.zoomRatio = camera.zoomRatio * 0.9;
-        //視窗改變 UI 也要改變
-        var UI = cc.find("Canvas/Main Camera/UI");
-        if (UI) {
-            UI.setPosition(0, 0);
-            UI.scaleX = 1 / camera.zoomRatio;
-            UI.scaleY = 1 / camera.zoomRatio;
         }
-        else
-            console.log("UI not found");
+        else {
+            cc.error("Level label not found");
+        }
+        // regenerate the map
+        var mapGen = (_a = cc.find("GameManager")) === null || _a === void 0 ? void 0 : _a.getComponent("MapGenerator");
+        if (mapGen) {
+            mapGen.regenerateMap(this.Level);
+        }
+        else {
+            cc.error("MapGenerator component not found");
+        }
+        // reset player position
+        var playerComp = (_b = this.player) === null || _b === void 0 ? void 0 : _b.getComponent("Player");
+        if (playerComp) {
+            playerComp.SetPlayer(this.Level);
+        }
+        else {
+            cc.error("Player component not found");
+        }
+        // reset monster
+        var monsterMgr = (_c = cc.find("Canvas/MapManager/MonsterManager")) === null || _c === void 0 ? void 0 : _c.getComponent("MonsterManager");
+        if (monsterMgr) {
+            monsterMgr.SetMonster(this.Level);
+        }
+        // adjust camera zoom and UI scaling
+        var camera = (_d = cc.find("Canvas/Main Camera")) === null || _d === void 0 ? void 0 : _d.getComponent(cc.Camera);
+        if (camera) {
+            camera.zoomRatio *= 0.99;
+            var UI = cc.find("Canvas/Main Camera/UI");
+            if (UI) {
+                UI.setPosition(0, 0);
+                UI.scaleX = 1 / camera.zoomRatio;
+                UI.scaleY = 1 / camera.zoomRatio;
+            }
+            else {
+                cc.log("UI not found");
+            }
+        }
     };
-    GameManager.prototype.GameOver = function () {
+    GameManager.prototype.saveProgress = function (level) {
+        cc.log("Saving progress for level:", level);
+        if (!window._firebaseInited) {
+            cc.warn("Firebase not initialized.");
+            return;
+        }
+        var user = firebase.auth().currentUser;
+        if (!user) {
+            cc.warn("User not logged in.");
+            return;
+        }
+        var db = firebase.firestore();
+        var userRef = db.collection("leaderboard").doc(user.uid);
+        userRef.get().then(function (doc) {
+            var prev = doc.exists ? doc.data().highestLevel : 0;
+            if (level > prev) {
+                userRef.set({
+                    username: user.displayName || "Unknown",
+                    highestLevel: level
+                });
+                cc.log("Updated leaderboard for " + (user.displayName || "Unknown") + ": Level " + level);
+            }
+        }).catch(function (err) {
+            cc.error("Failed to save progress:", err);
+        });
+    };
+    GameManager.prototype.loadLeaderboard = function () {
+        if (!window._firebaseInited) {
+            cc.warn("Firebase not initialized.");
+            return;
+        }
+        var db = firebase.firestore();
+        db.collection("leaderboard")
+            .orderBy("highestLevel", "desc")
+            .limit(10)
+            .get()
+            .then(function (snapshot) {
+            snapshot.forEach(function (doc) {
+                var data = doc.data();
+                cc.log(data.username + ": Level " + data.highestLevel);
+                // You can update UI here
+            });
+        }).catch(function (err) {
+            cc.error("Failed to load leaderboard:", err);
+        });
     };
     __decorate([
         property({ type: cc.AudioClip })

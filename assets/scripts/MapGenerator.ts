@@ -53,7 +53,6 @@ export default class MapGenerator extends cc.Component {
     }
 
     GeneratorMap () {
-        
         this.myMap = new Map_Graph(this.Map_xmax,this.Map_ymax);// generate map
         //Please set the Anchor of Prefab into (0,0) first
         for(let _x:number = 0;_x<this.Map_xmax;_x++){
@@ -70,11 +69,14 @@ export default class MapGenerator extends cc.Component {
                 }
             }
         }
+        // Generate the outer walls
         for(let i:number = 0;i<this.Map_xmax;i++){
             const prefab_temp = cc.instantiate(this.horizontalWallPrefab);
             prefab_temp.setPosition(i*this.blocksize_x,this.Map_ymax*this.blocksize_y);
             this.wallList.addChild(prefab_temp,1,'wall');
         }
+
+        // Generate the vertical walls
         for(let i:number = 0;i<this.Map_ymax;i++){
             const prefab_temp = cc.instantiate(this.verticalWallPrefab);
             prefab_temp.setPosition(this.Map_xmax*this.blocksize_x,i*this.blocksize_y);
@@ -82,11 +84,12 @@ export default class MapGenerator extends cc.Component {
         }
         this.generateKey_Lock();
     }
+
     regenerateMap(level: number) {
         this.wallList.removeAllChildren();
         // Find Level
-        this.Map_xmax = level*4 + 6 ; // Level 1,2,3...，Map_xmax  = 10,14,18...
-        this.Map_ymax = level*2 + 3 ; // Level 1,2,3...，Map_ymax = 5,7,9...
+        this.Map_xmax = level*4 + 2 ; // Level 1,2,3...，Map_xmax  = 6,10,14...
+        this.Map_ymax = level*2 + 1 ; // Level 1,2,3...，Map_ymax = 3,5,7...
 
         this.myMap = new Map_Graph(this.Map_xmax, this.Map_ymax);
 
@@ -116,6 +119,7 @@ export default class MapGenerator extends cc.Component {
         }
         this.generateKey_Lock();
     }
+    
     generateKey_Lock(){
         let _x:number = 0;
         let _y:number = 0;
@@ -136,17 +140,3 @@ export default class MapGenerator extends cc.Component {
     }
     // update (dt) {}
 }
-
-/*
-export class YourScriptName extends Component {
-
-    @property(Prefab)
-    ground0: Prefab = null!;
-
-    start() {
-        const groundNode = instantiate(this.ground0);
-        groundNode.setPosition(new Vec3(0, 0, 0));
-        this.node.addChild(groundNode);
-    }
-}
-*/

@@ -90,11 +90,13 @@ var MapGenerator = /** @class */ (function (_super) {
                 }
             }
         }
+        // Generate the outer walls
         for (var i = 0; i < this.Map_xmax; i++) {
             var prefab_temp = cc.instantiate(this.horizontalWallPrefab);
             prefab_temp.setPosition(i * this.blocksize_x, this.Map_ymax * this.blocksize_y);
             this.wallList.addChild(prefab_temp, 1, 'wall');
         }
+        // Generate the vertical walls
         for (var i = 0; i < this.Map_ymax; i++) {
             var prefab_temp = cc.instantiate(this.verticalWallPrefab);
             prefab_temp.setPosition(this.Map_xmax * this.blocksize_x, i * this.blocksize_y);
@@ -105,8 +107,8 @@ var MapGenerator = /** @class */ (function (_super) {
     MapGenerator.prototype.regenerateMap = function (level) {
         this.wallList.removeAllChildren();
         // Find Level
-        this.Map_xmax = level * 4 + 6; // Level 1,2,3...，Map_xmax  = 10,14,18...
-        this.Map_ymax = level * 2 + 3; // Level 1,2,3...，Map_ymax = 5,7,9...
+        this.Map_xmax = level * 4 + 2; // Level 1,2,3...，Map_xmax  = 6,10,14...
+        this.Map_ymax = level * 2 + 1; // Level 1,2,3...，Map_ymax = 3,5,7...
         this.myMap = new MapGeneratorCore_1.Map_Graph(this.Map_xmax, this.Map_ymax);
         for (var _x = 0; _x < this.Map_xmax; _x++) {
             for (var _y = 0; _y < this.Map_ymax; _y++) {
@@ -171,18 +173,5 @@ var MapGenerator = /** @class */ (function (_super) {
     return MapGenerator;
 }(cc.Component));
 exports.default = MapGenerator;
-/*
-export class YourScriptName extends Component {
-
-    @property(Prefab)
-    ground0: Prefab = null!;
-
-    start() {
-        const groundNode = instantiate(this.ground0);
-        groundNode.setPosition(new Vec3(0, 0, 0));
-        this.node.addChild(groundNode);
-    }
-}
-*/
 
 cc._RF.pop();

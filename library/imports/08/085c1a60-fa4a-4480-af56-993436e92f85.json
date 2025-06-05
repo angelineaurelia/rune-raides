@@ -449,10 +449,8 @@
     "patrolRadius": 90,
     "detectionRadius": 55,
     "attackRadius": 20,
-    "specAttackRadius": 30,
     "timeBeforeAttack": 1,
     "attackDamage": 20,
-    "specAttackDamage": 40,
     "maxHealth": 100,
     "health": 100,
     "lifebar": {

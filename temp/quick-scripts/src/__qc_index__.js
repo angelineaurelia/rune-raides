@@ -1,6 +1,7 @@
 
 require('./assets/scripts/ActorController');
 require('./assets/scripts/GameManager');
+require('./assets/scripts/LeaderboardManager');
 require('./assets/scripts/MapGenerator');
 require('./assets/scripts/MapGeneratorCore');
 require('./assets/scripts/MapManager');

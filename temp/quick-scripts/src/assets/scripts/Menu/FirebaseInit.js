@@ -31,7 +31,7 @@ var FirebaseInit = /** @class */ (function (_super) {
     }
     FirebaseInit.prototype.onLoad = function () {
         if (!window._firebaseInited) {
-            var cfg = {
+            var config = {
                 apiKey: "AIzaSyDFW4-emWdI1ghgZWWGp1wqoWvAvTwAqrQ",
                 authDomain: "rune-raids.firebaseapp.com",
                 projectId: "rune-raids",
@@ -40,7 +40,9 @@ var FirebaseInit = /** @class */ (function (_super) {
                 appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
                 measurementId: "G-B1C5FG1YSN"
             };
-            firebase.initializeApp(cfg);
+            firebase.initializeApp(config);
+            firebase.firestore();
+            firebase.auth();
             window._firebaseInited = true;
             cc.log("Firebase initialized");
         }

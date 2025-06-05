@@ -10,10 +10,10 @@ enum SlimeState {
 @ccclass
 export default class BlueSlimeAI extends cc.Component {
     @property({ tooltip: "Slime walk speed in pixels per second" })
-    walkSpeed: number = 100;
+    walkSpeed: number = 120;
 
     @property({ tooltip: "Slime run speed in pixels per second" })
-    runSpeed: number = 200;
+    runSpeed: number = 240;
 
     @property({ tooltip: "How long the slime stays idle before walking (seconds)" })
     idleTime: number = 5;
@@ -25,10 +25,10 @@ export default class BlueSlimeAI extends cc.Component {
     patrolRadius: number = 200;
 
     @property({ tooltip: "Detection circle radius (pixels)" })
-    detectionRadius: number = 150;
+    detectionRadius: number = 170;
 
     @property({ tooltip: "Attack circle radius (pixels)" })
-    attackRadius: number = 50;
+    attackRadius: number = 70;
 
     @property({ tooltip: "How much damage the slime does per attack" })
     attackDamage: number = 10;
