@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '906b6ZwtNJApoIUce17Hcz9', 'FirebaseInit');
-// scripts/FirebaseInit.ts
+// scripts/Menu/FirebaseInit.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {

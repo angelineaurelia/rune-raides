@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, 'df599DLGEpEProbgXphfwt4', 'AuthManager');
-// scripts/AuthManager.ts
+// scripts/Menu/AuthManager.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -96,11 +96,12 @@ var AuthManager = /** @class */ (function (_super) {
             return userCred.user.updateProfile({ displayName: username });
         })
             .then(function () {
-            cc.log(text + " succeeded:", username);
-            _this.showPopup(text + " Successful");
+            cc.log("Signup succeeded:", username);
+            _this.showPopup("Signup Successful");
         })
             .catch(function (err) {
-            cc.error(text + " error:", err.code, err.message);
+            cc.error("Signup error:", err.code, err.message);
+            _this.showPopup("\nSignup Failed: " + err.message);
         });
     };
     AuthManager.prototype.login = function () {
@@ -114,10 +115,11 @@ var AuthManager = /** @class */ (function (_super) {
         }
         this.auth.signInWithEmailAndPassword(email, password).then(function (userCred) {
             cc.log("Login succeeded:", username);
-            _this.showPopup("Login Successful");
+            _this.showPopup("\nLogin Successful");
         })
             .catch(function (err) {
             cc.error("Login error:", err.code, err.message);
+            _this.showPopup("\nLogin Failed: " + err.message);
         });
     };
     AuthManager.prototype.showPopup = function (msg) {

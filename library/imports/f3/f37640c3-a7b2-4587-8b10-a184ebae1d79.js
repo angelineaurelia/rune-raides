@@ -29,6 +29,7 @@ var SuccessPopup = /** @class */ (function (_super) {
     function SuccessPopup() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.messageLabel = null;
+        _this.background = null;
         // Called by Menu code when OK is clicked
         _this.onOk = null;
         return _this;
@@ -45,6 +46,9 @@ var SuccessPopup = /** @class */ (function (_super) {
     __decorate([
         property(cc.Label)
     ], SuccessPopup.prototype, "messageLabel", void 0);
+    __decorate([
+        property(cc.Node)
+    ], SuccessPopup.prototype, "background", void 0);
     SuccessPopup = __decorate([
         ccclass('SuccessPopup')
     ], SuccessPopup);

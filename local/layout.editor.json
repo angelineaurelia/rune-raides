@@ -5,22 +5,14 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-<<<<<<< Updated upstream
       "x": 260,
       "y": 225,
       "width": 1280,
       "height": 742,
-=======
-      "x": -8,
-      "y": -8,
-      "width": 1296,
-      "height": 768,
->>>>>>> Stashed changes
       "layout": {
         "type": "dock-h",
         "children": [
           {
-<<<<<<< Updated upstream
             "width": 304,
             "height": 655,
             "type": "dock-v",
@@ -28,15 +20,6 @@
               {
                 "width": 304,
                 "height": 226,
-=======
-            "width": 299.6145935058594,
-            "height": 633.8333740234375,
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 299.6145935058594,
-                "height": 272.44793701171875,
->>>>>>> Stashed changes
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -44,13 +27,8 @@
                 ]
               },
               {
-<<<<<<< Updated upstream
                 "width": 304,
                 "height": 426,
-=======
-                "width": 299.6145935058594,
-                "height": 358.38543701171875,
->>>>>>> Stashed changes
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -60,13 +38,8 @@
             ]
           },
           {
-<<<<<<< Updated upstream
             "width": 666,
             "height": 655,
-=======
-            "width": 656.3854370117188,
-            "height": 633.8333740234375,
->>>>>>> Stashed changes
             "type": "dock-v",
             "children": [
               {
@@ -75,13 +48,8 @@
                 "type": "dock-h",
                 "children": [
                   {
-<<<<<<< Updated upstream
                     "width": 399,
                     "height": 342,
-=======
-                    "width": 389.38543701171875,
-                    "height": 331.04168701171875,
->>>>>>> Stashed changes
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -90,11 +58,7 @@
                   },
                   {
                     "width": 264,
-<<<<<<< Updated upstream
                     "height": 342,
-=======
-                    "height": 331.04168701171875,
->>>>>>> Stashed changes
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -104,13 +68,8 @@
                 ]
               },
               {
-<<<<<<< Updated upstream
                 "width": 666,
                 "height": 310,
-=======
-                "width": 656.3854370117188,
-                "height": 299.79168701171875,
->>>>>>> Stashed changes
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -123,11 +82,7 @@
           },
           {
             "width": 304,
-<<<<<<< Updated upstream
             "height": 655,
-=======
-            "height": 633.8333740234375,
->>>>>>> Stashed changes
             "type": "panel",
             "active": 0,
             "children": [
@@ -149,19 +104,7 @@
         "cocos-services"
       ]
     },
-<<<<<<< Updated upstream
     " common-asset-worker-worker": {}
-=======
-    "window-1749109452877": {}
-  },
-  "panels": {
-    "builder": {
-      "x": 382,
-      "y": 6,
-      "width": 516,
-      "height": 740
-    }
->>>>>>> Stashed changes
   },
   "panels": {},
   "panelLabelWidth": {}

@@ -71,18 +71,18 @@ export default class AuthManager extends cc.Component {
     }
 
     // 4) Create user and set displayName
-   
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCred: any) => {
         return userCred.user.updateProfile({ displayName: username });
       })
       .then(() => {
-        cc.log(text + " succeeded:", username);
-        this.showPopup(text + " Successful");
+        cc.log("Signup succeeded:", username);
+        this.showPopup("Signup Successful");
       })
       .catch((err: any) => {
-        cc.error(text + " error:", err.code, err.message);
+        cc.error("Signup error:", err.code, err.message);
+        this.showPopup("\nSignup Failed: " + err.message);
       });
   }
   private login(){
@@ -96,13 +96,14 @@ export default class AuthManager extends cc.Component {
     }
     this.auth.signInWithEmailAndPassword(email, password).then((userCred: any) => {
       cc.log("Login succeeded:", username);
-      this.showPopup("Login Successful");
+      this.showPopup("\nLogin Successful");
     })
     .catch((err: any) => {
       cc.error("Login error:", err.code, err.message);
+      this.showPopup("\nLogin Failed: " + err.message);
     });
   }
-  
+
   private showPopup(msg: string) {
     // Load and instantiate SuccessPopup
     cc.resources.load("prefabs/SuccessPopup", cc.Prefab, (err, prefab: cc.Prefab) => {

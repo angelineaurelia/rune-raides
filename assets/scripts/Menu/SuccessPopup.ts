@@ -5,7 +5,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass('SuccessPopup')
 export default class SuccessPopup extends cc.Component {
   @property(cc.Label) messageLabel: cc.Label = null;
-
+  @property(cc.Node) background: cc.Node = null;
   // Called by Menu code when OK is clicked
   public onOk: (() => void) | null = null;
 
