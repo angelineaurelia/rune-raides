@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "restart",
+    "texture": "b48240ea-1106-4626-9231-f7875753aa2f",
+    "atlas": "",
+    "rect": [
+      32,
+      0,
+      963,
+      472
+    ],
+    "offset": [
+      1.5,
+      19.5
+    ],
+    "originalSize": [
+      1024,
+      511
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

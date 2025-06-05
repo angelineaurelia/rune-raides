@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "resume",
+    "texture": "70f1284b-ad46-45d6-9aaf-2ce72ac912c7",
+    "atlas": "",
+    "rect": [
+      30,
+      0,
+      965,
+      472
+    ],
+    "offset": [
+      0.5,
+      19.5
+    ],
+    "originalSize": [
+      1024,
+      511
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

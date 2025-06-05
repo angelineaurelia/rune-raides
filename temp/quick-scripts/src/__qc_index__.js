@@ -1,15 +1,17 @@
 
 require('./assets/scripts/ActorController');
+require('./assets/scripts/AuthManager');
+require('./assets/scripts/FirebaseInit');
 require('./assets/scripts/GameManager');
 require('./assets/scripts/MapGenerator');
 require('./assets/scripts/MapGeneratorCore');
 require('./assets/scripts/MapManager');
-require('./assets/scripts/Menu/AuthManager');
 require('./assets/scripts/Menu/LoadingManager');
 require('./assets/scripts/Menu/Menu');
 require('./assets/scripts/Menu/MenuMgr');
 require('./assets/scripts/MonsterManager');
 require('./assets/scripts/Player');
+require('./assets/scripts/SuccessPopup');
 require('./assets/scripts/UIManager');
 require('./assets/scripts/ai/Agent');
 require('./assets/scripts/ai/BlueSlimeAI');

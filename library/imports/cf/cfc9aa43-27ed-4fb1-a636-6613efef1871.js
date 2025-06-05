@@ -29,15 +29,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var AuthManager_1 = require("../AuthManager");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var NewClass = /** @class */ (function (_super) {
-    __extends(NewClass, _super);
-    function NewClass() {
+var MenuMgr = /** @class */ (function (_super) {
+    __extends(MenuMgr, _super);
+    function MenuMgr() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.VolumnValue = 0.5;
+        _this.isSigningUp = false;
+        _this.authComp = null;
+        _this.startGameButton = null;
         return _this;
     }
-    NewClass.prototype.onLoad = function () {
+    MenuMgr.prototype.onLoad = function () {
+        // Hook up OptionButton → ShowSetting
         var OptionButton = new cc.Component.EventHandler();
         OptionButton.target = this.node;
         OptionButton.component = "MenuMgr";
@@ -45,9 +50,9 @@ var NewClass = /** @class */ (function (_super) {
         cc.find("Canvas/background/OptionButton").getComponent(cc.Button).clickEvents.push(OptionButton);
         //Load VolumnValue from localStorage
     };
-    NewClass.prototype.ShowSetting = function () {
+    MenuMgr.prototype.ShowSetting = function () {
         var _this = this;
-        //Setting is a prefab
+        // Setting is a prefab
         cc.resources.load("prefabs/Setting", cc.Prefab, function (err, prefab) {
             if (err) {
                 cc.error("Failed to load Setting prefab: ", err);
@@ -62,7 +67,7 @@ var NewClass = /** @class */ (function (_super) {
             _this.initSettingButton();
         });
     };
-    NewClass.prototype.initSettingButton = function () {
+    MenuMgr.prototype.initSettingButton = function () {
         //ExitSettingButton is a biutton in Setting prefab
         var ExitSettingButton = new cc.Component.EventHandler();
         ExitSettingButton.target = this.node;
@@ -81,7 +86,7 @@ var NewClass = /** @class */ (function (_super) {
         LoginButton.component = "MenuMgr";
         LoginButton.handler = "Login";
         cc.find("Canvas/Setting/Login").getComponent(cc.Button).clickEvents.push(LoginButton);
-        //Volumnslider?
+        //Volumnslider
         var Volumnslider = cc.find("Canvas/Setting/Volumn/VolumnSlider").getComponent(cc.Slider);
         var savedVolumn = cc.sys.localStorage.getItem("VolumnValue");
         if (savedVolumn !== null)
@@ -90,77 +95,84 @@ var NewClass = /** @class */ (function (_super) {
             Volumnslider.progress = 0.5;
         Volumnslider.node.on('slide', this.onVolumnChange, this);
     };
-    NewClass.prototype.ExitSetting = function () {
+    MenuMgr.prototype.ExitSetting = function () {
         var settingNode = cc.find("Canvas/Setting");
-        if (settingNode) {
+        if (settingNode)
             settingNode.destroy();
-        }
     };
-    NewClass.prototype.onVolumnChange = function (slider) {
+    MenuMgr.prototype.onVolumnChange = function (slider) {
         cc.audioEngine.setMusicVolume(slider.progress); // 0~1
         cc.audioEngine.setEffectsVolume(slider.progress);
         this.VolumnValue = slider.progress;
         cc.sys.localStorage.setItem("VolumnValue", this.VolumnValue.toString());
     };
-    NewClass.prototype.SignUp = function () {
+    MenuMgr.prototype.SignUp = function () {
+        this.isSigningUp = true;
+        this.openSignupLoginPanel();
+    };
+    MenuMgr.prototype.Login = function () {
+        this.isSigningUp = false;
+        this.openSignupLoginPanel();
+    };
+    MenuMgr.prototype.openSignupLoginPanel = function () {
         var _this = this;
-        cc.resources.load("prefabs/SignupLogin", cc.Prefab, function (err, prefab) {
+        cc.resources.load("prefabs/SignupLogin", cc.Prefab, function (err, asset) {
             if (err) {
-                cc.error("Failed to load SignupLogin ", err);
+                cc.error("Failed to load SignupLogin prefab:", err);
                 return;
             }
-            var SignupLoginNode = cc.instantiate(prefab);
-            SignupLoginNode.setPosition(0, 0);
-            SignupLoginNode.scaleX = 0.5;
-            SignupLoginNode.scaleY = 0.5;
-            SignupLoginNode.zIndex = 1000;
-            cc.find("Canvas/Setting").addChild(SignupLoginNode);
-            SignupLoginNode.name = "SignupLogin";
+            // Cast the loaded asset to cc.Prefab:
+            var prefab = asset;
+            // Now instantiate a Node from that prefab
+            var signupLoginNode = cc.instantiate(prefab);
+            signupLoginNode.setPosition(0, 0);
+            signupLoginNode.scaleX = 0.5;
+            signupLoginNode.scaleY = 0.5;
+            signupLoginNode.zIndex = 1000;
+            cc.find("Canvas/Setting").addChild(signupLoginNode);
+            signupLoginNode.name = "SignupLogin";
+            // grab the AuthManager component from the newly‐created Node
+            _this.authComp = signupLoginNode.getComponent(AuthManager_1.default);
+            if (!_this.authComp) {
+                cc.error("AuthManager component not found on SignupLogin prefab!");
+                return;
+            }
             _this.initSignupLogin();
         });
     };
-    NewClass.prototype.Login = function () {
-        var _this = this;
-        //SignupLogin is a prefab
-        cc.resources.load("prefabs/SignupLogin", cc.Prefab, function (err, prefab) {
-            if (err) {
-                cc.error("Failed to load SignupLOgin ", err);
-                return;
-            }
-            var SignupLoginNode = cc.instantiate(prefab);
-            SignupLoginNode.setPosition(0, 0);
-            SignupLoginNode.scaleX = 0.5;
-            SignupLoginNode.scaleY = 0.5;
-            SignupLoginNode.zIndex = 1000;
-            cc.find("Canvas/Setting").addChild(SignupLoginNode);
-            SignupLoginNode.name = "SignupLogin";
-            _this.initSignupLogin();
-        });
-    };
-    NewClass.prototype.initSignupLogin = function () {
+    MenuMgr.prototype.initSignupLogin = function () {
+        // “Exit” button wiring (unchanged)…
         var ExitSignupLoginButton = new cc.Component.EventHandler();
         ExitSignupLoginButton.target = this.node;
         ExitSignupLoginButton.component = "MenuMgr";
         ExitSignupLoginButton.handler = "ExitSignupLogin";
         cc.find("Canvas/Setting/SignupLogin/Exit").getComponent(cc.Button).clickEvents.push(ExitSignupLoginButton);
-        //save
+        // “Save” button now calls either authComp.SignUp or authComp.Login
         var SaveSignupLoginButton = new cc.Component.EventHandler();
-        SaveSignupLoginButton.target = this.node;
-        SaveSignupLoginButton.component = "MenuMgr";
-        SaveSignupLoginButton.handler = "ExitSignupLogin";
+        SaveSignupLoginButton.target = this.authComp.node;
+        SaveSignupLoginButton.component = "AuthManager";
+        SaveSignupLoginButton.handler = this.isSigningUp ? "SignUp" : "Login";
         cc.find("Canvas/Setting/SignupLogin/Save").getComponent(cc.Button).clickEvents.push(SaveSignupLoginButton);
     };
-    NewClass.prototype.ExitSignupLogin = function () {
+    MenuMgr.prototype.ExitSignupLogin = function () {
         var T_Node = cc.find("Canvas/Setting/SignupLogin");
         if (T_Node) {
             T_Node.destroy();
         }
     };
-    NewClass = __decorate([
+    MenuMgr.prototype.enableStartButton = function () {
+        if (this.startGameButton) {
+            this.startGameButton.node.active = true;
+        }
+    };
+    __decorate([
+        property(cc.Button)
+    ], MenuMgr.prototype, "startGameButton", void 0);
+    MenuMgr = __decorate([
         ccclass
-    ], NewClass);
-    return NewClass;
+    ], MenuMgr);
+    return MenuMgr;
 }(cc.Component));
-exports.default = NewClass;
+exports.default = MenuMgr;
 
 cc._RF.pop();
