@@ -277,6 +277,7 @@ export default class BlueSlimeAI extends cc.Component {
         this.scheduleOnce(this.applyAttackHit, this.attackHitDelay);
     }
 
+    
     private applyAttackHit() {
         if (this.slimeState !== SlimeState.Attack) return;
 

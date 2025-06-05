@@ -1,8 +1,8 @@
-// Player.ts
-
 const { ccclass, property } = cc._decorator;
 import GameManager from "./GameManager";
 import BlueSlimeAI from "./ai/BlueSlimeAI";
+// ↓ Fix the typo here: it should be "GreenSlimeAI" (two “e”s), not "GreenSlimeAI"
+import GreenSlimeAI from "./ai/GreenSlimeAI";
 
 type FacingDirection = "up" | "down" | "left" | "right";
 
@@ -68,10 +68,8 @@ export default class Player extends cc.Component {
     private anim!: cc.Animation;
 
     // Tracks which direction the player is facing.
-    // You should update this value whenever your movement code changes direction.
-    // Default is "down" if you don’t explicitly set it.
     private facing: FacingDirection = "down";
-    private isDead: boolean = false;//new
+    private isDead: boolean = false; // new
 
     onLoad() {
         this.gameManager = cc.find("GameManager").getComponent("GameManager");
@@ -97,8 +95,12 @@ export default class Player extends cc.Component {
 
     // Called when any key is pressed
     private onKeyDown(event: cc.Event.EventKeyboard) {
-        // Use Space as the attack key (change if you prefer another key)
-        if (event.keyCode === cc.macro.KEY.c || event.keyCode === cc.macro.KEY.z || event.keyCode === cc.macro.KEY.v) {
+        // Use C, Z, or V as the attack key (you can adjust as needed)
+        if (
+            event.keyCode === cc.macro.KEY.c ||
+            event.keyCode === cc.macro.KEY.z ||
+            event.keyCode === cc.macro.KEY.v
+        ) {
             this.tryAttack();
         }
     }
@@ -120,38 +122,55 @@ export default class Player extends cc.Component {
         this.scheduleOnce(this.applyAttackHit, this.attackHitDelay);
 
         // 3) Once the full animation is done, allow attacking again
-        this.scheduleOnce(() => {
-            this.isAttacking = false;
-        }, this.attackAnimDuration);
+        this.scheduleOnce(
+            () => {
+                this.isAttacking = false;
+            },
+            this.attackAnimDuration
+        );
     }
 
-    // Runs attackHitDelay seconds into the swing to check for any slimes in range
+    // ────────────────────────────────────────────────────────────────────────────
+    // This method checks every child under “Canvas/MapManager/MonsterManager” for
+    // either a BlueSlimeAI or a GreenSlimeAI, then applies damage if within range.
+    // ────────────────────────────────────────────────────────────────────────────
     private applyAttackHit() {
         // 1) Convert the player's position to world space (Vec3) and then to Vec2
         const playerWorld3 = this.node.convertToWorldSpaceAR(cc.v3(0, 0, 0));
         const playerWorld2 = cc.v2(playerWorld3.x, playerWorld3.y);
 
-        // 2) Find all slimes under “Canvas/MapManager/Actors”
+        // 2) Find all slimes under “Canvas/MapManager/MonsterManager”
         const actorsRoot = cc.find("Canvas/MapManager/MonsterManager");
         if (!actorsRoot) return;
 
         actorsRoot.children.forEach((childNode) => {
-            const slimeComp = childNode.getComponent(BlueSlimeAI);
-            if (!slimeComp) return; // skip non‐slime nodes
+            // 3a) Try to grab a BlueSlimeAI component
+            let slimeComp: BlueSlimeAI | GreenSlimeAI | null =
+                (childNode.getComponent(BlueSlimeAI) as BlueSlimeAI) || null;
 
-            // 3) Convert that slime’s position to world-space Vec2
+            // 3b) If there was no BlueSlimeAI, try to grab a GreenSlimeAI instead
+            if (!slimeComp) {
+                slimeComp = childNode.getComponent(GreenSlimeAI) as GreenSlimeAI;
+            }
+
+            // 4) If this node has neither component, skip it
+            if (!slimeComp) {
+                return;
+            }
+
+            // 5) Convert that slime’s position (node’s anchor point) to world-space Vec3 → Vec2
             const slimeWorld3 = childNode.convertToWorldSpaceAR(cc.v3(0, 0, 0));
             const slimeWorld2 = cc.v2(slimeWorld3.x, slimeWorld3.y);
 
-            // 4) Distance check
+            // 6) Check distance from player
             const dist = playerWorld2.sub(slimeWorld2).mag();
             if (dist <= this.attackRange) {
-                // 5) Slash hits this slime → deal damage
+                // 7) We’re in range → deal damage
                 slimeComp.takeDamage(this.attackPower);
-                // (Optional) If you only want one slime per swing, uncomment:
+
+                // (Optional) If you want to hit only one slime per swing, uncomment:
                 // return;
             }
-            
         });
     }
 
@@ -198,7 +217,7 @@ export default class Player extends cc.Component {
             }
             return; // exit early, no death logic yet
         }
-        
+
         // 2) HP has dropped to zero → play “death” animation in the correct direction
         switch (this.facing) {
             case "up":
@@ -220,16 +239,15 @@ export default class Player extends cc.Component {
         }
         this.updatelife(-amount, this.hp);
 
-        // (Optional) play a death sound here if you want
-        // if (this.deathsound) cc.audioEngine.playEffect(this.deathsound, false);
         this.isDead = true;
         // 3) Delay the actual “freeze/game-over” until after the death animation finishes.
-        //    Suppose each death clip is about 1.0 second long; adjust as needed.
-        this.scheduleOnce(() => {
-            this.die();
-        }, 1.0);
+        this.scheduleOnce(
+            () => {
+                this.die();
+            },
+            1.0 // adjust this delay to match your death‐animation length
+        );
     }
-
 
     public heal(amount: number) {
         this.hp += amount;
