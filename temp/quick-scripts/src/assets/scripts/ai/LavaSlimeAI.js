@@ -24,6 +24,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var Player_1 = require("../Player");
 var SlimeState;
 (function (SlimeState) {
     SlimeState[SlimeState["Idle"] = 0] = "Idle";
@@ -44,12 +45,10 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         _this.attackRadius = 50;
         _this.timeBeforeAttack = 1;
         _this.attackDamage = 20;
-        _this.maxHealth = 100;
-        _this.health = 100;
+        _this.maxHealth = 40;
+        _this.health = 40;
         _this.lifebar = null;
         _this.barOffsetY = 50;
-        //@property({ type: cc.Node, tooltip: "Player node to detect" })
-        //player: cc.Node = null;
         _this.player = null;
         _this.slimeState = SlimeState.Idle;
         _this.timer = 0;
@@ -57,8 +56,13 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         _this.patrolCenter = cc.v2(0, 0);
         _this.currentRunClip = "";
         _this.currentAttackClip = "";
+        _this.isDead = false;
+        _this.isDeathAnimPlaying = false;
         return _this;
     }
+    LavaSlimeAI.prototype.onLoad = function () {
+        cc.director.getCollisionManager().enabled = true;
+    };
     LavaSlimeAI.prototype.start = function () {
         this.player = cc.find("Canvas/MapManager/Actors/Player");
         if (!this.player)
@@ -86,14 +90,21 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         this.attackNode.setPosition(0, 0);
         this.attackGfx = this.attackNode.addComponent(cc.Graphics);
         this.attackGfx.lineWidth = 2;
-        // Health bar setup (Player-style)
+        // Health bar setup
         if (this.lifebar) {
-            this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
+            //this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
             this.updateLife(0, this.health);
         }
         this.setToIdle();
     };
     LavaSlimeAI.prototype.update = function (dt) {
+        // If already marked dead, skip AI
+        if (this.isDead)
+            return;
+        if (this.isDeathAnimPlaying) {
+            // Let death animation play; do nothing else until it's over
+            return;
+        }
         // 1) compute distance to player
         var distToPlayer = Infinity;
         if (this.player) {
@@ -111,7 +122,8 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         this.detectionGfx.clear();
         this.detectionGfx.lineWidth = 2;
         this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
-            ? cc.color(255, 165, 0) : cc.color(255, 0, 0);
+            ? cc.color(255, 165, 0)
+            : cc.color(255, 0, 0);
         this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
         // 4) redraw attack circle
@@ -119,7 +131,8 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         this.attackGfx.clear();
         this.attackGfx.lineWidth = 2;
         this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
-            ? cc.color(128, 0, 128) : cc.color(0, 0, 255);
+            ? cc.color(128, 0, 128)
+            : cc.color(0, 0, 255);
         this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
         // 5) AI state transitions
@@ -132,6 +145,7 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         }
         if (this.slimeState === SlimeState.Attack) {
             this.timer += dt;
+            // Wait through wind-up + attack anim (wind-up = timeBeforeAttack, attackAnim assumed 1s)
             if (this.timer >= this.timeBeforeAttack + 1) {
                 this.setToIdle();
             }
@@ -147,7 +161,7 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         else if (this.slimeState === SlimeState.Run) {
             this.setToIdle();
         }
-        // finally patrol (idle→walk→idle)
+        // patrol (idle → walk → idle)
         this.timer += dt;
         if (this.slimeState === SlimeState.Idle && this.timer >= this.idleTime) {
             this.startWalking();
@@ -166,12 +180,10 @@ var LavaSlimeAI = /** @class */ (function (_super) {
             }
         }
     };
-    // —— Player-style life-bar updater ——  
+    // —— Health‐bar updater ——
     LavaSlimeAI.prototype.updateLife = function (delta, hp) {
-        console.log("lava slime hp:", delta, "→", hp);
         if (!this.lifebar)
             return;
-        // direct pixel width = hp (or scale as needed)
         this.lifebar.width = hp;
         if (hp <= 10)
             this.lifebar.color = cc.Color.RED;
@@ -181,21 +193,50 @@ var LavaSlimeAI = /** @class */ (function (_super) {
             this.lifebar.color = cc.Color.GREEN;
     };
     LavaSlimeAI.prototype.takeDamage = function (amount) {
+        if (this.health <= 0 || this.isDeathAnimPlaying)
+            return;
+        // play hurt animation based on direction to player
+        var playerPos = this.player.getPosition();
+        var slimePos = this.node.getPosition();
+        var dir = playerPos.sub(slimePos).normalize();
+        var hurtAnim = Math.abs(dir.x) > Math.abs(dir.y)
+            ? (dir.x > 0 ? "LavaSlimeHurtRight" : "LavaSlimeHurtLeft")
+            : (dir.y > 0 ? "LavaSlimeHurtUp" : "LavaSlimeHurtDown");
+        this.anim.play(hurtAnim);
         this.health -= amount;
         if (this.health < 0)
             this.health = 0;
         this.updateLife(-amount, this.health);
-        if (this.health === 0)
-            this.die();
+        if (this.health === 0) {
+            this.startDeathSequence(dir);
+        }
     };
     LavaSlimeAI.prototype.heal = function (amount) {
+        if (this.health <= 0)
+            return;
         this.health += amount;
         if (this.health > this.maxHealth)
             this.health = this.maxHealth;
         this.updateLife(amount, this.health);
     };
-    LavaSlimeAI.prototype.die = function () {
-        this.node.destroy();
+    LavaSlimeAI.prototype.startDeathSequence = function (direction) {
+        this.isDeathAnimPlaying = true;
+        this.slimeState = SlimeState.Idle; // freeze other AI
+        this.playDeathAnimation(direction);
+    };
+    LavaSlimeAI.prototype.playDeathAnimation = function (direction) {
+        var _this = this;
+        var deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "LavaSlimeDeathRight" : "LavaSlimeDeathLeft")
+            : (direction.y > 0 ? "LavaSlimeDeathUp" : "LavaSlimeDeathDown");
+        this.anim.play(deathAnim);
+        this.unscheduleAllCallbacks();
+        // After the death animation finishes (assume 1s), mark as fully dead
+        this.scheduleOnce(function () {
+            _this.isDead = true;
+            _this.isDeathAnimPlaying = false;
+            // Do NOT destroy the node—just leave the dead pose in place
+        }, 1);
     };
     LavaSlimeAI.prototype.setToIdle = function () {
         this.slimeState = SlimeState.Idle;
@@ -219,19 +260,29 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         var _this = this;
         this.slimeState = SlimeState.Attack;
         this.timer = 0;
-        // wind-up animation
+        // Wind‐up: play idle (or a custom wind‐up anim)
         this.anim.play("LavaSlimeIdle");
         this.scheduleOnce(function () { return _this.performAttack(); }, this.timeBeforeAttack);
     };
     LavaSlimeAI.prototype.performAttack = function () {
         var _this = this;
-        // actual attack animation + damage
+        // Play attack clip based on direction to player
         var dir = this.getRunDirection();
         var clip = Math.abs(dir.x) > Math.abs(dir.y)
             ? (dir.x > 0 ? "LavaSlimeAttackRight" : "LavaSlimeAttackLeft")
             : (dir.y > 0 ? "LavaSlimeAttackUp" : "LavaSlimeAttackDown");
         this.anim.play(clip);
-        this.applyAttackDamage();
+        // Apply damage if player still within radius
+        var playerComp = this.player.getComponent(Player_1.default);
+        if (playerComp) {
+            var slimeW = this.node.parent.convertToWorldSpaceAR(this.node.position);
+            var playerW = this.player.parent.convertToWorldSpaceAR(this.player.position);
+            var dist = slimeW.sub(playerW).mag();
+            if (dist <= this.attackRadius) {
+                playerComp.takeDamage(this.attackDamage);
+            }
+        }
+        // After attack anim (~1s), go back to idle
         this.scheduleOnce(function () { return _this.setToIdle(); }, 1);
     };
     LavaSlimeAI.prototype.runTowardsPlayer = function (dt) {
@@ -256,13 +307,8 @@ var LavaSlimeAI = /** @class */ (function (_super) {
         var localP = this.node.parent.convertToNodeSpaceAR(worldP);
         return cc.v2(localP.x - this.node.x, localP.y - this.node.y).normalize();
     };
-    LavaSlimeAI.prototype.applyAttackDamage = function () {
-        if (!this.player)
-            return;
-        var healthComp = this.player.getComponent("Health");
-        if (healthComp && typeof healthComp.takeDamage === "function") {
-            healthComp.takeDamage(this.attackDamage);
-        }
+    LavaSlimeAI.prototype.onDisable = function () {
+        this.unscheduleAllCallbacks();
     };
     __decorate([
         property({ tooltip: "Slime walk speed in pixels per second" })

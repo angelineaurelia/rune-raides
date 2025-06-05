@@ -575,9 +575,20 @@
     "patrolRadius": 80,
     "detectionRadius": 50,
     "attackRadius": 20,
+<<<<<<< Updated upstream
     "maxHealth": 100,
     "health": 100,
     "lifebar": null,
+=======
+    "attackDamage": 10,
+    "attackHitDelay": 0.3,
+    "attackAnimDuration": 1,
+    "maxHealth": 40,
+    "health": 40,
+    "lifebar": {
+      "__id__": 6
+    },
+>>>>>>> Stashed changes
     "barOffsetY": 10,
     "_id": ""
   },

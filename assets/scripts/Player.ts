@@ -1,8 +1,12 @@
 const { ccclass, property } = cc._decorator;
 import GameManager from "./GameManager";
 import BlueSlimeAI from "./ai/BlueSlimeAI";
+import LavaSlimeAI from "./ai/LavaSlimeAI";
+
+
 // ↓ Fix the typo here: it should be "GreenSlimeAI" (two “e”s), not "GreenSlimeAI"
 import GreenSlimeAI from "./ai/GreenSlimeAI";
+import GreenBossAI from "./ai/GreenBossAI";
 
 type FacingDirection = "up" | "down" | "left" | "right";
 
@@ -145,12 +149,18 @@ export default class Player extends cc.Component {
 
         actorsRoot.children.forEach((childNode) => {
             // 3a) Try to grab a BlueSlimeAI component
-            let slimeComp: BlueSlimeAI | GreenSlimeAI | null =
+            let slimeComp: BlueSlimeAI | GreenSlimeAI | LavaSlimeAI | GreenBossAI | null =
                 (childNode.getComponent(BlueSlimeAI) as BlueSlimeAI) || null;
 
             // 3b) If there was no BlueSlimeAI, try to grab a GreenSlimeAI instead
             if (!slimeComp) {
                 slimeComp = childNode.getComponent(GreenSlimeAI) as GreenSlimeAI;
+            }
+            if (!slimeComp) {
+                slimeComp = childNode.getComponent(LavaSlimeAI) as LavaSlimeAI;
+            }
+            if (!slimeComp) {
+                slimeComp = childNode.getComponent(GreenBossAI) as GreenBossAI;
             }
 
             // 4) If this node has neither component, skip it
@@ -302,7 +312,6 @@ export default class Player extends cc.Component {
         // reset player position & HP
         this.hp = this.maxHp;
         this.updatelife(0, this.hp);
-        this.node.setPosition(20, 20);
         this.holdingKey = false;
     }
 

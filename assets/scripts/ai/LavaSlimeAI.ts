@@ -1,4 +1,5 @@
 const { ccclass, property } = cc._decorator;
+import Player from "../Player";
 
 enum SlimeState {
     Idle,
@@ -37,19 +38,16 @@ export default class LavaSlimeAI extends cc.Component {
     attackDamage: number = 20;
 
     @property({ tooltip: "Maximum health of the slime" })
-    maxHealth: number = 100;
+    maxHealth: number = 40;
 
     @property({ tooltip: "Current health of the slime" })
-    health: number = 100;
+    health: number = 40;
 
     @property(cc.Node)
     private lifebar: cc.Node = null;
 
     @property({ tooltip: "Vertical offset of health bar above slime (pixels)" })
     private barOffsetY: number = 50;
-
-    //@property({ type: cc.Node, tooltip: "Player node to detect" })
-    //player: cc.Node = null;
 
     public player: cc.Node = null;
     private slimeState = SlimeState.Idle;
@@ -66,6 +64,13 @@ export default class LavaSlimeAI extends cc.Component {
     private anim!: cc.Animation;
     private currentRunClip = "";
     private currentAttackClip = "";
+
+    private isDead: boolean = false;
+    private isDeathAnimPlaying: boolean = false;
+
+    onLoad() {
+        cc.director.getCollisionManager().enabled = true;
+    }
 
     start() {
         this.player = cc.find("Canvas/MapManager/Actors/Player") as cc.Node;
@@ -98,9 +103,9 @@ export default class LavaSlimeAI extends cc.Component {
         this.attackGfx = this.attackNode.addComponent(cc.Graphics);
         this.attackGfx.lineWidth = 2;
 
-        // Health bar setup (Player-style)
+        // Health bar setup
         if (this.lifebar) {
-            this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
+            //this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
             this.updateLife(0, this.health);
         }
 
@@ -108,6 +113,13 @@ export default class LavaSlimeAI extends cc.Component {
     }
 
     update(dt: number) {
+        // If already marked dead, skip AI
+        if (this.isDead) return;
+        if (this.isDeathAnimPlaying) {
+            // Let death animation play; do nothing else until it's over
+            return;
+        }
+
         // 1) compute distance to player
         let distToPlayer = Infinity;
         if (this.player) {
@@ -129,7 +141,8 @@ export default class LavaSlimeAI extends cc.Component {
         this.detectionGfx.clear();
         this.detectionGfx.lineWidth   = 2;
         this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
-            ? cc.color(255,165,0) : cc.color(255,0,0);
+            ? cc.color(255, 165, 0)
+            : cc.color(255, 0, 0);
         this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
 
@@ -138,13 +151,14 @@ export default class LavaSlimeAI extends cc.Component {
         this.attackGfx.clear();
         this.attackGfx.lineWidth   = 2;
         this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
-            ? cc.color(128,0,128) : cc.color(0,0,255);
+            ? cc.color(128, 0, 128)
+            : cc.color(0, 0, 255);
         this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
 
         // 5) AI state transitions
         const inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
-        const inAttack = distToPlayer <= this.attackRadius    && playerInPatrol;
+        const inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
 
         // attack first
         if (inAttack && this.slimeState !== SlimeState.Attack) {
@@ -153,6 +167,7 @@ export default class LavaSlimeAI extends cc.Component {
         }
         if (this.slimeState === SlimeState.Attack) {
             this.timer += dt;
+            // Wait through wind-up + attack anim (wind-up = timeBeforeAttack, attackAnim assumed 1s)
             if (this.timer >= this.timeBeforeAttack + 1) {
                 this.setToIdle();
             }
@@ -168,7 +183,7 @@ export default class LavaSlimeAI extends cc.Component {
             this.setToIdle();
         }
 
-        // finally patrol (idle→walk→idle)
+        // patrol (idle → walk → idle)
         this.timer += dt;
         if (this.slimeState === SlimeState.Idle && this.timer >= this.idleTime) {
             this.startWalking();
@@ -179,7 +194,7 @@ export default class LavaSlimeAI extends cc.Component {
                 this.direction.x * this.walkSpeed * dt,
                 this.direction.y * this.walkSpeed * dt
             );
-            const next = pos.add(delta);
+            const next  = pos.add(delta);
             if (next.sub(this.patrolCenter).mag() > this.patrolRadius) {
                 this.setToIdle();
                 return;
@@ -191,11 +206,9 @@ export default class LavaSlimeAI extends cc.Component {
         }
     }
 
-    // —— Player-style life-bar updater ——  
+    // —— Health‐bar updater ——
     private updateLife(delta: number, hp: number) {
-        console.log("lava slime hp:", delta, "→", hp);
         if (!this.lifebar) return;
-        // direct pixel width = hp (or scale as needed)
         this.lifebar.width = hp;
         if (hp <= 10)       this.lifebar.color = cc.Color.RED;
         else if (hp <= 20)  this.lifebar.color = cc.Color.ORANGE;
@@ -203,20 +216,52 @@ export default class LavaSlimeAI extends cc.Component {
     }
 
     public takeDamage(amount: number) {
+        if (this.health <= 0 || this.isDeathAnimPlaying) return;
+
+        // play hurt animation based on direction to player
+        const playerPos = this.player.getPosition();
+        const slimePos  = this.node.getPosition();
+        const dir       = playerPos.sub(slimePos).normalize();
+        const hurtAnim  = Math.abs(dir.x) > Math.abs(dir.y)
+            ? (dir.x > 0 ? "LavaSlimeHurtRight" : "LavaSlimeHurtLeft")
+            : (dir.y > 0 ? "LavaSlimeHurtUp" : "LavaSlimeHurtDown");
+        this.anim.play(hurtAnim);
+
         this.health -= amount;
         if (this.health < 0) this.health = 0;
         this.updateLife(-amount, this.health);
-        if (this.health === 0) this.die();
+
+        if (this.health === 0) {
+            this.startDeathSequence(dir);
+        }
     }
 
     public heal(amount: number) {
+        if (this.health <= 0) return;
         this.health += amount;
         if (this.health > this.maxHealth) this.health = this.maxHealth;
         this.updateLife(amount, this.health);
     }
 
-    private die() {
-        this.node.destroy();
+    private startDeathSequence(direction: cc.Vec2) {
+        this.isDeathAnimPlaying = true;
+        this.slimeState = SlimeState.Idle; // freeze other AI
+        this.playDeathAnimation(direction);
+    }
+
+    private playDeathAnimation(direction: cc.Vec2) {
+        const deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
+            ? (direction.x > 0 ? "LavaSlimeDeathRight" : "LavaSlimeDeathLeft")
+            : (direction.y > 0 ? "LavaSlimeDeathUp" : "LavaSlimeDeathDown");
+        this.anim.play(deathAnim);
+
+        this.unscheduleAllCallbacks();
+        // After the death animation finishes (assume 1s), mark as fully dead
+        this.scheduleOnce(() => {
+            this.isDead = true;
+            this.isDeathAnimPlaying = false;
+            // Do NOT destroy the node—just leave the dead pose in place
+        }, 1);
     }
 
     private setToIdle() {
@@ -246,19 +291,31 @@ export default class LavaSlimeAI extends cc.Component {
     private startAttack() {
         this.slimeState = SlimeState.Attack;
         this.timer = 0;
-        // wind-up animation
+        // Wind‐up: play idle (or a custom wind‐up anim)
         this.anim.play("LavaSlimeIdle");
         this.scheduleOnce(() => this.performAttack(), this.timeBeforeAttack);
     }
 
     private performAttack() {
-        // actual attack animation + damage
+        // Play attack clip based on direction to player
         const dir = this.getRunDirection();
         const clip = Math.abs(dir.x) > Math.abs(dir.y)
             ? (dir.x > 0 ? "LavaSlimeAttackRight" : "LavaSlimeAttackLeft")
             : (dir.y > 0 ? "LavaSlimeAttackUp" : "LavaSlimeAttackDown");
         this.anim.play(clip);
-        this.applyAttackDamage();
+
+        // Apply damage if player still within radius
+        const playerComp = this.player.getComponent(Player);
+        if (playerComp) {
+            const slimeW   = this.node.parent!.convertToWorldSpaceAR(this.node.position);
+            const playerW  = this.player.parent!.convertToWorldSpaceAR(this.player.position);
+            const dist     = slimeW.sub(playerW).mag();
+            if (dist <= this.attackRadius) {
+                playerComp.takeDamage(this.attackDamage);
+            }
+        }
+
+        // After attack anim (~1s), go back to idle
         this.scheduleOnce(() => this.setToIdle(), 1);
     }
 
@@ -281,16 +338,12 @@ export default class LavaSlimeAI extends cc.Component {
     }
 
     private getRunDirection(): cc.Vec2 {
-        const worldP = this.player.parent!.convertToWorldSpaceAR(this.player.position);
+        const worldP = this.player!.parent!.convertToWorldSpaceAR(this.player.position);
         const localP = this.node.parent!.convertToNodeSpaceAR(worldP);
         return cc.v2(localP.x - this.node.x, localP.y - this.node.y).normalize();
     }
 
-    private applyAttackDamage() {
-        if (!this.player) return;
-        const healthComp = this.player.getComponent("Health");
-        if (healthComp && typeof healthComp.takeDamage === "function") {
-            (healthComp as any).takeDamage(this.attackDamage);
-        }
+    onDisable() {
+        this.unscheduleAllCallbacks();
     }
 }

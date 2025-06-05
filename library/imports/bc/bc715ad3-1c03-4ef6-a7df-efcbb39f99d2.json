@@ -180,9 +180,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 98,
+      "r": 221,
+      "g": 221,
+      "b": 221,
       "a": 255
     },
     "_contentSize": {
@@ -451,9 +451,11 @@
     "attackRadius": 23.6,
     "timeBeforeAttack": 1,
     "attackDamage": 20,
-    "maxHealth": 100,
-    "health": 100,
-    "lifebar": null,
+    "maxHealth": 30,
+    "health": 30,
+    "lifebar": {
+      "__id__": 6
+    },
     "barOffsetY": 50,
     "_id": ""
   },
