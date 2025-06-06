@@ -35,6 +35,9 @@ export default class MapGenerator extends cc.Component {
     @property(cc.Prefab)
     lockToNextLevel: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    groundPrefab: cc.Prefab = null;
+
     private myMap : Map_Graph = null;
     private Map_xmax : number = 10;
     private Map_ymax : number = 5;
@@ -55,6 +58,13 @@ export default class MapGenerator extends cc.Component {
     GeneratorMap () {
         this.myMap = new Map_Graph(this.Map_xmax,this.Map_ymax);// generate map
         //Please set the Anchor of Prefab into (0,0) first
+        for(let _x:number = 0;_x<this.Map_xmax;_x++){
+            for(let _y:number = 0;_y<this.Map_ymax;_y++){
+                const prefab_temp = cc.instantiate(this.groundPrefab);
+                prefab_temp.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+                this.wallList.addChild(prefab_temp,0,'ground');
+            }
+        }
         for(let _x:number = 0;_x<this.Map_xmax;_x++){
             for(let _y:number = 0;_y<this.Map_ymax;_y++){
                 if(this.myMap.mapBlock[_y][_x].up){
@@ -130,6 +140,18 @@ export default class MapGenerator extends cc.Component {
             _x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
             _y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         }
+
+        let mapBlocks : boolean[][] = []; // mapBlocks[_y][_x] mapBlocks[_i][_j]
+        for(let _i:number = 0;_i<this.MapYmax;_i += 1){
+            mapBlocks[_i] = [];
+            for(let _j:number = 0;_j<this.MapXmax;_j += 1){
+                mapBlocks[_i][_j] = false;
+            }
+        }
+        mapBlocks[_y][_x] = true;
+        mapBlocks[_y1][_x1] = true;
+
+        for(let i:number=0;i<)
         
         const prefab_temp_0 = cc.instantiate(this.keyToNextLevel);
         prefab_temp_0.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);

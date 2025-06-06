@@ -47,6 +47,7 @@ var MapGenerator = /** @class */ (function (_super) {
         _this.horizontalWallPrefab = null;
         _this.keyToNextLevel = null;
         _this.lockToNextLevel = null;
+        _this.groundPrefab = null;
         _this.myMap = null;
         _this.Map_xmax = 10;
         _this.Map_ymax = 5;
@@ -76,6 +77,13 @@ var MapGenerator = /** @class */ (function (_super) {
     MapGenerator.prototype.GeneratorMap = function () {
         this.myMap = new MapGeneratorCore_1.Map_Graph(this.Map_xmax, this.Map_ymax); // generate map
         //Please set the Anchor of Prefab into (0,0) first
+        for (var _x = 0; _x < this.Map_xmax; _x++) {
+            for (var _y = 0; _y < this.Map_ymax; _y++) {
+                var prefab_temp = cc.instantiate(this.groundPrefab);
+                prefab_temp.setPosition(_x * this.blocksize_x, _y * this.blocksize_y);
+                this.wallList.addChild(prefab_temp, 0, 'ground');
+            }
+        }
         for (var _x = 0; _x < this.Map_xmax; _x++) {
             for (var _y = 0; _y < this.Map_ymax; _y++) {
                 if (this.myMap.mapBlock[_y][_x].up) {
@@ -173,6 +181,9 @@ var MapGenerator = /** @class */ (function (_super) {
     __decorate([
         property(cc.Prefab)
     ], MapGenerator.prototype, "lockToNextLevel", void 0);
+    __decorate([
+        property(cc.Prefab)
+    ], MapGenerator.prototype, "groundPrefab", void 0);
     MapGenerator = __decorate([
         ccclass
     ], MapGenerator);

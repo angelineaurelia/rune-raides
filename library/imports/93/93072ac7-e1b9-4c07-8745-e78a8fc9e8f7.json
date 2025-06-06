@@ -67,7 +67,7 @@
   {
     "__type__": "cc.Node",
     "_name": "GameManager",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -199,6 +199,9 @@
     "lockToNextLevel": {
       "__uuid__": "6c74b5de-b864-44af-99eb-4ec33968e873"
     },
+    "groundPrefab": {
+      "__uuid__": "3d11f6b7-3a75-428f-9508-eae4c22b9c2c"
+    },
     "_id": "1f5QR58aZEQ6k8kS3+zLvM"
   },
   {
@@ -268,6 +271,9 @@
     },
     "_children": [
       {
+        "__id__": 6
+      },
+      {
         "__id__": 41
       },
       {
@@ -275,9 +281,6 @@
       },
       {
         "__id__": 71
-      },
-      {
-        "__id__": 6
       }
     ],
     "_active": true,
