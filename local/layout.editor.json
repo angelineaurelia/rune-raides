@@ -14,12 +14,12 @@
         "children": [
           {
             "width": 303,
-            "height": 648.5,
+            "height": 651,
             "type": "dock-v",
             "children": [
               {
                 "width": 303,
-                "height": 234.17709350585938,
+                "height": 235.08334350585938,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -28,7 +28,7 @@
               },
               {
                 "width": 303,
-                "height": 411.32293701171875,
+                "height": 412.91668701171875,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -39,17 +39,17 @@
           },
           {
             "width": 663.9896240234375,
-            "height": 648.5,
+            "height": 651,
             "type": "dock-v",
             "children": [
               {
                 "width": 663.9896240234375,
-                "height": 338.26043701171875,
+                "height": 339.5625,
                 "type": "dock-h",
                 "children": [
                   {
                     "width": 393.9895935058594,
-                    "height": 338.26043701171875,
+                    "height": 339.5625,
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -58,7 +58,7 @@
                   },
                   {
                     "width": 267,
-                    "height": 338.26043701171875,
+                    "height": 339.5625,
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -69,7 +69,7 @@
               },
               {
                 "width": 663.9896240234375,
-                "height": 307.22918701171875,
+                "height": 308.4270935058594,
                 "type": "panel",
                 "active": 1,
                 "children": [
@@ -82,7 +82,7 @@
           },
           {
             "width": 307,
-            "height": 648.5,
+            "height": 651,
             "type": "panel",
             "active": 0,
             "children": [

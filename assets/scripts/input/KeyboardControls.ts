@@ -24,18 +24,18 @@ export default class KeyboardControls
     private _vAxis: number = 0;
     public get verticalAxis(): number { return this._vAxis }
 
-    private _zKey: ButtonState = ButtonState.Rest;
-    public get attack(): ButtonState { return this._zKey }
-    public get interact(): ButtonState { return this._zKey }
+    private _kKey: ButtonState = ButtonState.Rest;
+    public get attack(): ButtonState { return this._kKey }
+    public get interact(): ButtonState { return this._kKey }
 
     private _xKey: ButtonState = ButtonState.Rest;
     public get gethurt(): ButtonState { return this._xKey }
 
-    private _cKey: ButtonState = ButtonState.Rest;
-    public get attack2(): ButtonState { return this._cKey }
+    private _jKey: ButtonState = ButtonState.Rest;
+    public get attack2(): ButtonState { return this._jKey }
 
-    private _vKey: ButtonState = ButtonState.Rest;
-    public get attack3(): ButtonState { return this._vKey }
+    private _lKey: ButtonState = ButtonState.Rest;
+    public get attack3(): ButtonState { return this._lKey }
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -63,10 +63,10 @@ export default class KeyboardControls
                 this._vAxis = -1;
                 break;
             case cc.macro.KEY.z: 
-                if (this._zKey === ButtonState.Rest || this._zKey === ButtonState.Released) {
-                    this._zKey = ButtonState.Pressed;
+                if (this._kKey === ButtonState.Rest || this._kKey === ButtonState.Released) {
+                    this._kKey = ButtonState.Pressed;
                 } else {
-                    this._zKey = ButtonState.Held;
+                    this._kKey = ButtonState.Held;
                 }
                 break;
             case cc.macro.KEY.x: 
@@ -78,17 +78,17 @@ export default class KeyboardControls
                 }
                 break;
             case cc.macro.KEY.c: 
-                if (this._cKey === ButtonState.Rest || this._cKey === ButtonState.Released) {
-                    this._cKey = ButtonState.Pressed;
+                if (this._jKey === ButtonState.Rest || this._jKey === ButtonState.Released) {
+                    this._jKey = ButtonState.Pressed;
                 } else {
-                    this._cKey = ButtonState.Held;
+                    this._jKey = ButtonState.Held;
                 }
                 break;
             case cc.macro.KEY.v: 
-                if (this._vKey === ButtonState.Rest || this._vKey === ButtonState.Released) {
-                    this._vKey = ButtonState.Pressed;
+                if (this._lKey === ButtonState.Rest || this._lKey === ButtonState.Released) {
+                    this._lKey = ButtonState.Pressed;
                 } else {
-                    this._vKey = ButtonState.Held;
+                    this._lKey = ButtonState.Held;
                 }
                 break;
         }
@@ -111,10 +111,10 @@ export default class KeyboardControls
                 this._vAxis += 1;
                 break;
             case cc.macro.KEY.z: 
-                if (this._zKey === ButtonState.Pressed || this._zKey === ButtonState.Held) {
-                    this._zKey = ButtonState.Released;
+                if (this._kKey === ButtonState.Pressed || this._kKey === ButtonState.Held) {
+                    this._kKey = ButtonState.Released;
                 } else {
-                    this._zKey = ButtonState.Rest;
+                    this._kKey = ButtonState.Rest;
                 }
                 break;
             case cc.macro.KEY.x: 
@@ -125,17 +125,17 @@ export default class KeyboardControls
                 }
                 break;
             case cc.macro.KEY.c: 
-                if (this._cKey === ButtonState.Pressed || this._cKey === ButtonState.Held) {
-                    this._cKey = ButtonState.Released;
+                if (this._jKey === ButtonState.Pressed || this._jKey === ButtonState.Held) {
+                    this._jKey = ButtonState.Released;
                 } else {
-                    this._cKey = ButtonState.Rest;
+                    this._jKey = ButtonState.Rest;
                 }
                 break;
             case cc.macro.KEY.v: 
-                if (this._vKey === ButtonState.Pressed || this._vKey === ButtonState.Held) {
-                    this._vKey = ButtonState.Released;
+                if (this._lKey === ButtonState.Pressed || this._lKey === ButtonState.Held) {
+                    this._lKey = ButtonState.Released;
                 } else {
-                    this._vKey = ButtonState.Rest;
+                    this._lKey = ButtonState.Rest;
                 }
                 break;
         }
