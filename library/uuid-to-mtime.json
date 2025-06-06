@@ -510,8 +510,8 @@
     "relativePath": "Animation\\Monster"
   },
   "aeba3497-819b-4eb0-b24d-cb0fa71c64f9": {
-    "asset": 1749096986366,
-    "meta": 1749097671442,
+    "asset": 1749233374699,
+    "meta": 1749233653732,
     "relativePath": "Animation\\Objects"
   },
   "e03d40ec-ea74-4135-ad25-6d9726e5a0c5": {
@@ -8655,8 +8655,8 @@
     "relativePath": "characters\\slime\\lava slime\\walk\\lava-slime-walk-18.png"
   },
   "cc24ca8f-f822-42bd-ac0f-47d0c89b25aa": {
-    "asset": 1749096986465,
-    "meta": 1749097692778,
+    "asset": 1749227944240,
+    "meta": 1749233653742,
     "relativePath": "Objects\\blade"
   },
   "1e3e2c7d-7535-4a4a-9233-1ff12a21eb55": {
@@ -15465,8 +15465,8 @@
     "relativePath": "Objects\\stars\\stars-green\\stars-green-9.png"
   },
   "1f18610d-3629-4040-bbef-966b49345870": {
-    "asset": 1749223948078,
-    "meta": 1749227031276,
+    "asset": 1749233383349,
+    "meta": 1749233653756,
     "relativePath": "resources\\prefabs"
   },
   "f37814f4-6166-4580-9d05-393353aee528": {
@@ -15525,8 +15525,8 @@
     "relativePath": "Objects\\stars\\stars-red\\stars-red-0.png"
   },
   "5a45b349-5490-48eb-bbb0-81994a458f5e": {
-    "asset": 1749096988336,
-    "meta": 1749097709538,
+    "asset": 1749233383347,
+    "meta": 1749233656078,
     "relativePath": "resources\\prefabs\\Blue Slime.prefab"
   },
   "8270ea44-8647-4e8d-afb0-ad3cbbe99038": {
@@ -15540,8 +15540,8 @@
     "relativePath": "Objects\\stars\\stars-red\\stars-red-6.png"
   },
   "30346e72-c16a-4b83-89f1-0aed9808fa13": {
-    "asset": 1749223948079,
-    "meta": 1749227031273,
+    "asset": 1749233383353,
+    "meta": 1749233653694,
     "relativePath": "scene"
   },
   "5336dfc9-c5e3-4d00-835e-beda0b6ccbb0": {
@@ -15560,8 +15560,8 @@
     "relativePath": "Objects\\stars\\stars-red\\stars-red-5.png"
   },
   "32de0ae2-f9ef-4678-823c-247b1fa96931": {
-    "asset": 1749223944685,
-    "meta": 1749227031274,
+    "asset": 1749233383355,
+    "meta": 1749233653697,
     "relativePath": "scripts"
   },
   "cd063a0f-8729-44d2-859d-6ed355d8d99f": {
@@ -15575,8 +15575,8 @@
     "relativePath": "Objects\\stars\\stars-red\\stars-red-8.png"
   },
   "1891c2e5-8070-4ca6-a979-5fba92ca9f7c": {
-    "asset": 1749209040343,
-    "meta": 1749209342041,
+    "asset": 1749233383355,
+    "meta": 1749233653761,
     "relativePath": "scripts\\ai"
   },
   "7d67fea0-43b8-436c-b2f3-8199ac8d18fb": {
@@ -15810,8 +15810,8 @@
     "relativePath": "tilemaps\\door-wood-animation-2"
   },
   "737d70fd-1d9a-433e-bb69-50239d68bed2": {
-    "asset": 1749096988560,
-    "meta": 1749097711659,
+    "asset": 1749233383353,
+    "meta": 1749233656075,
     "relativePath": "scene\\Loading.fire"
   },
   "c5789520-9ae9-4e36-9ac1-38f942621422": {
@@ -15950,8 +15950,8 @@
     "relativePath": "tilemaps\\waterfall-green-long"
   },
   "ac6a04de-eb12-4aec-a239-a6e7354dd1b1": {
-    "asset": 1749096989455,
-    "meta": 1749097711784,
+    "asset": 1749233383360,
+    "meta": 1749233654027,
     "relativePath": "tilemaps\\waterfall-green-short"
   },
   "1ee434b8-5e32-4187-81a4-4c6886bbb21d": {
@@ -20856,7 +20856,7 @@
   },
   "aa8960b4-be5a-4a09-807a-805091dd5ceb": {
     "asset": 1749096989451,
-    "meta": 1749097725136,
+    "meta": 1749233656235,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-0.png"
   },
   "cfaaf060-1cbb-44a1-9ab4-1cd1fcabd672": {
@@ -20866,37 +20866,37 @@
   },
   "0a3ae004-576a-4368-a403-9eb47fd3e981": {
     "asset": 1749096989451,
-    "meta": 1749097725157,
+    "meta": 1749233656303,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-1.png"
   },
   "01956087-79b5-4ba8-af3a-dcf3dd1123ec": {
     "asset": 1749096989452,
-    "meta": 1749097725179,
+    "meta": 1749233656254,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-2.png"
   },
   "1290c8fe-2a44-4bf5-81fa-299a181eb285": {
     "asset": 1749096989452,
-    "meta": 1749097725204,
+    "meta": 1749233656251,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-3.png"
   },
   "f06ad3d7-e17c-44d8-848d-e60e8ff2ee5f": {
     "asset": 1749096989453,
-    "meta": 1749097725218,
+    "meta": 1749233656232,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-4.png"
   },
   "f2d15e10-8ea8-4b5b-826d-8fcd1a5423a6": {
     "asset": 1749096989453,
-    "meta": 1749097725239,
+    "meta": 1749233656289,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-5.png"
   },
   "b752b74c-13dc-43cf-9df2-879d8188f59f": {
     "asset": 1749096989454,
-    "meta": 1749097725252,
+    "meta": 1749233656332,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-6.png"
   },
   "874da427-05d6-40f2-adca-c17c3d76cde1": {
     "asset": 1749096989454,
-    "meta": 1749097725285,
+    "meta": 1749233656311,
     "relativePath": "tilemaps\\waterfall-green-short\\waterfall-green-short-7.png"
   },
   "d2603f38-2980-4c5a-b799-1039ed5893ea": {
@@ -21015,18 +21015,18 @@
     "relativePath": "resources\\prefabs\\Setting.prefab"
   },
   "ddc97a5f-e83f-49e6-b7e6-7684a53e100f": {
-    "asset": 1749112942141,
-    "meta": 1749113024493,
+    "asset": 1749233383354,
+    "meta": 1749233655187,
     "relativePath": "scripts\\ai\\GreenBossAI.ts"
   },
   "d731b1b4-525f-4dbd-8a30-1a2f5c05eaf4": {
-    "asset": 1749112942086,
-    "meta": 1749112275736,
+    "asset": 1749233383348,
+    "meta": 1749233383349,
     "relativePath": "resources\\prefabs\\Green Slime.prefab"
   },
   "bc715ad3-1c03-4ef6-a7df-efcbb39f99d2": {
-    "asset": 1749112942120,
-    "meta": 1749113024632,
+    "asset": 1749233383349,
+    "meta": 1749233656085,
     "relativePath": "resources\\prefabs\\Lava Slime.prefab"
   },
   "f1fcd243-2213-4c91-81c0-4a613ec6685c": {
@@ -21150,23 +21150,23 @@
     "relativePath": "scripts\\firebase.js"
   },
   "93c172ec-5963-4d30-8865-3e0860176be8": {
-    "asset": 1749209040341,
-    "meta": 1749209342538,
+    "asset": 1749233383354,
+    "meta": 1749233654390,
     "relativePath": "scripts\\ai\\BlueSlimeAI.ts"
   },
   "83760605-2174-4fc8-bf98-85e8e136abaa": {
-    "asset": 1749209040342,
-    "meta": 1749209342632,
+    "asset": 1749233383355,
+    "meta": 1749233655578,
     "relativePath": "scripts\\ai\\GreenSlimeAI.ts"
   },
   "8da0837e-175e-40c8-abe0-bfcf5a3619b7": {
-    "asset": 1749209040343,
-    "meta": 1749209342720,
+    "asset": 1749233383355,
+    "meta": 1749233655846,
     "relativePath": "scripts\\ai\\LavaSlimeAI.ts"
   },
   "085c1a60-fa4a-4480-af56-993436e92f85": {
-    "asset": 1749209040321,
-    "meta": 1749209342889,
+    "asset": 1749233383348,
+    "meta": 1749233656081,
     "relativePath": "resources\\prefabs\\Green Boss.prefab"
   },
   "73ee723e-d220-4425-a7bf-501cd479bd40": {
@@ -21205,8 +21205,8 @@
     "relativePath": "scene\\menu.fire"
   },
   "c99a37f2-7268-4836-a723-2406fc7600ff": {
-    "asset": 1749221108501,
-    "meta": 1749221159772,
+    "asset": 1749233383356,
+    "meta": 1749233654023,
     "relativePath": "scripts\\MapGenerator.ts"
   },
   "332a6812-c50e-4b45-bdb9-aebe5d2c2c3a": {
@@ -21270,8 +21270,8 @@
     "relativePath": "resources\\prefabs\\HorizontalWall.prefab"
   },
   "93072ac7-e1b9-4c07-8745-e78a8fc9e8f7": {
-    "asset": 1749232297455,
-    "meta": 1749232297491,
+    "asset": 1749233383352,
+    "meta": 1749233656072,
     "relativePath": "scene\\demo_test.fire"
   },
   "5de1cb9f-502c-43bc-8ad8-8ca1841cacbc": {
