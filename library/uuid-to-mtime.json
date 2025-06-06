@@ -21355,8 +21355,18 @@
     "relativePath": "model/primitives.fbx"
   },
   "f4a412e1-c433-4e64-b0ea-9178f19aa027": {
-    "asset": 1749222462881,
-    "meta": 1749222497501,
+    "asset": 1749223589136,
+    "meta": 1749223589145,
     "relativePath": "resources/prefabs/GameOver.prefab"
+  },
+  "5de1cb9f-502c-43bc-8ad8-8ca1841cacbc": {
+    "asset": 1749223382229,
+    "meta": 1749223382237,
+    "relativePath": "Animation/player/death/gameover.anim"
+  },
+  "cd91ed65-5801-4944-8225-6895ba4245c7": {
+    "asset": 1749223792882,
+    "meta": 1749223840009,
+    "relativePath": "scripts/Menu/GameOver.ts"
   }
 }

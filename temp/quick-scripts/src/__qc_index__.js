@@ -8,6 +8,7 @@ require('./assets/scripts/MapManager');
 require('./assets/scripts/Menu/AuthManager');
 require('./assets/scripts/Menu/FirebaseInit');
 require('./assets/scripts/Menu/FirebaseManager');
+require('./assets/scripts/Menu/GameOver');
 require('./assets/scripts/Menu/LoadingManager');
 require('./assets/scripts/Menu/LoginSignUp');
 require('./assets/scripts/Menu/Menu');
