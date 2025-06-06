@@ -30,6 +30,9 @@ export default class MapGenerator extends cc.Component {
     horizontalWallPrefab: cc.Prefab = null;
 
     @property(cc.Prefab)
+    chestWallPrefab: cc.Prefab = null;
+
+    @property(cc.Prefab)
     keyToNextLevel: cc.Prefab = null;
 
     @property(cc.Prefab)
@@ -41,6 +44,7 @@ export default class MapGenerator extends cc.Component {
     private myMap : Map_Graph = null;
     private Map_xmax : number = 10;
     private Map_ymax : number = 5;
+    private chestboxes : number = 2;
     private blocksize_x : number = 100;
     private blocksize_y : number = 100;
     public get MapXmax(): number {
@@ -98,8 +102,9 @@ export default class MapGenerator extends cc.Component {
     regenerateMap(level: number) {
         this.wallList.removeAllChildren();
         // Find Level
-        this.Map_xmax = level*4 + 2 ; // Level 1,2,3...，Map_xmax  = 6,10,14...
-        this.Map_ymax = level*2 + 1 ; // Level 1,2,3...，Map_ymax = 3,5,7...
+        this.Map_xmax = level*4 + 6 ; // Level 1,2,3...，Map_xmax  = 10,14,18...
+        this.Map_ymax = level*2 + 3 ; // Level 1,2,3...，Map_ymax = 5,7,9...
+        this.chestboxes = level*2 + 1 ;
 
         this.myMap = new Map_Graph(this.Map_xmax, this.Map_ymax);
 
@@ -131,12 +136,12 @@ export default class MapGenerator extends cc.Component {
     }
     
     generateKey_Lock(){
-        let _x:number = 0;_x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
-        let _y:number = 0;_y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        let _x0:number = 0;_x0 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+        let _y0:number = 0;_y0 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         let _x1:number = 0;_x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
         let _y1:number = 0;_y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
 
-        while((_x === _x1) && (_y === _y1)){
+        while((_x0 === _x1) && (_y0 === _y1)){
             _x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
             _y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         }
@@ -148,15 +153,28 @@ export default class MapGenerator extends cc.Component {
                 mapBlocks[_i][_j] = false;
             }
         }
-        mapBlocks[_y][_x] = true;
-        mapBlocks[_y1][_x1] = true;
+        mapBlocks[Math.floor(_y0)][Math.floor(_x0)] = true;
+        mapBlocks[Math.floor(_y1)][Math.floor(_x1)] = true;
 
-        for(let i:number=0;i<)
+        for(let i:number=0;i<this.chestboxes;i+=1){
+            let _x:number = 0;_x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+            let _y:number = 0;_y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+            while(mapBlocks[Math.floor(_y)][Math.floor(_x)]){
+                _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+                _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+            }
+            mapBlocks[Math.floor(_y)][Math.floor(_x)] = true;
+            //=====================================================================
+            const prefab_temp_2 = cc.instantiate(this.chestWallPrefab);
+            prefab_temp_2.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+            this.wallList.addChild(prefab_temp_2,1,'chest');
+            console.log("chest at:",_x, _y);
+        }
         
         const prefab_temp_0 = cc.instantiate(this.keyToNextLevel);
-        prefab_temp_0.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
+        prefab_temp_0.setPosition(_x0*this.blocksize_x,_y0*this.blocksize_y);
         this.wallList.addChild(prefab_temp_0,1,'key');
-        console.log("Key at:",_x, _y);
+        console.log("Key at:",_x0, _y0);
 
         const prefab_temp_1 = cc.instantiate(this.lockToNextLevel);
         prefab_temp_1.setPosition(_x1*this.blocksize_x,_y1*this.blocksize_y);

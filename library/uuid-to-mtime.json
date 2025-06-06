@@ -380,8 +380,8 @@
     "relativePath": "scene\\demo.fire"
   },
   "93072ac7-e1b9-4c07-8745-e78a8fc9e8f7": {
-    "asset": 1749217686982,
-    "meta": 1749217686998,
+    "asset": 1749220034346,
+    "meta": 1749220034360,
     "relativePath": "scene\\demo_test.fire"
   },
   "9afa1c3b-416f-42b2-9afe-235d30d0a6e9": {
@@ -21344,9 +21344,14 @@
     "meta": 1749217194841,
     "relativePath": "resources\\prefabs\\groundPrefab.prefab"
   },
+  "0e5ce78c-88cd-4829-95e1-71ee1fadfc3d": {
+    "asset": 1749219740344,
+    "meta": 1749219740359,
+    "relativePath": "resources\\prefabs\\Chest.prefab"
+  },
   "c99a37f2-7268-4836-a723-2406fc7600ff": {
-    "asset": 1749217433787,
-    "meta": 1749217436183,
+    "asset": 1749220058356,
+    "meta": 1749220070118,
     "relativePath": "scripts\\MapGenerator.ts"
   }
 }

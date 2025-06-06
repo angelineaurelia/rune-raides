@@ -45,12 +45,14 @@ var MapGenerator = /** @class */ (function (_super) {
         _this.verticalWallPrefab = null;
         //Please set the Anchor of Prefab into (0,0) first
         _this.horizontalWallPrefab = null;
+        _this.chestWallPrefab = null;
         _this.keyToNextLevel = null;
         _this.lockToNextLevel = null;
         _this.groundPrefab = null;
         _this.myMap = null;
         _this.Map_xmax = 10;
         _this.Map_ymax = 5;
+        _this.chestboxes = 2;
         _this.blocksize_x = 100;
         _this.blocksize_y = 100;
         return _this;
@@ -115,8 +117,9 @@ var MapGenerator = /** @class */ (function (_super) {
     MapGenerator.prototype.regenerateMap = function (level) {
         this.wallList.removeAllChildren();
         // Find Level
-        this.Map_xmax = level * 4 + 2; // Level 1,2,3...，Map_xmax  = 6,10,14...
-        this.Map_ymax = level * 2 + 1; // Level 1,2,3...，Map_ymax = 3,5,7...
+        this.Map_xmax = level * 4 + 6; // Level 1,2,3...，Map_xmax  = 10,14,18...
+        this.Map_ymax = level * 2 + 3; // Level 1,2,3...，Map_ymax = 5,7,9...
+        this.chestboxes = level * 2 + 1;
         this.myMap = new MapGeneratorCore_1.Map_Graph(this.Map_xmax, this.Map_ymax);
         for (var _x = 0; _x < this.Map_xmax; _x++) {
             for (var _y = 0; _y < this.Map_ymax; _y++) {
@@ -145,22 +148,47 @@ var MapGenerator = /** @class */ (function (_super) {
         this.generateKey_Lock();
     };
     MapGenerator.prototype.generateKey_Lock = function () {
-        var _x = 0;
-        _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
-        var _y = 0;
-        _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        var _x0 = 0;
+        _x0 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+        var _y0 = 0;
+        _y0 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         var _x1 = 0;
         _x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
         var _y1 = 0;
         _y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
-        while ((_x === _x1) && (_y === _y1)) {
+        while ((_x0 === _x1) && (_y0 === _y1)) {
             _x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
             _y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         }
+        var mapBlocks = []; // mapBlocks[_y][_x] mapBlocks[_i][_j]
+        for (var _i = 0; _i < this.MapYmax; _i += 1) {
+            mapBlocks[_i] = [];
+            for (var _j = 0; _j < this.MapXmax; _j += 1) {
+                mapBlocks[_i][_j] = false;
+            }
+        }
+        mapBlocks[Math.floor(_y0)][Math.floor(_x0)] = true;
+        mapBlocks[Math.floor(_y1)][Math.floor(_x1)] = true;
+        for (var i = 0; i < this.chestboxes; i += 1) {
+            var _x = 0;
+            _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+            var _y = 0;
+            _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+            while (mapBlocks[Math.floor(_y)][Math.floor(_x)]) {
+                _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+                _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+            }
+            mapBlocks[Math.floor(_y)][Math.floor(_x)] = true;
+            //=====================================================================
+            var prefab_temp_2 = cc.instantiate(this.chestWallPrefab);
+            prefab_temp_2.setPosition(_x * this.blocksize_x, _y * this.blocksize_y);
+            this.wallList.addChild(prefab_temp_2, 1, 'chest');
+            console.log("chest at:", _x, _y);
+        }
         var prefab_temp_0 = cc.instantiate(this.keyToNextLevel);
-        prefab_temp_0.setPosition(_x * this.blocksize_x, _y * this.blocksize_y);
+        prefab_temp_0.setPosition(_x0 * this.blocksize_x, _y0 * this.blocksize_y);
         this.wallList.addChild(prefab_temp_0, 1, 'key');
-        console.log("Key at:", _x, _y);
+        console.log("Key at:", _x0, _y0);
         var prefab_temp_1 = cc.instantiate(this.lockToNextLevel);
         prefab_temp_1.setPosition(_x1 * this.blocksize_x, _y1 * this.blocksize_y);
         this.wallList.addChild(prefab_temp_1, 1, 'lock');
@@ -175,6 +203,9 @@ var MapGenerator = /** @class */ (function (_super) {
     __decorate([
         property(cc.Prefab)
     ], MapGenerator.prototype, "horizontalWallPrefab", void 0);
+    __decorate([
+        property(cc.Prefab)
+    ], MapGenerator.prototype, "chestWallPrefab", void 0);
     __decorate([
         property(cc.Prefab)
     ], MapGenerator.prototype, "keyToNextLevel", void 0);
