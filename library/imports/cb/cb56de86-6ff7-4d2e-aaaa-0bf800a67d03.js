@@ -55,6 +55,12 @@ var Chest = /** @class */ (function (_super) {
         var anim = this.getComponent(cc.Animation);
         if (anim)
             anim.play("chest_open");
+        if (this.openSound) {
+            cc.audioEngine.playEffect(this.openSound, false);
+        }
+        else {
+            cc.error("Chest.openSound is not assigned!");
+        }
         //藥水放在寶箱的節點之下
         this.scheduleOnce(function () { }, 0.5);
         var potion = cc.instantiate(this.potionPrefab);

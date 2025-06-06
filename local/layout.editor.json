@@ -5,57 +5,21 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "x": -8,
-      "y": -8,
-=======
-      "x": 120,
-      "y": 28,
->>>>>>> Stashed changes
+      "x": 252,
+      "y": 134,
       "width": 1296,
       "height": 768,
-=======
-      "x": 0,
-      "y": 43,
-      "width": 1800,
-      "height": 1126,
->>>>>>> Stashed changes
       "layout": {
         "type": "dock-h",
         "children": [
           {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            "width": 303,
-            "height": 651,
+            "width": 306.796875,
+            "height": 681,
             "type": "dock-v",
             "children": [
               {
-                "width": 303,
-<<<<<<< HEAD
-                "height": 235.08334350585938,
-=======
-                "height": 234.17709350585938,
-=======
-            "width": 428,
-            "height": 1067,
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 428,
-                "height": 369,
->>>>>>> Stashed changes
-=======
-            "width": 303.8125,
-            "height": 652.2000122070312,
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 303.8125,
-                "height": 235.16250610351562,
->>>>>>> Stashed changes
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+                "width": 306.796875,
+                "height": 245.875,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -63,22 +27,8 @@
                 ]
               },
               {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                "width": 303,
-<<<<<<< HEAD
-                "height": 412.91668701171875,
-=======
-                "height": 411.32293701171875,
-=======
-                "width": 428,
-                "height": 695,
->>>>>>> Stashed changes
-=======
-                "width": 303.8125,
-                "height": 414.0375061035156,
->>>>>>> Stashed changes
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+                "width": 306.796875,
+                "height": 432.125,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -88,56 +38,18 @@
             ]
           },
           {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            "width": 663.9896240234375,
-<<<<<<< HEAD
-            "height": 651,
+            "width": 672.328125,
+            "height": 681,
             "type": "dock-v",
             "children": [
               {
-                "width": 663.9896240234375,
-                "height": 339.5625,
-=======
-            "height": 648.5,
-=======
-            "width": 664.7750244140625,
-            "height": 652.2000122070312,
->>>>>>> Stashed changes
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 664.7750244140625,
-                "height": 340.20001220703125,
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+                "width": 672.328125,
+                "height": 355.734375,
                 "type": "dock-h",
                 "children": [
                   {
-<<<<<<< Updated upstream
-                    "width": 393.9895935058594,
-<<<<<<< HEAD
-                    "height": 339.5625,
-=======
-                    "height": 338.26043701171875,
-=======
-            "width": 938,
-            "height": 1067,
-            "type": "dock-v",
-            "children": [
-              {
-                "width": 938,
-                "height": 559,
-                "type": "dock-h",
-                "children": [
-                  {
-                    "width": 563,
-                    "height": 559,
->>>>>>> Stashed changes
-=======
-                    "width": 394.4624938964844,
-                    "height": 340.20001220703125,
->>>>>>> Stashed changes
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+                    "width": 398.96875,
+                    "height": 355.734375,
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -145,22 +57,8 @@
                     ]
                   },
                   {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                    "width": 267,
-<<<<<<< HEAD
-                    "height": 339.5625,
-=======
-                    "height": 338.26043701171875,
-=======
-                    "width": 372,
-                    "height": 559,
->>>>>>> Stashed changes
-=======
-                    "width": 267.3125,
-                    "height": 340.20001220703125,
->>>>>>> Stashed changes
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+                    "width": 270.359375,
+                    "height": 355.734375,
                     "type": "panel",
                     "active": 0,
                     "children": [
@@ -170,22 +68,8 @@
                 ]
               },
               {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                "width": 663.9896240234375,
-<<<<<<< HEAD
-                "height": 308.4270935058594,
-=======
-                "height": 307.22918701171875,
-=======
-                "width": 938,
-                "height": 505,
->>>>>>> Stashed changes
-=======
-                "width": 664.7750244140625,
-                "height": 308.9875183105469,
->>>>>>> Stashed changes
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+                "width": 672.328125,
+                "height": 322.265625,
                 "type": "panel",
                 "active": 1,
                 "children": [
@@ -197,22 +81,8 @@
             ]
           },
           {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            "width": 307,
-<<<<<<< HEAD
-            "height": 651,
-=======
-            "height": 648.5,
-=======
-            "width": 428,
-            "height": 1067,
->>>>>>> Stashed changes
-=======
-            "width": 307.82501220703125,
-            "height": 652.2000122070312,
->>>>>>> Stashed changes
->>>>>>> parent of e74437c (Merge branch 'master' of https://github.com/angelineaurelia/rune-raides)
+            "width": 310.859375,
+            "height": 681,
             "type": "panel",
             "active": 0,
             "children": [
@@ -234,7 +104,8 @@
         "cocos-services"
       ]
     },
-    " common-asset-worker-worker": {}
+    " common-asset-worker-worker": {},
+    " load-media-worker": {}
   },
   "panels": {},
   "panelLabelWidth": {}
