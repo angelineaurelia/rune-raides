@@ -1163,9 +1163,7 @@
     },
     "_enabled": true,
     "ExitButton": null,
-    "Menubgm": {
-      "__uuid__": "3adc0658-2765-4bf2-b511-7ae86f175a73"
-    },
+    "Menubgm": null,
     "_id": "7822ACMbFPKIceLyMGJg5i"
   },
   {

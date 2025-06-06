@@ -12,7 +12,7 @@
   "height": 1024,
   "platformSettings": {},
   "subMetas": {
-    "save": {
+    "Save": {
       "ver": "1.0.6",
       "uuid": "e7a70a90-fd64-4923-84ab-cc09e3c6fafc",
       "importer": "sprite-frame",

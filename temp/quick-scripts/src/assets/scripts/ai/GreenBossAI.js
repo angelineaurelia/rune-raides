@@ -228,8 +228,8 @@ var GreenBossAI = /** @class */ (function (_super) {
     GreenBossAI.prototype.playDeathAnimation = function (direction) {
         var _this = this;
         var deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
-            ? (direction.x > 0 ? "GreenBossDeathRight" : "GreenBossDeathLeft")
-            : (direction.y > 0 ? "GreenBossDeathUp" : "GreenBossDeathDown");
+            ? (direction.x > 0 ? "GreenBossDeadRight" : "GreenBossDeadLeft")
+            : (direction.y > 0 ? "GreenBossDeadUp" : "GreenBossDeadDown");
         this.anim.play(deathAnim);
         this.unscheduleAllCallbacks();
         // After the death animation finishes (assume 1s), mark as fully dead

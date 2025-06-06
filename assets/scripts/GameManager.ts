@@ -20,6 +20,7 @@ export default class GameManager extends cc.Component {
     private player: cc.Node = null;
     public VolumnValue : number = null;
     public Level: number = 1;
+    private _hasShownGameOver = false;
 
     onLoad(){
         let pauseBtnNode = cc.find("Canvas/Main Camera/UI/Pause"); 
@@ -51,7 +52,7 @@ export default class GameManager extends cc.Component {
             messagingSenderId: "530514360843",
             appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
             measurementId: "G-B1C5FG1YSN"
-        };*/
+        }
 
         if (!window._firebaseInited) {
             firebase.initializeApp(firebaseConfig);
@@ -59,7 +60,7 @@ export default class GameManager extends cc.Component {
             cc.log("✅ Firebase initialized in GameManager.ts");
         } else {
             cc.log("ℹ️ Firebase already initialized");
-        }
+        };*/
         
     }
 
@@ -291,6 +292,8 @@ export default class GameManager extends cc.Component {
         }
     }
     public EndGame() {
+        if (this._hasShownGameOver) return;
+        this._hasShownGameOver = true;
         cc.resources.load("prefabs/GameOver", cc.Prefab, (err, prefab) => {
             if (err) {
                 cc.error("Failed to load GameOver prefab:", err);

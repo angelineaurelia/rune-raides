@@ -33,6 +33,12 @@ export default class Chest extends cc.Component {
         let anim = this.getComponent(cc.Animation);
         if (anim) anim.play("chest_open");
         
+        if (this.openSound) {
+            cc.audioEngine.playEffect(this.openSound, false);
+        } else {
+            cc.error("Chest.openSound is not assigned!");
+        }
+
         //藥水放在寶箱的節點之下
         this.scheduleOnce(()=>{},0.5);
         const potion = cc.instantiate(this.potionPrefab);

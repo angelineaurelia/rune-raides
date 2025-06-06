@@ -34,6 +34,7 @@ var GameManager = /** @class */ (function (_super) {
         _this.player = null;
         _this.VolumnValue = null;
         _this.Level = 1;
+        _this._hasShownGameOver = false;
         return _this;
     }
     GameManager.prototype.onLoad = function () {
@@ -66,15 +67,15 @@ var GameManager = /** @class */ (function (_super) {
             messagingSenderId: "530514360843",
             appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
             measurementId: "G-B1C5FG1YSN"
-        };*/
+        }
+
         if (!window._firebaseInited) {
             firebase.initializeApp(firebaseConfig);
             window._firebaseInited = true;
             cc.log("✅ Firebase initialized in GameManager.ts");
-        }
-        else {
+        } else {
             cc.log("ℹ️ Firebase already initialized");
-        }
+        };*/
     };
     GameManager.prototype.onDestroy = function () {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -313,6 +314,9 @@ var GameManager = /** @class */ (function (_super) {
     };
     GameManager.prototype.EndGame = function () {
         var _this = this;
+        if (this._hasShownGameOver)
+            return;
+        this._hasShownGameOver = true;
         cc.resources.load("prefabs/GameOver", cc.Prefab, function (err, prefab) {
             if (err) {
                 cc.error("Failed to load GameOver prefab:", err);

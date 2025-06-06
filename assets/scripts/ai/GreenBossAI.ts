@@ -251,8 +251,8 @@ export default class GreenBossAI extends cc.Component {
 
     private playDeathAnimation(direction: cc.Vec2) {
         const deathAnim = Math.abs(direction.x) > Math.abs(direction.y)
-            ? (direction.x > 0 ? "GreenBossDeathRight" : "GreenBossDeathLeft")
-            : (direction.y > 0 ? "GreenBossDeathUp" : "GreenBossDeathDown");
+            ? (direction.x > 0 ? "GreenBossDeadRight" : "GreenBossDeadLeft")
+            : (direction.y > 0 ? "GreenBossDeadUp" : "GreenBossDeadDown");
         this.anim.play(deathAnim);
 
         this.unscheduleAllCallbacks();

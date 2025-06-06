@@ -485,7 +485,9 @@
     "potionPrefab": {
       "__uuid__": "db3bf3ce-35c3-4acb-8e4e-8de83f3e083a"
     },
-    "openSound": null,
+    "openSound": {
+      "__uuid__": "fb902122-fc62-47e4-93fd-1ab43caf7d07"
+    },
     "_id": ""
   },
   {

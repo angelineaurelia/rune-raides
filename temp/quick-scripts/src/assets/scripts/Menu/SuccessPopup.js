@@ -30,12 +30,19 @@ var SuccessPopup = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.messageLabel = null;
         _this.background = null;
+        _this.openSound = null;
         // Called by Menu code when OK is clicked
         _this.onOk = null;
         return _this;
     }
     SuccessPopup.prototype.onLoad = function () {
         var _this = this;
+        if (this.openSound) {
+            cc.audioEngine.playEffect(this.openSound, false);
+        }
+        else {
+            cc.error("SuccessPopup.openSound is not assigned!");
+        }
         var okBtn = cc.find("OKButton", this.node).getComponent(cc.Button);
         okBtn.node.on('click', function () {
             if (_this.onOk)
@@ -49,6 +56,9 @@ var SuccessPopup = /** @class */ (function (_super) {
     __decorate([
         property(cc.Node)
     ], SuccessPopup.prototype, "background", void 0);
+    __decorate([
+        property(cc.AudioClip)
+    ], SuccessPopup.prototype, "openSound", void 0);
     SuccessPopup = __decorate([
         ccclass('SuccessPopup')
     ], SuccessPopup);
