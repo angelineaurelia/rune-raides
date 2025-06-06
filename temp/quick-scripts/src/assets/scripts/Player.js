@@ -68,6 +68,9 @@ var Player = /** @class */ (function (_super) {
         // Listen for keyboard input to trigger attack
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     };
+    Player.prototype.update = function (dt) {
+        cc.find("Canvas/Main Camera/UI/Key").active = this.holdingKey;
+    };
     Player.prototype.onDestroy = function () {
         // Clean up listener
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -286,13 +289,18 @@ var Player = /** @class */ (function (_super) {
             otherCollider.node.active = false;
         }
         if (otherCollider.node.name == "lock" && this.holdingKey) {
-            var temp = otherCollider.getComponent("NewClass");
+            var temp = otherCollider.getComponent("Lock");
             if (temp) {
                 temp.playAnim();
             }
             this.scheduleOnce(function () {
-                if (otherCollider.node)
+                if (otherCollider.node) {
                     otherCollider.node.destroy();
+                }
+                else {
+                    cc.log("can't deal with otherCollider.node.destroy(); properly");
+                }
+                _this.gameManager = cc.find("GameManager").getComponent("GameManager");
                 _this.gameManager.GoNextLevel();
             }, 1.2);
         }

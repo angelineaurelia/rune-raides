@@ -138,19 +138,25 @@ var MapGenerator = /** @class */ (function (_super) {
     };
     MapGenerator.prototype.generateKey_Lock = function () {
         var _x = 0;
-        var _y = 0;
         _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+        var _y = 0;
         _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        var _x1 = 0;
+        _x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+        var _y1 = 0;
+        _y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        while ((_x === _x1) && (_y === _y1)) {
+            _x1 = Math.floor(Math.random() * this.Map_xmax) + 0.5;
+            _y1 = Math.floor(Math.random() * this.Map_ymax) + 0.5;
+        }
         var prefab_temp_0 = cc.instantiate(this.keyToNextLevel);
         prefab_temp_0.setPosition(_x * this.blocksize_x, _y * this.blocksize_y);
         this.wallList.addChild(prefab_temp_0, 1, 'key');
         console.log("Key at:", _x, _y);
-        _x = Math.floor(Math.random() * this.Map_xmax) + 0.5;
-        _y = Math.floor(Math.random() * this.Map_ymax) + 0.5;
         var prefab_temp_1 = cc.instantiate(this.lockToNextLevel);
-        prefab_temp_1.setPosition(_x * this.blocksize_x, _y * this.blocksize_y);
+        prefab_temp_1.setPosition(_x1 * this.blocksize_x, _y1 * this.blocksize_y);
         this.wallList.addChild(prefab_temp_1, 1, 'lock');
-        console.log("Lock at:", _x, _y);
+        console.log("Lock at:", _x1, _y1);
     };
     __decorate([
         property(cc.Node)

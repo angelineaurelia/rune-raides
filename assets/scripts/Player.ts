@@ -88,6 +88,10 @@ export default class Player extends cc.Component {
         );
     }
 
+    update(dt){
+        cc.find("Canvas/Main Camera/UI/Key").active = this.holdingKey;
+    }
+
     onDestroy() {
         // Clean up listener
         cc.systemEvent.off(
@@ -321,14 +325,19 @@ export default class Player extends cc.Component {
             otherCollider.node.active = false;
         }
         if (otherCollider.node.name == "lock" && this.holdingKey) {
-            const temp = otherCollider.getComponent("NewClass");
+            const temp = otherCollider.getComponent("Lock");
             if (temp) {
                 temp.playAnim();
             }
-            this.scheduleOnce(() => {
-                if (otherCollider.node) otherCollider.node.destroy();
+            this.scheduleOnce(()=>{
+                if(otherCollider.node){
+                    otherCollider.node.destroy();
+                }else{
+                    cc.log("can't deal with otherCollider.node.destroy(); properly");
+                }
+                this.gameManager = cc.find("GameManager").getComponent("GameManager");
                 this.gameManager.GoNextLevel();
-            }, 1.2);
+            },1.2);
         }
     }
 
