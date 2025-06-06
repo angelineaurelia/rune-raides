@@ -77,10 +77,10 @@ var BlueSlimeAI = /** @class */ (function (_super) {
         this.boundaryNode.parent = this.node.parent;
         this.boundaryNode.setPosition(this.patrolCenter);
         //const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
-        // patrolGfx.lineWidth = 2;
+        //patrolGfx.lineWidth = 2;
         //patrolGfx.strokeColor = cc.color(0, 255, 0);
-        // patrolGfx.circle(0, 0, this.patrolRadius);
-        // patrolGfx.stroke();
+        //patrolGfx.circle(0, 0, this.patrolRadius);
+        //patrolGfx.stroke();
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
         this.detectionNode.setPosition(0, 0);

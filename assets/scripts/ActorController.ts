@@ -153,6 +153,8 @@ export default class ActorController extends Controller {
 
         this._rigidbody = this.node.getComponent(cc.RigidBody);
         if (!this._rigidbody) console.warn(`ActorController: Component cc.RigidBody missing on node ${this.node.name}`);
+        let KeyController = cc.find("Canvas/MapManager/Actors/Player").getComponent("KeyboardControl");
+        KeyController.openInput();
     }
 
     start() {
@@ -358,8 +360,8 @@ export default class ActorController extends Controller {
             let Mgr = cc.find("GameManager").getComponent("GameManager");
             Mgr.EndGame();
         }, 1);
+        let KeyController = cc.find("Canvas/MapManager/Actors/Player").getComponent("KeyboardControl");
+        KeyController.closeInput();
     }
-        
-}
-    
 
+}

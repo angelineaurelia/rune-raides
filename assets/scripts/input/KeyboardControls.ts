@@ -45,7 +45,14 @@ export default class KeyboardControls
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     }
-
+    closeInput() {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    }
+    openInput() {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    }
     // update (dt) {}
 
     onKeyDown(event: cc.Event.EventKeyboard) {
@@ -62,7 +69,7 @@ export default class KeyboardControls
             case cc.macro.KEY.s:
                 this._vAxis = -1;
                 break;
-            case cc.macro.KEY.z: 
+            case cc.macro.KEY.j: 
                 if (this._kKey === ButtonState.Rest || this._kKey === ButtonState.Released) {
                     this._kKey = ButtonState.Pressed;
                 } else {
@@ -77,14 +84,14 @@ export default class KeyboardControls
                     this._xKey = ButtonState.Held;
                 }
                 break;
-            case cc.macro.KEY.c: 
+            case cc.macro.KEY.k: 
                 if (this._jKey === ButtonState.Rest || this._jKey === ButtonState.Released) {
                     this._jKey = ButtonState.Pressed;
                 } else {
                     this._jKey = ButtonState.Held;
                 }
                 break;
-            case cc.macro.KEY.v: 
+            case cc.macro.KEY.l:
                 if (this._lKey === ButtonState.Rest || this._lKey === ButtonState.Released) {
                     this._lKey = ButtonState.Pressed;
                 } else {
@@ -110,7 +117,7 @@ export default class KeyboardControls
             case cc.macro.KEY.s:
                 this._vAxis += 1;
                 break;
-            case cc.macro.KEY.z: 
+            case cc.macro.KEY.j: 
                 if (this._kKey === ButtonState.Pressed || this._kKey === ButtonState.Held) {
                     this._kKey = ButtonState.Released;
                 } else {
@@ -124,14 +131,14 @@ export default class KeyboardControls
                     this._xKey = ButtonState.Rest;
                 }
                 break;
-            case cc.macro.KEY.c: 
+            case cc.macro.KEY.k: 
                 if (this._jKey === ButtonState.Pressed || this._jKey === ButtonState.Held) {
                     this._jKey = ButtonState.Released;
                 } else {
                     this._jKey = ButtonState.Rest;
                 }
                 break;
-            case cc.macro.KEY.v: 
+            case cc.macro.KEY.l: 
                 if (this._lKey === ButtonState.Pressed || this._lKey === ButtonState.Held) {
                     this._lKey = ButtonState.Released;
                 } else {

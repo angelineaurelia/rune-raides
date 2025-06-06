@@ -105,9 +105,9 @@ export default class Player extends cc.Component {
     private onKeyDown(event: cc.Event.EventKeyboard) {
         // Use C, Z, or V as the attack key (you can adjust as needed)
         if (
-            event.keyCode === cc.macro.KEY.c ||
-            event.keyCode === cc.macro.KEY.z ||
-            event.keyCode === cc.macro.KEY.v
+            event.keyCode === cc.macro.KEY.j ||
+            event.keyCode === cc.macro.KEY.k ||
+            event.keyCode === cc.macro.KEY.l
         ) {
             this.tryAttack();
         }
@@ -317,6 +317,15 @@ export default class Player extends cc.Component {
         this.hp = this.maxHp;
         this.updatelife(0, this.hp);
         this.holdingKey = false;
+        //set player position based on level randeomly
+        let Mx = (level*4+6)*100;
+        let My = (level*2+3)*100;
+        this.node.setPosition(
+            cc.v2(
+                Mx * (Math.random())*0.95,
+                My * (Math.random())*0.95,
+            )
+        );
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {
@@ -336,8 +345,9 @@ export default class Player extends cc.Component {
                     cc.log("can't deal with otherCollider.node.destroy(); properly");
                 }
                 this.gameManager = cc.find("GameManager").getComponent("GameManager");
-                this.gameManager.GoNextLevel();
+                
             },1.2);
+            this.gameManager.GoNextLevel();
         }
     }
 

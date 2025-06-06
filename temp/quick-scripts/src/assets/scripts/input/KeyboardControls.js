@@ -87,6 +87,14 @@ var KeyboardControls = /** @class */ (function (_super) {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     };
+    KeyboardControls.prototype.closeInput = function () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    };
+    KeyboardControls.prototype.openInput = function () {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    };
     // update (dt) {}
     KeyboardControls.prototype.onKeyDown = function (event) {
         switch (event.keyCode) {
@@ -102,7 +110,7 @@ var KeyboardControls = /** @class */ (function (_super) {
             case cc.macro.KEY.s:
                 this._vAxis = -1;
                 break;
-            case cc.macro.KEY.z:
+            case cc.macro.KEY.j:
                 if (this._kKey === IInputControls_1.ButtonState.Rest || this._kKey === IInputControls_1.ButtonState.Released) {
                     this._kKey = IInputControls_1.ButtonState.Pressed;
                 }
@@ -118,7 +126,7 @@ var KeyboardControls = /** @class */ (function (_super) {
                     this._xKey = IInputControls_1.ButtonState.Held;
                 }
                 break;
-            case cc.macro.KEY.c:
+            case cc.macro.KEY.k:
                 if (this._jKey === IInputControls_1.ButtonState.Rest || this._jKey === IInputControls_1.ButtonState.Released) {
                     this._jKey = IInputControls_1.ButtonState.Pressed;
                 }
@@ -126,7 +134,7 @@ var KeyboardControls = /** @class */ (function (_super) {
                     this._jKey = IInputControls_1.ButtonState.Held;
                 }
                 break;
-            case cc.macro.KEY.v:
+            case cc.macro.KEY.l:
                 if (this._lKey === IInputControls_1.ButtonState.Rest || this._lKey === IInputControls_1.ButtonState.Released) {
                     this._lKey = IInputControls_1.ButtonState.Pressed;
                 }
@@ -152,7 +160,7 @@ var KeyboardControls = /** @class */ (function (_super) {
             case cc.macro.KEY.s:
                 this._vAxis += 1;
                 break;
-            case cc.macro.KEY.z:
+            case cc.macro.KEY.j:
                 if (this._kKey === IInputControls_1.ButtonState.Pressed || this._kKey === IInputControls_1.ButtonState.Held) {
                     this._kKey = IInputControls_1.ButtonState.Released;
                 }
@@ -168,7 +176,7 @@ var KeyboardControls = /** @class */ (function (_super) {
                     this._xKey = IInputControls_1.ButtonState.Rest;
                 }
                 break;
-            case cc.macro.KEY.c:
+            case cc.macro.KEY.k:
                 if (this._jKey === IInputControls_1.ButtonState.Pressed || this._jKey === IInputControls_1.ButtonState.Held) {
                     this._jKey = IInputControls_1.ButtonState.Released;
                 }
@@ -176,7 +184,7 @@ var KeyboardControls = /** @class */ (function (_super) {
                     this._jKey = IInputControls_1.ButtonState.Rest;
                 }
                 break;
-            case cc.macro.KEY.v:
+            case cc.macro.KEY.l:
                 if (this._lKey === IInputControls_1.ButtonState.Pressed || this._lKey === IInputControls_1.ButtonState.Held) {
                     this._lKey = IInputControls_1.ButtonState.Released;
                 }

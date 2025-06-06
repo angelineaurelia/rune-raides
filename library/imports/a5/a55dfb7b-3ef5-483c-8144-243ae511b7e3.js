@@ -127,6 +127,8 @@ var ActorController = /** @class */ (function (_super) {
         this._rigidbody = this.node.getComponent(cc.RigidBody);
         if (!this._rigidbody)
             console.warn("ActorController: Component cc.RigidBody missing on node " + this.node.name);
+        var KeyController = cc.find("Canvas/MapManager/Actors/Player").getComponent("KeyboardControl");
+        KeyController.openInput();
     };
     ActorController.prototype.start = function () {
         _super.prototype.start && _super.prototype.start.call(this);
@@ -333,6 +335,8 @@ var ActorController = /** @class */ (function (_super) {
             var Mgr = cc.find("GameManager").getComponent("GameManager");
             Mgr.EndGame();
         }, 1);
+        var KeyController = cc.find("Canvas/MapManager/Actors/Player").getComponent("KeyboardControl");
+        KeyController.closeInput();
     };
     __decorate([
         property({ type: cc.Enum(FacingDirection) })

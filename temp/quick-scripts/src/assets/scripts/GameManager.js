@@ -29,6 +29,7 @@ var GameManager = /** @class */ (function (_super) {
     function GameManager() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.bgm = null;
+        _this.endBgm = null;
         _this.LevelLabel = null;
         _this.maxhp = 10;
         _this.player = null;
@@ -238,6 +239,12 @@ var GameManager = /** @class */ (function (_super) {
             this.ResumeAllAnimation(child);
         }
     };
+    GameManager.prototype.playendBGM = function () {
+        if (this.endBgm)
+            cc.audioEngine.playMusic(this.endBgm, true);
+        else
+            cc.error("End BGM not assigned!");
+    };
     GameManager.prototype.playMusic = function () {
         if (this.bgm)
             cc.audioEngine.playMusic(this.bgm, true);
@@ -267,7 +274,9 @@ var GameManager = /** @class */ (function (_super) {
         MonsterMgr.SetMonster(this.Level);
     };
     GameManager.prototype.GoNextLevel = function () {
-        var _a, _b, _c, _d;
+        //close keyboard event
+        var _this = this;
+        var _a, _b;
         this.Level++;
         this.saveProgress(this.Level);
         if (this.LevelLabel) {
@@ -276,16 +285,58 @@ var GameManager = /** @class */ (function (_super) {
         else {
             cc.error("Level label not found");
         }
-        // regenerate the map
-        var mapGen = (_a = cc.find("GameManager")) === null || _a === void 0 ? void 0 : _a.getComponent("MapGenerator");
-        if (mapGen) {
-            mapGen.regenerateMap(this.Level);
+        var trans = cc.resources.load("prefabs/NextLevel", cc.Prefab, function (err, prefab) {
+            if (err) {
+                cc.error("Failed to load NextLevel prefab:", err);
+                return;
+            }
+            var TRNode = cc.instantiate(prefab);
+            var Canvas = cc.find("Canvas");
+            TRNode.name = "TR";
+            // Set the position of the transition node to the center of the canvas
+            var cameraNode = cc.find("Canvas/Main Camera");
+            if (cameraNode) {
+                var worldPos = cameraNode.convertToWorldSpaceAR(cc.Vec2.ZERO);
+                var localPos = Canvas.convertToNodeSpaceAR(worldPos);
+                TRNode.setPosition(localPos);
+            }
+            else {
+                cc.warn("找不到 Main Camera, 使用預設位置 (0, 0)");
+                TRNode.setPosition(0, 0);
+            }
+            TRNode.scaleX = 1;
+            TRNode.scaleY = 1;
+            TRNode.zIndex = 10; // Ensure it's on top
+            Canvas.addChild(TRNode);
+            var label = TRNode.getChildByName("MessageLabel").getComponent(cc.Label);
+            if (label) {
+                label.string = "\nGo to Level " + _this.Level + " !";
+            }
+            else {
+                cc.error("MessageLabel not found");
+            }
         }
-        else {
-            cc.error("MapGenerator component not found");
-        }
+        //destroy transition node after 2 seconds
+        , 
+        //destroy transition node after 2 seconds
+        this.scheduleOnce(function () {
+            var TRNode = cc.find("Canvas/TR");
+            if (TRNode) {
+                TRNode.destroy();
+            }
+        }, 2));
+        this.scheduleOnce(function () {
+            var _a;
+            var mapGen = (_a = cc.find("GameManager")) === null || _a === void 0 ? void 0 : _a.getComponent("MapGenerator");
+            if (mapGen) {
+                mapGen.regenerateMap(_this.Level);
+            }
+            else {
+                cc.error("MapGenerator component not found");
+            }
+        }, 1.5);
         // reset player position
-        var playerComp = (_b = this.player) === null || _b === void 0 ? void 0 : _b.getComponent("Player");
+        var playerComp = cc.find("Canvas/MapManager/Actors/Player").getComponent("Player");
         if (playerComp) {
             playerComp.SetPlayer(this.Level);
         }
@@ -293,12 +344,12 @@ var GameManager = /** @class */ (function (_super) {
             cc.error("Player component not found");
         }
         // reset monster
-        var monsterMgr = (_c = cc.find("Canvas/MapManager/MonsterManager")) === null || _c === void 0 ? void 0 : _c.getComponent("MonsterManager");
+        var monsterMgr = (_a = cc.find("Canvas/MapManager/MonsterManager")) === null || _a === void 0 ? void 0 : _a.getComponent("MonsterManager");
         if (monsterMgr) {
             monsterMgr.SetMonster(this.Level);
         }
         // adjust camera zoom and UI scaling
-        var camera = (_d = cc.find("Canvas/Main Camera")) === null || _d === void 0 ? void 0 : _d.getComponent(cc.Camera);
+        var camera = (_b = cc.find("Canvas/Main Camera")) === null || _b === void 0 ? void 0 : _b.getComponent(cc.Camera);
         if (camera) {
             camera.zoomRatio *= 0.99;
             var UI = cc.find("Canvas/Main Camera/UI");
@@ -317,6 +368,7 @@ var GameManager = /** @class */ (function (_super) {
         if (this._hasShownGameOver)
             return;
         this._hasShownGameOver = true;
+        this.playendBGM();
         cc.resources.load("prefabs/GameOver", cc.Prefab, function (err, prefab) {
             if (err) {
                 cc.error("Failed to load GameOver prefab:", err);
@@ -404,6 +456,9 @@ var GameManager = /** @class */ (function (_super) {
     __decorate([
         property({ type: cc.AudioClip })
     ], GameManager.prototype, "bgm", void 0);
+    __decorate([
+        property(cc.AudioClip)
+    ], GameManager.prototype, "endBgm", void 0);
     __decorate([
         property(cc.Label)
     ], GameManager.prototype, "LevelLabel", void 0);

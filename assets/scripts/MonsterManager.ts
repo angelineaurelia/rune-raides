@@ -37,8 +37,7 @@ export default class NewClass extends cc.Component {
     // update (dt) {}
     initMonster() {
         console.log("Map_xmax =", this.Map_xmax, "Map_ymax =", this.Map_ymax);
-        let monsterCount = Math.floor((this.Map_xmax/100)*(this.Map_ymax/100)/9);
-        console.log("monster Count = ",monsterCount);
+        let monsterCount = Math.floor((this.Map_xmax/100)*(this.Map_ymax/100)/5);
         for (let i = 0; i < monsterCount; i++) {
             let randomType = Math.floor(Math.random()*3.9999);
             console.log("Monster Type:", randomType);

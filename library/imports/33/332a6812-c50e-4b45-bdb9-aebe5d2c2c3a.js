@@ -78,9 +78,9 @@ var Player = /** @class */ (function (_super) {
     // Called when any key is pressed
     Player.prototype.onKeyDown = function (event) {
         // Use C, Z, or V as the attack key (you can adjust as needed)
-        if (event.keyCode === cc.macro.KEY.c ||
-            event.keyCode === cc.macro.KEY.z ||
-            event.keyCode === cc.macro.KEY.v) {
+        if (event.keyCode === cc.macro.KEY.j ||
+            event.keyCode === cc.macro.KEY.k ||
+            event.keyCode === cc.macro.KEY.l) {
             this.tryAttack();
         }
     };
@@ -281,6 +281,10 @@ var Player = /** @class */ (function (_super) {
         this.hp = this.maxHp;
         this.updatelife(0, this.hp);
         this.holdingKey = false;
+        //set player position based on level randeomly
+        var Mx = (level * 4 + 6) * 100;
+        var My = (level * 2 + 3) * 100;
+        this.node.setPosition(cc.v2(Mx * (Math.random()) * 0.95, My * (Math.random()) * 0.95));
     };
     Player.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
         var _this = this;
@@ -301,8 +305,8 @@ var Player = /** @class */ (function (_super) {
                     cc.log("can't deal with otherCollider.node.destroy(); properly");
                 }
                 _this.gameManager = cc.find("GameManager").getComponent("GameManager");
-                _this.gameManager.GoNextLevel();
             }, 1.2);
+            this.gameManager.GoNextLevel();
         }
     };
     Player.prototype.onDisable = function () {

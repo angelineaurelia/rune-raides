@@ -34,11 +34,6 @@ export default class Menu extends cc.Component {
     }
 
     start(){
-        let StartButton = new cc.Component.EventHandler();
-        StartButton.target = this.node;
-        StartButton.component = "Menu";
-        StartButton.handler = "LoadGame";
-        cc.find("Canvas/background/StartButton").getComponent(cc.Button).clickEvents.push(StartButton);
 
         let MapButton = new cc.Component.EventHandler();
         MapButton.target = this.node;

@@ -60,8 +60,7 @@ var NewClass = /** @class */ (function (_super) {
     // update (dt) {}
     NewClass.prototype.initMonster = function () {
         console.log("Map_xmax =", this.Map_xmax, "Map_ymax =", this.Map_ymax);
-        var monsterCount = Math.floor((this.Map_xmax / 100) * (this.Map_ymax / 100) / 9);
-        console.log("monster Count = ", monsterCount);
+        var monsterCount = Math.floor((this.Map_xmax / 100) * (this.Map_ymax / 100) / 5);
         for (var i = 0; i < monsterCount; i++) {
             var randomType = Math.floor(Math.random() * 3.9999);
             console.log("Monster Type:", randomType);

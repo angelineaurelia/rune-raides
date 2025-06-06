@@ -56,11 +56,6 @@ var Menu = /** @class */ (function (_super) {
         this.ExitButton.clickEvents.push(exitHandler);
     };
     Menu.prototype.start = function () {
-        var StartButton = new cc.Component.EventHandler();
-        StartButton.target = this.node;
-        StartButton.component = "Menu";
-        StartButton.handler = "LoadGame";
-        cc.find("Canvas/background/StartButton").getComponent(cc.Button).clickEvents.push(StartButton);
         var MapButton = new cc.Component.EventHandler();
         MapButton.target = this.node;
         MapButton.component = "Menu";

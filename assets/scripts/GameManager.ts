@@ -13,6 +13,9 @@ export default class GameManager extends cc.Component {
     @property({ type: cc.AudioClip })
     public bgm: cc.AudioClip = null;
 
+    @property(cc.AudioClip)
+    public endBgm: cc.AudioClip = null;
+
     @property(cc.Label)
     public LevelLabel: cc.Label = null;
 
@@ -215,6 +218,10 @@ export default class GameManager extends cc.Component {
         let children = node.children;
         for (let child of children) this.ResumeAllAnimation(child);
     }
+    playendBGM() {
+        if (this.endBgm) cc.audioEngine.playMusic(this.endBgm, true);
+        else cc.error("End BGM not assigned!");
+    }
 
     playMusic() {
         if (this.bgm) cc.audioEngine.playMusic(this.bgm, true);
@@ -245,6 +252,8 @@ export default class GameManager extends cc.Component {
     }
 
     public GoNextLevel() {
+        //close keyboard event
+
         this.Level++;
         this.saveProgress(this.Level);
 
@@ -253,17 +262,55 @@ export default class GameManager extends cc.Component {
         } else {
             cc.error("Level label not found");
         }
+        let trans = cc.resources.load("prefabs/NextLevel", cc.Prefab, (err, prefab) => {
+            if (err) {
+                cc.error("Failed to load NextLevel prefab:", err);
+                return;
+            }
+            const TRNode = cc.instantiate(prefab);
+            const Canvas = cc.find("Canvas");
+            TRNode.name = "TR";
+            // Set the position of the transition node to the center of the canvas
+            let cameraNode = cc.find("Canvas/Main Camera");
+            if (cameraNode) {
+                let worldPos = cameraNode.convertToWorldSpaceAR(cc.Vec2.ZERO);
+                let localPos = Canvas.convertToNodeSpaceAR(worldPos);
+                TRNode.setPosition(localPos);
+            } else {
+                cc.warn("找不到 Main Camera, 使用預設位置 (0, 0)");
+                TRNode.setPosition(0, 0);
+            }
+                TRNode.scaleX = 1;
+                TRNode.scaleY = 1;
+                TRNode.zIndex = 10; // Ensure it's on top
+                Canvas.addChild(TRNode);
+                let label = TRNode.getChildByName("MessageLabel").getComponent(cc.Label);
+                if (label) {
+                    label.string = "\nGo to Level " + this.Level + " !";
+                } else {
+                    cc.error("MessageLabel not found");
+                }
+            }
 
-        // regenerate the map
-        const mapGen = cc.find("GameManager")?.getComponent("MapGenerator");
-        if (mapGen) {
-            mapGen.regenerateMap(this.Level);
-        } else {
-            cc.error("MapGenerator component not found");
-        }
+        //destroy transition node after 2 seconds
+        this.scheduleOnce(() => {
+            const TRNode = cc.find("Canvas/TR");
+            if (TRNode) {
+                TRNode.destroy();
+            }
+        }, 2);
+                
+        this.scheduleOnce(()=>{
+            const mapGen = cc.find("GameManager")?.getComponent("MapGenerator");
+            if (mapGen) {
+                mapGen.regenerateMap(this.Level);
+            } else {
+                cc.error("MapGenerator component not found");
+            }
+        },1.5);
 
         // reset player position
-        const playerComp = this.player?.getComponent("Player");
+        const playerComp = cc.find("Canvas/MapManager/Actors/Player").getComponent("Player");
         if (playerComp) {
             playerComp.SetPlayer(this.Level);
         } else {
@@ -290,10 +337,12 @@ export default class GameManager extends cc.Component {
                 cc.log("UI not found");
             }
         }
+        
     }
     public EndGame() {
         if (this._hasShownGameOver) return;
         this._hasShownGameOver = true;
+        this.playendBGM();
         cc.resources.load("prefabs/GameOver", cc.Prefab, (err, prefab) => {
             if (err) {
                 cc.error("Failed to load GameOver prefab:", err);
