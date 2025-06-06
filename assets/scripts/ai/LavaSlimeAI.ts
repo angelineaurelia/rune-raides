@@ -38,10 +38,10 @@ export default class LavaSlimeAI extends cc.Component {
     attackDamage: number = 13;
 
     @property({ tooltip: "Maximum health of the slime" })
-    maxHealth: number = 10;
+    maxHealth: number = 40;
 
     @property({ tooltip: "Current health of the slime" })
-    health: number = 10;
+    health: number = 40;
 
     @property(cc.Node)
     private lifebar: cc.Node = null;
@@ -83,11 +83,11 @@ export default class LavaSlimeAI extends cc.Component {
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent!;
         this.boundaryNode.setPosition(this.patrolCenter);
-        //const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
-        //patrolGfx.lineWidth = 2;
-        //patrolGfx.strokeColor = cc.color(0, 255, 0);
-        //patrolGfx.circle(0, 0, this.patrolRadius);
-        //patrolGfx.stroke();
+        const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
+        patrolGfx.lineWidth = 2;
+        patrolGfx.strokeColor = cc.color(0, 255, 0);
+        patrolGfx.circle(0, 0, this.patrolRadius);
+        patrolGfx.stroke();
 
         // Detection area
         this.detectionNode = new cc.Node("DetectionArea");
@@ -106,7 +106,7 @@ export default class LavaSlimeAI extends cc.Component {
         // Health bar setup
         if (this.lifebar) {
             //this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
-            //this.updateLife(0, 40);
+            this.updateLife(0, this.health);
         }
 
         this.setToIdle();
@@ -140,21 +140,21 @@ export default class LavaSlimeAI extends cc.Component {
         const drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
         this.detectionGfx.clear();
         this.detectionGfx.lineWidth   = 2;
-        //this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
-        //    ? cc.color(255, 165, 0)
-        //    : cc.color(255, 0, 0);
-        //this.detectionGfx.circle(0, 0, drawDetectR);
-        //this.detectionGfx.stroke();
+        this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
+            ? cc.color(255, 165, 0)
+            : cc.color(255, 0, 0);
+        this.detectionGfx.circle(0, 0, drawDetectR);
+        this.detectionGfx.stroke();
 
         // 4) redraw attack circle
         const drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
         this.attackGfx.clear();
         this.attackGfx.lineWidth   = 2;
-        //this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
-         //   ? cc.color(128, 0, 128)
-         //   : cc.color(0, 0, 255);
-        //this.attackGfx.circle(0, 0, drawAttackR);
-        //this.attackGfx.stroke();
+        this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
+            ? cc.color(128, 0, 128)
+            : cc.color(0, 0, 255);
+        this.attackGfx.circle(0, 0, drawAttackR);
+        this.attackGfx.stroke();
 
         // 5) AI state transitions
         const inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
@@ -209,7 +209,7 @@ export default class LavaSlimeAI extends cc.Component {
     // —— Health‐bar updater ——
     private updateLife(delta: number, hp: number) {
         if (!this.lifebar) return;
-        this.lifebar.width = (hp/this.maxHealth)*40;
+        this.lifebar.width = hp;
         if (hp <= 10)       this.lifebar.color = cc.Color.RED;
         else if (hp <= 20)  this.lifebar.color = cc.Color.ORANGE;
         else                this.lifebar.color = cc.Color.GREEN;

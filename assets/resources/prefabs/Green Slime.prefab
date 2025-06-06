@@ -156,8 +156,8 @@
     "_skewX": 0,
     "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
+    "_groupIndex": 4,
+    "groupIndex": 4,
     "_id": ""
   },
   {
@@ -220,8 +220,8 @@
     "_skewX": 0,
     "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
+    "_groupIndex": 4,
+    "groupIndex": 4,
     "_id": ""
   },
   {
@@ -264,7 +264,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "55BY9HSTpMx7VA0sCvlSd7",
+    "fileId": "f9SPdSFBFLhqnJcg1g5lE8",
     "sync": false
   },
   {
@@ -327,8 +327,8 @@
     "_skewX": 0,
     "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
+    "_groupIndex": 4,
+    "groupIndex": 4,
     "_id": ""
   },
   {
@@ -371,7 +371,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "99D7dAA+dFt6u5rxhOHcu+",
+    "fileId": "d1NP1nQQxF24W+AprmXxPU",
     "sync": false
   },
   {
@@ -399,7 +399,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "7aU3cGHlFBEpMeUtgBSGUC",
+    "fileId": "496C3nyuZEg6kJrS2ICr90",
     "sync": false
   },
   {
@@ -521,7 +521,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 0,
+    "_type": 1,
     "_allowSleep": true,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -568,18 +568,26 @@
       "__id__": 1
     },
     "_enabled": true,
-    "walkSpeed": 40,
-    "runSpeed": 80,
+    "walkSpeed": 20,
+    "runSpeed": 40,
     "idleTime": 3,
-    "walkTime": 10,
-    "patrolRadius": 130,
-    "detectionRadius": 68.1,
+    "walkTime": 3,
+    "patrolRadius": 80,
+    "detectionRadius": 50,
     "attackRadius": 20,
-    "attackDamage": 12,
-    "attackHitDelay": 2,
+<<<<<<< Updated upstream
+    "attackDamage": 10,
+    "attackHitDelay": 0.3,
     "attackAnimDuration": 1,
-    "maxHealth": 15,
-    "health": 15,
+    "maxHealth": 100,
+    "health": 100,
+=======
+    "attackDamage": 5,
+    "attackHitDelay": 0.3,
+    "attackAnimDuration": 1,
+    "maxHealth": 40,
+    "health": 40,
+>>>>>>> Stashed changes
     "lifebar": {
       "__id__": 6
     },

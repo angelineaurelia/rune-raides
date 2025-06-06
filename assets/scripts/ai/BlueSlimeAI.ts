@@ -40,10 +40,10 @@ export default class BlueSlimeAI extends cc.Component {
     attackAnimDuration: number = 1.0;
 
     @property({ tooltip: "Maximum health of the slime" })
-    maxHealth: number = 20;
+    maxHealth: number = 40;
 
     @property({ tooltip: "Current health of the slime" })
-    health: number = 20;
+    health: number = 40;
 
     @property(cc.Node)
     private lifebar: cc.Node = null;
@@ -71,9 +71,6 @@ export default class BlueSlimeAI extends cc.Component {
     private currentAttackClip: string = "";
 
     onLoad() {
-        let level = cc.find("GamemManager").getComponent("GameManager").level;
-        let MaxX = (level*4 + 6)*100;
-        let MaxY = (level*2 + 3)*100;
         cc.director.getCollisionManager().enabled = true;
     }
 
@@ -87,11 +84,11 @@ export default class BlueSlimeAI extends cc.Component {
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent!;
         this.boundaryNode.setPosition(this.patrolCenter);
-        //const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
-       // patrolGfx.lineWidth = 2;
-        //patrolGfx.strokeColor = cc.color(0, 255, 0);
-       // patrolGfx.circle(0, 0, this.patrolRadius);
-       // patrolGfx.stroke();
+        const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
+        patrolGfx.lineWidth = 2;
+        patrolGfx.strokeColor = cc.color(0, 255, 0);
+        patrolGfx.circle(0, 0, this.patrolRadius);
+        patrolGfx.stroke();
 
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
@@ -106,7 +103,7 @@ export default class BlueSlimeAI extends cc.Component {
         this.attackGfx.lineWidth = 2;
 
         if (this.lifebar) {
-            //this.updateLife(0, 40);
+            this.updateLife(0, 40);
         }
 
         this.setToIdle();
@@ -138,19 +135,19 @@ export default class BlueSlimeAI extends cc.Component {
         const drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
 
         this.detectionGfx.clear();
-        //this.detectionGfx.lineWidth = 2;
-        //this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
-            //? cc.color(255, 165, 0)
-            //: cc.color(255, 0, 0);
-        //this.detectionGfx.circle(0, 0, drawDetectR);
+        this.detectionGfx.lineWidth = 2;
+        this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
+            ? cc.color(255, 165, 0)
+            : cc.color(255, 0, 0);
+        this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
 
         this.attackGfx.clear();
-        //this.attackGfx.lineWidth = 2;
-        //this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
-           // ? cc.color(128, 0, 128)
-           // : cc.color(0, 0, 255);
-        //this.attackGfx.circle(0, 0, drawAttackR);
+        this.attackGfx.lineWidth = 2;
+        this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
+            ? cc.color(128, 0, 128)
+            : cc.color(0, 0, 255);
+        this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
 
         const inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
@@ -201,8 +198,7 @@ export default class BlueSlimeAI extends cc.Component {
 
     private updateLife(delta: number, hp: number) {
         if (!this.lifebar) return;
-
-        this.lifebar.width = (hp/this.maxHealth)*40;
+        this.lifebar.width = hp;
         if (hp <= 10) this.lifebar.color = cc.Color.RED;
         else if (hp <= 20) this.lifebar.color = cc.Color.ORANGE;
         else this.lifebar.color = cc.Color.GREEN;

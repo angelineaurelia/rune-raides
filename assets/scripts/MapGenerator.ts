@@ -107,14 +107,6 @@ export default class MapGenerator extends cc.Component {
         this.chestboxes = level*2 + 1 ;
 
         this.myMap = new Map_Graph(this.Map_xmax, this.Map_ymax);
-        
-        for(let _x:number = 0;_x<this.Map_xmax;_x++){
-            for(let _y:number = 0;_y<this.Map_ymax;_y++){
-                const prefab_temp = cc.instantiate(this.groundPrefab);
-                prefab_temp.setPosition(_x*this.blocksize_x,_y*this.blocksize_y);
-                this.wallList.addChild(prefab_temp,0,'ground');
-            }
-        }
 
         for(let _x:number = 0;_x<this.Map_xmax;_x++){
             for(let _y:number = 0;_y<this.Map_ymax;_y++){

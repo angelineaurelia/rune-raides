@@ -446,13 +446,13 @@
     "runSpeed": 45,
     "idleTime": 3,
     "walkTime": 3,
-    "patrolRadius": 130,
-    "detectionRadius": 70,
+    "patrolRadius": 90,
+    "detectionRadius": 55,
     "attackRadius": 20,
     "timeBeforeAttack": 1,
-    "attackDamage": 5,
-    "maxHealth": 48,
-    "health": 48,
+    "attackDamage": 20,
+    "maxHealth": 100,
+    "health": 100,
     "lifebar": {
       "__id__": 6
     },

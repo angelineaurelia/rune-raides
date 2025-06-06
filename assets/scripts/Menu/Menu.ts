@@ -54,6 +54,8 @@ export default class Menu extends cc.Component {
     }
 
     LoadMap(){
+        let username = cc.find("Canvas/MenuMgr").getComponent("MenuMgr").authComp?.user || "Guest";
+        if(username) cc.sys.localStorage.setItem(username, 0);
         cc.director.loadScene("Loading", () => {
             let loadingManager = cc.find("Canvas/LoadingManager").getComponent("LoadingManager");
             loadingManager.startLoading("demo_test");
