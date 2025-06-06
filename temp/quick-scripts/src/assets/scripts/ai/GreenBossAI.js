@@ -45,8 +45,8 @@ var GreenBossAI = /** @class */ (function (_super) {
         _this.attackRadius = 50;
         _this.timeBeforeAttack = 1;
         _this.attackDamage = 20;
-        _this.maxHealth = 40;
-        _this.health = 40;
+        _this.maxHealth = 48;
+        _this.health = 48;
         _this.lifebar = null;
         _this.barOffsetY = 50;
         _this.player = null;
@@ -73,11 +73,11 @@ var GreenBossAI = /** @class */ (function (_super) {
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent;
         this.boundaryNode.setPosition(this.patrolCenter);
-        var patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
-        patrolGfx.lineWidth = 2;
-        patrolGfx.strokeColor = cc.color(0, 255, 0);
-        patrolGfx.circle(0, 0, this.patrolRadius);
-        patrolGfx.stroke();
+        //const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
+        //patrolGfx.lineWidth = 2;
+        //patrolGfx.strokeColor = cc.color(0, 255, 0);
+        //patrolGfx.circle(0, 0, this.patrolRadius);
+        //patrolGfx.stroke();
         // Detection area
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
@@ -93,7 +93,7 @@ var GreenBossAI = /** @class */ (function (_super) {
         // Health bar setup
         if (this.lifebar) {
             //this.lifebar.setPosition(0, this.node.height / 2 + this.barOffsetY);
-            this.updateLife(0, this.health);
+            //this.updateLife(0, this.health);
         }
         this.setToIdle();
     };
@@ -121,20 +121,20 @@ var GreenBossAI = /** @class */ (function (_super) {
         var drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
         this.detectionGfx.clear();
         this.detectionGfx.lineWidth = 2;
-        this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
-            ? cc.color(255, 165, 0)
-            : cc.color(255, 0, 0);
-        this.detectionGfx.circle(0, 0, drawDetectR);
-        this.detectionGfx.stroke();
+        //this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
+        //    ? cc.color(255, 165, 0)
+        //    : cc.color(255, 0, 0);
+        //this.detectionGfx.circle(0, 0, drawDetectR);
+        //this.detectionGfx.stroke();
         // 4) redraw attack circle
         var drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
         this.attackGfx.clear();
-        this.attackGfx.lineWidth = 2;
-        this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
-            ? cc.color(128, 0, 128)
-            : cc.color(0, 0, 255);
-        this.attackGfx.circle(0, 0, drawAttackR);
-        this.attackGfx.stroke();
+        //this.attackGfx.lineWidth   = 2;
+        //this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
+        //    ? cc.color(128, 0, 128)
+        //    : cc.color(0, 0, 255);
+        //this.attackGfx.circle(0, 0, drawAttackR);
+        //this.attackGfx.stroke();
         // 5) AI state transitions
         var inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
         var inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
@@ -184,7 +184,8 @@ var GreenBossAI = /** @class */ (function (_super) {
     GreenBossAI.prototype.updateLife = function (delta, hp) {
         if (!this.lifebar)
             return;
-        this.lifebar.width = hp;
+        this.lifebar.width = (hp / this.maxHealth) * 40;
+        ;
         if (hp <= 10)
             this.lifebar.color = cc.Color.RED;
         else if (hp <= 20)

@@ -46,8 +46,8 @@ var BlueSlimeAI = /** @class */ (function (_super) {
         _this.attackDamage = 10;
         _this.attackHitDelay = 0.3;
         _this.attackAnimDuration = 1.0;
-        _this.maxHealth = 40;
-        _this.health = 40;
+        _this.maxHealth = 20;
+        _this.health = 20;
         _this.lifebar = null;
         _this.barOffsetY = 10;
         _this.isDead = false;
@@ -62,6 +62,9 @@ var BlueSlimeAI = /** @class */ (function (_super) {
         return _this;
     }
     BlueSlimeAI.prototype.onLoad = function () {
+        var level = cc.find("GamemManager").getComponent("GameManager").level;
+        var MaxX = (level * 4 + 6) * 100;
+        var MaxY = (level * 2 + 3) * 100;
         cc.director.getCollisionManager().enabled = true;
     };
     BlueSlimeAI.prototype.start = function () {
@@ -73,11 +76,11 @@ var BlueSlimeAI = /** @class */ (function (_super) {
         this.boundaryNode = new cc.Node("PatrolBoundary");
         this.boundaryNode.parent = this.node.parent;
         this.boundaryNode.setPosition(this.patrolCenter);
-        var patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
-        patrolGfx.lineWidth = 2;
-        patrolGfx.strokeColor = cc.color(0, 255, 0);
-        patrolGfx.circle(0, 0, this.patrolRadius);
-        patrolGfx.stroke();
+        //const patrolGfx = this.boundaryNode.addComponent(cc.Graphics);
+        // patrolGfx.lineWidth = 2;
+        //patrolGfx.strokeColor = cc.color(0, 255, 0);
+        // patrolGfx.circle(0, 0, this.patrolRadius);
+        // patrolGfx.stroke();
         this.detectionNode = new cc.Node("DetectionArea");
         this.detectionNode.parent = this.node;
         this.detectionNode.setPosition(0, 0);
@@ -89,7 +92,7 @@ var BlueSlimeAI = /** @class */ (function (_super) {
         this.attackGfx = this.attackNode.addComponent(cc.Graphics);
         this.attackGfx.lineWidth = 2;
         if (this.lifebar) {
-            this.updateLife(0, 40);
+            //this.updateLife(0, 40);
         }
         this.setToIdle();
     };
@@ -113,18 +116,18 @@ var BlueSlimeAI = /** @class */ (function (_super) {
         var drawDetectR = Math.min(this.detectionRadius, this.patrolRadius);
         var drawAttackR = Math.min(this.attackRadius, this.patrolRadius);
         this.detectionGfx.clear();
-        this.detectionGfx.lineWidth = 2;
-        this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
-            ? cc.color(255, 165, 0)
-            : cc.color(255, 0, 0);
-        this.detectionGfx.circle(0, 0, drawDetectR);
+        //this.detectionGfx.lineWidth = 2;
+        //this.detectionGfx.strokeColor = distToPlayer <= this.detectionRadius
+        //? cc.color(255, 165, 0)
+        //: cc.color(255, 0, 0);
+        //this.detectionGfx.circle(0, 0, drawDetectR);
         this.detectionGfx.stroke();
         this.attackGfx.clear();
-        this.attackGfx.lineWidth = 2;
-        this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
-            ? cc.color(128, 0, 128)
-            : cc.color(0, 0, 255);
-        this.attackGfx.circle(0, 0, drawAttackR);
+        //this.attackGfx.lineWidth = 2;
+        //this.attackGfx.strokeColor = distToPlayer <= this.attackRadius
+        // ? cc.color(128, 0, 128)
+        // : cc.color(0, 0, 255);
+        //this.attackGfx.circle(0, 0, drawAttackR);
         this.attackGfx.stroke();
         var inDetect = distToPlayer <= this.detectionRadius && playerInPatrol;
         var inAttack = distToPlayer <= this.attackRadius && playerInPatrol;
@@ -168,7 +171,7 @@ var BlueSlimeAI = /** @class */ (function (_super) {
     BlueSlimeAI.prototype.updateLife = function (delta, hp) {
         if (!this.lifebar)
             return;
-        this.lifebar.width = hp;
+        this.lifebar.width = (hp / this.maxHealth) * 40;
         if (hp <= 10)
             this.lifebar.color = cc.Color.RED;
         else if (hp <= 20)
