@@ -338,7 +338,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 80,
-      "height": 20
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -682,11 +682,12 @@
     "_defaultClip": null,
     "_clips": [
       null,
+      null,
       {
         "__uuid__": "5de1cb9f-502c-43bc-8ad8-8ca1841cacbc"
       }
     ],
-    "playOnLoad": false,
+    "playOnLoad": true,
     "_id": ""
   },
   {

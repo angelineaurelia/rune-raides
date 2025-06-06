@@ -43,7 +43,7 @@ export default class GameManager extends cc.Component {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.log("Is Firebase initialized?", window._firebaseInited);
 
-        const firebaseConfig = {
+        /*const firebaseConfig = {
             apiKey: "AIzaSyDFW4-emWdI1ghgZWWGp1wqoWvAvTwAqrQ",
             authDomain: "rune-raids.firebaseapp.com",
             projectId: "rune-raids",
@@ -51,7 +51,7 @@ export default class GameManager extends cc.Component {
             messagingSenderId: "530514360843",
             appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
             measurementId: "G-B1C5FG1YSN"
-        };
+        };*/
 
         if (!window._firebaseInited) {
             firebase.initializeApp(firebaseConfig);
@@ -174,9 +174,9 @@ export default class GameManager extends cc.Component {
             loadingManager.startLoading("menu");
         });
         //Destroy Pausetting node if it exists
-        let PauseSettingNode = cc.find("Canvas/Pausetting");
-        if (PauseSettingNode) PauseSettingNode.destroy();
-        else cc.error("PauseSetting node not found");
+        //let PauseSettingNode = cc.find("Canvas/Pausetting");
+        //if (PauseSettingNode) PauseSettingNode.destroy();
+        //else cc.error("PauseSetting node not found");
          
     }
     ResumeGame() {
@@ -290,7 +290,39 @@ export default class GameManager extends cc.Component {
             }
         }
     }
+    public EndGame() {
+        cc.resources.load("prefabs/GameOver", cc.Prefab, (err, prefab) => {
+            if (err) {
+                cc.error("Failed to load GameOver prefab:", err);
+                return;
+            }
+            const GameOverNode = cc.instantiate(prefab);
+            const Canvas = cc.find("Canvas");
+            Canvas.addChild(GameOverNode,1,'GameOver');
+            //視窗正中間
+            let cameraNode = cc.find("Canvas/Main Camera");
+            if (cameraNode) {
+                let worldPos = cameraNode.convertToWorldSpaceAR(cc.Vec2.ZERO);
+                let localPos = Canvas.convertToNodeSpaceAR(worldPos);
+                GameOverNode.setPosition(localPos);
+            } else {
+                cc.warn("找不到 Main Camera, 使用預設位置 (0, 0)");
+                GameOverNode.setPosition(0, 0);
+            }
+            let RestartButton = new cc.Component.EventHandler();
+        RestartButton.target = this.node;
+        RestartButton.component = "GameManager";
+        RestartButton.handler = "RestartGame";
+        cc.find("Canvas/GameOver/Restart").getComponent(cc.Button).clickEvents.push(RestartButton);
 
+        let end = cc.find("Canvas/GameOver/player").getComponent(cc.Animation);
+        //game over animation
+        this.scheduleOnce(()=>{ 
+            end.play("gameover");
+        });
+        });
+        
+    }
     private saveProgress(level: number) {
         cc.log("Saving progress for level:", level);
 

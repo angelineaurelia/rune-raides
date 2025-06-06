@@ -102,7 +102,7 @@ var ActorController = /** @class */ (function (_super) {
         _this.combo_left_1 = "combo-1_left";
         _this.combo_up_1 = "combo-1_up";
         _this.combo_down_1 = "combo-1_down";
-        _this.moveSpeed = 20;
+        _this.moveSpeed = 60;
         _this.moveAxisX = 0;
         _this.moveAxisY = 0;
         _this._playerState = PlayerState.Idle;
@@ -329,6 +329,10 @@ var ActorController = /** @class */ (function (_super) {
     };
     ActorController.prototype.godie = function () {
         this._playerState = PlayerState.Die;
+        this.scheduleOnce(function () {
+            var Mgr = cc.find("GameManager").getComponent("GameManager");
+            Mgr.EndGame();
+        }, 1);
     };
     __decorate([
         property({ type: cc.Enum(FacingDirection) })

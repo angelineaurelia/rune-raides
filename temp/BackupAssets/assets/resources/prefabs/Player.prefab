@@ -723,9 +723,6 @@
       "__uuid__": "f0ea5fbc-b3e5-4415-bf4e-47ad732646ff"
     },
     "gameManager": null,
-    "attackRange": 50,
-    "attackHitDelay": 0.2,
-    "attackAnimDuration": 0.5,
     "_id": ""
   },
   {
@@ -771,7 +768,7 @@
     "combo_left_1": "combo-1_left",
     "combo_up_1": "combo-1_up",
     "combo_down_1": "combo-1_down",
-    "moveSpeed": 0,
+    "moveSpeed": 40,
     "comboInterval": 1,
     "_id": ""
   },

@@ -6,18 +6,9 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import AuthManager from './AuthManager';
+import { initializeApp, getApps } from "firebase/app";
 const {ccclass, property} = cc._decorator;
-declare const firebase: any;
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDFW4-emWdI1ghgZWWGp1wqoWvAvTwAqrQ",
-    authDomain: "rune-raids.firebaseapp.com",
-    projectId: "rune-raids",
-    storageBucket: "rune-raids.firebasestorage.app",
-    messagingSenderId: "530514360843",
-    appId: "1:530514360843:web:1cdda9d72bb4b52932250e",
-    measurementId: "G-B1C5FG1YSN"
-};
+// Firebase v9+ 的例子
 
 
 @ccclass
@@ -36,16 +27,6 @@ export default class MenuMgr extends cc.Component {
         OptionButton.handler = "ShowSetting";
         cc.find("Canvas/background/OptionButton").getComponent(cc.Button).clickEvents.push(OptionButton);
         cc.log("Is Firebase initialized?", window._firebaseInited);
-
-
-        if (!window._firebaseInited) {
-            firebase.initializeApp(firebaseConfig);
-            window._firebaseInited = true;
-            cc.log("✅ Firebase initialized in MenuMgr");
-        } else {
-            cc.log("ℹ️ Firebase already initialized");
-        }
-        //Load VolumnValue from localStorage
     }
 
     ShowSetting() {

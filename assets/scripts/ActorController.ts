@@ -128,7 +128,7 @@ export default class ActorController extends Controller {
     combo_down_1: string = "combo-1_down";
 
     @property(cc.Float)
-    moveSpeed = 20; 
+    moveSpeed = 60; 
 
     public moveAxisX = 0;
     public moveAxisY = 0;
@@ -354,6 +354,10 @@ export default class ActorController extends Controller {
 
     public godie(){
         this._playerState = PlayerState.Die;
+        this.scheduleOnce(()=>{
+            let Mgr = cc.find("GameManager").getComponent("GameManager");
+            Mgr.EndGame();
+        }, 1);
     }
         
 }
