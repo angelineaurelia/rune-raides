@@ -30,6 +30,7 @@ var GameManager = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.bgm = null;
         _this.LevelLabel = null;
+        _this.usernameLabel = null;
         _this.maxhp = 10;
         _this.player = null;
         _this.VolumnValue = null;
@@ -75,6 +76,14 @@ var GameManager = /** @class */ (function (_super) {
         else {
             cc.log("ℹ️ Firebase already initialized");
         }
+        //firebase 取得username
+        var user = firebase.auth().currentUser;
+        if (user) {
+            this.usernameLabel.string = user.displayName || "Guest";
+            console.log("User logged in:", user.displayName);
+        }
+        else
+            console.log("User not logged in");
     };
     GameManager.prototype.onDestroy = function () {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -403,6 +412,9 @@ var GameManager = /** @class */ (function (_super) {
     __decorate([
         property(cc.Label)
     ], GameManager.prototype, "LevelLabel", void 0);
+    __decorate([
+        property(cc.Label)
+    ], GameManager.prototype, "usernameLabel", void 0);
     GameManager = __decorate([
         ccclass
     ], GameManager);

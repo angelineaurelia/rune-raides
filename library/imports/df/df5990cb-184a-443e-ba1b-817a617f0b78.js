@@ -34,6 +34,7 @@ var AuthManager = /** @class */ (function (_super) {
         _this.pwdEB = null;
         _this.saveBtn = null;
         _this.exitBtn = null;
+        _this.user = "";
         _this.auth = null;
         return _this;
     }
@@ -62,6 +63,7 @@ var AuthManager = /** @class */ (function (_super) {
         var username = this.usernameEB.string.trim();
         var email = this.emailEB.string.trim();
         var password = this.pwdEB.string;
+        this.user = username;
         if (!email || !password || !username) {
             cc.warn("All fields must be filled.");
             return;

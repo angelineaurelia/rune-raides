@@ -1,5 +1,6 @@
 const { ccclass, property } = cc._decorator;
 import LoadingManager from "./Menu/LoadingManager";
+import firebase from "firebase/app";
 declare const firebase: any;
 //for Firebase initialization
 declare global {
@@ -15,6 +16,9 @@ export default class GameManager extends cc.Component {
 
     @property(cc.Label)
     public LevelLabel: cc.Label = null;
+
+    @property(cc.Label)
+    public usernameLabel: cc.Label = null;
 
     private maxhp: number = 10;
     private player: cc.Node = null;
@@ -60,7 +64,12 @@ export default class GameManager extends cc.Component {
         } else {
             cc.log("ℹ️ Firebase already initialized");
         }
-        
+        //firebase 取得username
+        const user = firebase.auth().currentUser;
+        if (user) {
+            this.usernameLabel.string = user.displayName || "Guest";
+            console.log("User logged in:", user.displayName);
+        } else console.log("User not logged in");
     }
 
     onDestroy() {
@@ -165,6 +174,7 @@ export default class GameManager extends cc.Component {
         Desc.active = true;
     }
     RestartGame() {//Restart the game => back to menu
+
         cc.director.getScheduler().setTimeScale(1);
         cc.director.getPhysicsManager().enabled = true;
         let Canvas = cc.find("Canvas");
