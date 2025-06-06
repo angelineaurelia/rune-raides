@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Blade",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2.55,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "8df8181c-cf0a-4f00-a1b2-770a442bcd55"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "f5e74ff1-bb31-4b90-98d1-bee51b63d718"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "c61f6f92-f647-4f3a-9e22-ecee73ead5b2"
+            }
+          },
+          {
+            "frame": 2.5,
+            "value": {
+              "__uuid__": "f5e74ff1-bb31-4b90-98d1-bee51b63d718"
+            }
+          },
+          {
+            "frame": 2.533333333333333,
+            "value": {
+              "__uuid__": "8df8181c-cf0a-4f00-a1b2-770a442bcd55"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
