@@ -16,7 +16,6 @@ export default class AuthManager extends cc.Component {
   saveBtn: cc.Button = null;
   exitBtn: cc.Button = null;
 
-  public user: string = "";
   private auth: any = null;
 
   onLoad() {
@@ -44,9 +43,7 @@ export default class AuthManager extends cc.Component {
     const username = this.usernameEB.string.trim();
     const email    = this.emailEB.string.trim();
     const password = this.pwdEB.string;
-    this.user = username;
 
-    
     if (!email || !password || !username) {
       cc.warn("All fields must be filled.");
       return;

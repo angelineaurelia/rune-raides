@@ -74,10 +74,6 @@ var Menu = /** @class */ (function (_super) {
         });
     };
     Menu.prototype.LoadMap = function () {
-        var _a;
-        var username = ((_a = cc.find("Canvas/MenuMgr").getComponent("MenuMgr").authComp) === null || _a === void 0 ? void 0 : _a.user) || "Guest";
-        if (username)
-            cc.sys.localStorage.setItem(username, 0);
         cc.director.loadScene("Loading", function () {
             var loadingManager = cc.find("Canvas/LoadingManager").getComponent("LoadingManager");
             loadingManager.startLoading("demo_test");

@@ -1,0 +1,67 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Waterfall",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "d1978c4f-b478-437d-9861-0242b8af95d2"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "84dd9d31-4a9b-4888-bf94-44601c0ad2f9"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "cf389549-f920-4a04-a667-71f071336125"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "bebc8c97-2df2-4411-a629-29ac6e55e497"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "4e927499-827a-446d-bf49-e6fe8818c588"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "be2495b5-8785-4e72-b54a-da25262d3990"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "52999dbe-5ffc-4e71-8b2c-3c9af24bd48b"
+            }
+          },
+          {
+            "frame": 0.5833333333333334,
+            "value": {
+              "__uuid__": "1eecd666-0763-4176-a7a3-436115579e34"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

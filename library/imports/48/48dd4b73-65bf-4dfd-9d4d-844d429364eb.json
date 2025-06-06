@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "",
+    "_name": "Green Slime",
     "_objFlags": 0,
     "_native": "",
     "data": {
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Blue Slime",
+    "_name": "Green Slime",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -52,8 +52,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 23,
-      "height": 23
+      "width": 19,
+      "height": 22
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -64,8 +64,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        130.352,
-        153.087,
+        129.642,
+        39.32,
         0,
         0,
         0,
@@ -135,8 +135,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -0.673,
-        8.305,
+        -1.048,
+        9.38,
         0,
         0,
         0,
@@ -264,7 +264,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "adhpT6h1FKRYz30rkltiAQ",
+    "fileId": "55BY9HSTpMx7VA0sCvlSd7",
     "sync": false
   },
   {
@@ -371,7 +371,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "b54QOzbwpMZpckamJL3oB4",
+    "fileId": "99D7dAA+dFt6u5rxhOHcu+",
     "sync": false
   },
   {
@@ -399,7 +399,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d1QoLTG7hHDrbPY4hJUlog",
+    "fileId": "7aU3cGHlFBEpMeUtgBSGUC",
     "sync": false
   },
   {
@@ -418,7 +418,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "e88deb88-da13-4b38-8a4a-ee26c5f8c3fe"
+      "__uuid__": "47090d58-248e-4c47-a91e-b4230d0882fb"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -435,32 +435,6 @@
     "_id": ""
   },
   {
-    "__type__": "93c17LsWWNNMIhlPghgF2vo",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "walkSpeed": 30,
-    "runSpeed": 60,
-    "idleTime": 3,
-    "walkTime": 6,
-    "patrolRadius": 170,
-    "detectionRadius": 100,
-    "attackRadius": 20,
-    "attackDamage": 3,
-    "attackHitDelay": 0.3,
-    "attackAnimDuration": 1,
-    "maxHealth": 20,
-    "health": 20,
-    "lifebar": {
-      "__id__": 6
-    },
-    "barOffsetY": 10,
-    "_id": ""
-  },
-  {
     "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
@@ -469,71 +443,71 @@
     },
     "_enabled": true,
     "_defaultClip": {
-      "__uuid__": "76666f8b-9a07-48c9-901f-7d326417baca"
+      "__uuid__": "8f24f5c6-1ab4-4561-b1ce-75b9bfa0de39"
     },
     "_clips": [
       {
-        "__uuid__": "76666f8b-9a07-48c9-901f-7d326417baca"
+        "__uuid__": "8f24f5c6-1ab4-4561-b1ce-75b9bfa0de39"
       },
       {
-        "__uuid__": "ba240c3e-ddb3-41fe-b2a4-e710aad5dc71"
+        "__uuid__": "d8bf112d-715d-42af-8529-c5a8dc84f3f5"
       },
       {
-        "__uuid__": "eac5831f-624f-4c2c-86a7-d0ad31f1d41e"
+        "__uuid__": "14445286-b9f6-4bc8-9eb2-04de6cd76452"
       },
       {
-        "__uuid__": "0709170a-4d46-4014-a2e0-443b23fc241d"
+        "__uuid__": "d80bb3d7-4d1b-4552-9ce4-f0d51537f521"
       },
       {
-        "__uuid__": "2025352d-7a02-4f0f-a544-d613aba6efa6"
+        "__uuid__": "2abf82b8-6f90-47d8-8785-deb5cff950e6"
       },
       {
-        "__uuid__": "602e19a7-875b-447e-8f50-fe6a578b71ce"
+        "__uuid__": "c5f5c964-2278-4506-ac90-f7c4159ec427"
       },
       {
-        "__uuid__": "31ceda04-497e-468a-9053-63b6e1c73513"
+        "__uuid__": "3efa7243-e06c-4fe8-baee-462cd3176068"
       },
       {
-        "__uuid__": "24ac8f88-16d4-473f-a8e1-53c296f25b53"
+        "__uuid__": "bbf094a4-11c5-48c0-8750-19993030ecbd"
       },
       {
-        "__uuid__": "23a61edb-db37-4ad7-a4bb-29f526868b0a"
+        "__uuid__": "7e348be8-9da5-4730-83fe-27f43975fe3f"
       },
       {
-        "__uuid__": "b00659c4-a3d0-452d-ac43-1fbc9de1a4b5"
+        "__uuid__": "e189ef7c-5f3a-44c1-a0ea-679c5bcf010c"
       },
       {
-        "__uuid__": "8cbec2d4-5c19-45f3-ab8c-2e0f44912f96"
+        "__uuid__": "8964a9c0-7c2c-460e-a8f0-ce84e943eeb8"
       },
       {
-        "__uuid__": "67b169ea-6227-4072-8e89-a9c78a3b3410"
+        "__uuid__": "25b3f3f8-0a0d-48e9-adf3-b6c091666b67"
       },
       {
-        "__uuid__": "bdd2b8bc-ca60-4997-99d9-4bcf9e7256a2"
+        "__uuid__": "a0d582ba-a817-4206-bf3e-d363a05f41e0"
       },
       {
-        "__uuid__": "871d0e68-1df9-403d-b4c2-ba23bccc7089"
+        "__uuid__": "d9f1aace-84a7-48cb-8b33-92037ea5057b"
       },
       {
-        "__uuid__": "700a6b7b-18df-49d8-aed5-a938c7db0062"
+        "__uuid__": "7679c821-89b2-4e9c-8ba4-a26e09017bd3"
       },
       {
-        "__uuid__": "57517152-4f30-4018-84de-7ff5bf40712c"
+        "__uuid__": "a3c0d07a-d53b-4cfe-adc6-e30b9db31b5d"
       },
       {
-        "__uuid__": "ee6fb17d-deea-4252-8e20-7da5030c6889"
+        "__uuid__": "e4e296ce-6a53-47ac-b414-245e9d8acd67"
       },
       {
-        "__uuid__": "e3dc453b-a23a-4105-8cbd-76c01ef2719b"
+        "__uuid__": "75883110-bcb4-4033-8f13-8afca91d23ca"
       },
       {
-        "__uuid__": "d855b8c4-5b9a-4ed9-9e2d-261026339ea1"
+        "__uuid__": "e3231372-d46d-490a-977b-3dbccfe7a156"
       },
       {
-        "__uuid__": "2eb11fe3-d39c-4177-996e-7910bcaeca1a"
+        "__uuid__": "766f4c49-b388-4a4e-b6ec-c362d302a6e6"
       },
       {
-        "__uuid__": "fe6e1359-1e32-41e2-9072-26b767bd170a"
+        "__uuid__": "77a83595-2ffd-4c51-a51f-933f7a8992ae"
       }
     ],
     "playOnLoad": false,
@@ -547,7 +521,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_type": 1,
+    "_type": 0,
     "_allowSleep": true,
     "_gravityScale": 1,
     "_linearDamping": 0,
@@ -580,10 +554,36 @@
     "body": null,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -2.3,
-      "y": -2.3
+      "x": -0.9,
+      "y": -2.5
     },
-    "_radius": 5.7,
+    "_radius": 6.9,
+    "_id": ""
+  },
+  {
+    "__type__": "83760YFIXRPyL+YhejhNquq",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "walkSpeed": 40,
+    "runSpeed": 80,
+    "idleTime": 3,
+    "walkTime": 10,
+    "patrolRadius": 130,
+    "detectionRadius": 68.1,
+    "attackRadius": 20,
+    "attackDamage": 12,
+    "attackHitDelay": 2,
+    "attackAnimDuration": 1,
+    "maxHealth": 15,
+    "health": 15,
+    "lifebar": {
+      "__id__": 6
+    },
+    "barOffsetY": 10,
     "_id": ""
   },
   {
