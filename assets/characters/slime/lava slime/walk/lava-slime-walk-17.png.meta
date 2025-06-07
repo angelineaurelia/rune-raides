@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "dc4a06a1-46fd-405c-bf05-be266c1c3a98",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 64,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "lava-slime-walk-17": {
+      "ver": "1.0.6",
+      "uuid": "2820cf4b-7194-4cfb-a6ed-fba1994109ab",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "dc4a06a1-46fd-405c-bf05-be266c1c3a98",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 2,
+      "offsetY": 5,
+      "trimX": 22,
+      "trimY": 12,
+      "width": 24,
+      "height": 30,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

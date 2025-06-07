@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "4d65ebc7-678c-43dd-833c-512c7edbb798",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 64,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "lava-slime-attack-18": {
+      "ver": "1.0.6",
+      "uuid": "3786ec06-7d45-4fa3-9ff2-22fbf76edfbc",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "4d65ebc7-678c-43dd-833c-512c7edbb798",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 1.5,
+      "offsetY": 4.5,
+      "trimX": 24,
+      "trimY": 13,
+      "width": 19,
+      "height": 29,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
